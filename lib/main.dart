@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:linkup/constants.dart';
 
 void main() => runApp(const LinkUpApp());
 
@@ -25,7 +26,7 @@ class LinkUpApp extends StatelessWidget {
               "LinkUp Mobile",
               style: TextStyle(
                 color: Colors.black,
-                fontFamily: "SF-Pro",
+                fontFamily: fontFamilySFPro,
                 fontSize: 24.0,
               ),
             ),
