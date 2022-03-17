@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:linkup/components/bottom_navbar.dart';
 import 'package:linkup/components/side_navbar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -23,6 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       drawer: const SideNavbar(),
+      bottomNavigationBar: const BottomNavbar(),
       body: const Text("Home Screen"),
     );
   }
