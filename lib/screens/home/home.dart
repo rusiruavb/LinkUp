@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:linkup/components/side_navbar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -13,10 +14,15 @@ class _HomeScreenState extends State<HomeScreen> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      drawer: Drawer(
-        elevation: 0.0,
-        child: Container(),
+      appBar: AppBar(
+        title: const Text(
+          "LinkUp",
+          style: TextStyle(
+            fontFamily: "SF-Pro",
+          ),
+        ),
       ),
+      drawer: const SideNavbar(),
       body: const Text("Home Screen"),
     );
   }
