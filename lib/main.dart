@@ -1,10 +1,15 @@
 import "package:flutter/material.dart";
+import 'package:linkup/components/rounded_button.dart';
 import 'package:linkup/constants.dart';
 
 void main() => runApp(const LinkUpApp());
 
 class LinkUpApp extends StatelessWidget {
   const LinkUpApp({Key key}) : super(key: key);
+
+  void _testFunc() {
+    print("This is function");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +26,17 @@ class LinkUpApp extends StatelessWidget {
               ),
             ),
           ),
-          body: const Center(
-            child: Text(
-              "LinkUp Mobile",
-              style: TextStyle(
-                color: Colors.black,
-                fontFamily: fontFamilySFPro,
-                fontSize: 24.0,
-              ),
+          body: Center(
+            child: RoundedButton(
+              width: 130,
+              height: 50,
+              color: colorPrimary,
+              fontSize: 15,
+              text: "Test Button",
+              onPressed: () {
+                print("Button Clicked");
+              },
+              textColor: colorSecondary,
             ),
           ),
         ),
