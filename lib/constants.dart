@@ -4,6 +4,10 @@ import 'package:flutter/widgets.dart';
 const String fontFamilyLarsseit = "Larsseit";
 const String fontFamilyOpenSans = "Opensans";
 const String fontFamilySFPro = "SF-Pro";
+const String fontFamilyRobotoRegular = "Roboto-Regular";
+const String fontFamilyRobotoMedium = "Roboto-Medium";
+const String fontFamilyRobotoThin = "Roboto-Thin";
+const String fontFamilyRobotBold = "Roboto-Bold";
 
 // Background Color
 const Color colorBackground = Color(0xffffffff);

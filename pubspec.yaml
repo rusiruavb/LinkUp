@@ -33,6 +33,18 @@ flutter:
   assets:
     - assets/images/
   fonts:
+    - family: Roboto-Regular
+      fonts:
+        - asset: assets/fonts/RobotoRegular.ttf
+    - family: Roboto-Medium
+      fonts:
+        - asset: assets/fonts/RobotoMedium.ttf
+    - family: Roboto-Thin
+      fonts:
+        - asset: assets/fonts/RobotoThin.ttf
+    - family: Roboto-Bold
+      fonts:
+        - asset: assets/fonts/RobotoBold.ttf
     - family: Larsseit
       fonts:
         - asset: assets/fonts/Larsseit.ttf
@@ -41,4 +53,4 @@ flutter:
         - asset: assets/fonts/OpenSans.ttf
     - family: SF-Pro
       fonts:
-        - asset: assets/fonts/SF-Text.ttf
+        - asset: assets/fonts/SFPro.ttf
