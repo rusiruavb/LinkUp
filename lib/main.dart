@@ -4,7 +4,7 @@ import 'package:linkup/constants.dart';
 void main() => runApp(const LinkUpApp());
 
 class LinkUpApp extends StatelessWidget {
-  const LinkUpApp({Key? key}) : super(key: key);
+  const LinkUpApp({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
