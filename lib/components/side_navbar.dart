@@ -46,12 +46,14 @@ class SideNavbar extends StatelessWidget {
             onClick: () {
               Navigator.pushNamed(context, "/signup");
             },
-            icon: Icons.bookmark,
+            icon: Icons.person,
           ),
           _NavbarItem(
-            text: "Item 02",
-            onClick: () {},
-            icon: Icons.person,
+            text: "Login",
+            onClick: () {
+              Navigator.pushNamed(context, "/login");
+            },
+            icon: Icons.login,
           ),
         ],
       ),

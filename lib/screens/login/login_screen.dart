@@ -1,4 +1,9 @@
 import "package:flutter/material.dart";
+import 'package:linkup/components/rounded_text_field.dart';
+import 'package:linkup/components/side_navbar.dart';
+
+import '../../components/rounded_button.dart';
+import '../../constants.dart';
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -6,8 +11,125 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  String email = "";
+  String password = "";
+
   @override
   Widget build(BuildContext context) {
-    return Container();
+    final size = MediaQuery.of(context).size;
+    final orientation = MediaQuery.of(context).orientation;
+
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        iconTheme: const IconThemeData(color: Colors.black),
+        elevation: 0.0,
+        title: const Text(
+          "Login",
+          style: TextStyle(
+            fontFamily: "SF-Pro",
+            color: Colors.black,
+          ),
+        ),
+      ),
+      drawer: const SideNavbar(),
+      body: SingleChildScrollView(
+        child: SizedBox(
+          width: size.width,
+          height: orientation == Orientation.landscape
+              ? size.height * 0.95
+              : size.height * 0.6,
+          child: Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: Form(
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Padding(
+                        padding: orientation == Orientation.landscape
+                            ? const EdgeInsets.only(left: 32, top: 10)
+                            : const EdgeInsets.only(left: 10, top: 10),
+                        child: const Text(
+                          "Hello 👋🏻, login to your",
+                          style: TextStyle(
+                            fontFamily: fontFamilySFPro,
+                            fontSize: 22,
+                            color: colorPrimaryDark,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Padding(
+                        padding: orientation == Orientation.landscape
+                            ? const EdgeInsets.only(left: 32, top: 10)
+                            : const EdgeInsets.only(left: 10, top: 10),
+                        child: const Text(
+                          "Privillage Club Account",
+                          style: TextStyle(
+                            fontFamily: fontFamilySFPro,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 26,
+                            color: colorPrimaryDark,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: size.height * 0.1,
+                  ),
+                  RoundedTextField(
+                    text: "Email Address",
+                    type: "email",
+                    onChange: (value) {
+                      setState(() {
+                        email = value;
+                      });
+                    },
+                    value: email,
+                  ),
+                  SizedBox(
+                    height: size.height * 0.03,
+                  ),
+                  RoundedTextField(
+                    text: "Password",
+                    type: "password",
+                    onChange: (value) {
+                      setState(() {
+                        password = value;
+                      });
+                    },
+                    value: password,
+                  ),
+                  SizedBox(
+                    height: size.height * 0.03,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 15,
+                      right: 15,
+                    ),
+                    child: RoundedButton(
+                      color: colorPrimaryDark,
+                      fontSize: 14,
+                      height: 50,
+                      width: size.width * 0.4,
+                      text: "Login",
+                      onPressed: () {
+                        print("Button clicked");
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
