@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:linkup/components/bottom_navbar.dart';
 import 'package:linkup/components/side_navbar.dart';
+import 'package:linkup/constants.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -22,6 +23,8 @@ class _HomeScreenState extends State<HomeScreen> {
             fontFamily: "SF-Pro",
           ),
         ),
+        backgroundColor: colorPrimaryDark,
+        elevation: 0.0,
       ),
       drawer: const SideNavbar(),
       bottomNavigationBar: const BottomNavbar(),

@@ -46,9 +46,7 @@ class RoundedButton extends StatelessWidget {
               ),
             ],
           ),
-          onPressed: () {
-            print("Hello");
-          },
+          onPressed: onPressed,
         ),
       ),
     );

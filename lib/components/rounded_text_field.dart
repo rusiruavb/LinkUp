@@ -19,39 +19,42 @@ class RoundedTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          text,
-          style: const TextStyle(
-            fontFamily: fontFamilyRobotoRegular,
-            fontSize: 16,
-            fontWeight: FontWeight.normal,
-          ),
-          textAlign: TextAlign.left,
-        ),
-        SizedBox(
-          height: size.height * 0.005,
-        ),
-        TextFieldContainer(
-          child: TextFormField(
-            initialValue: value,
-            keyboardType: type == "email"
-                ? TextInputType.emailAddress
-                : TextInputType.text,
+    return Material(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            text,
             style: const TextStyle(
               fontFamily: fontFamilyRobotoRegular,
-              fontSize: 18,
+              fontSize: 16,
+              fontWeight: FontWeight.normal,
             ),
-            onChanged: onChange,
-            decoration: const InputDecoration(
-              focusedBorder: InputBorder.none,
-              enabledBorder: InputBorder.none,
-            ),
+            textAlign: TextAlign.left,
           ),
-        )
-      ],
+          SizedBox(
+            height: size.height * 0.005,
+          ),
+          TextFieldContainer(
+            child: TextFormField(
+              initialValue: value,
+              keyboardType: type == "email"
+                  ? TextInputType.emailAddress
+                  : TextInputType.text,
+              style: const TextStyle(
+                fontFamily: fontFamilyRobotoRegular,
+                fontSize: 18,
+              ),
+              onChanged: onChange,
+              decoration: const InputDecoration(
+                focusedBorder: InputBorder.none,
+                enabledBorder: InputBorder.none,
+              ),
+              obscureText: type == "password" ? true : false,
+            ),
+          )
+        ],
+      ),
     );
   }
 }

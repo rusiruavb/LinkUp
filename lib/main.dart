@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:linkup/routes/page_routes.dart';
 import 'package:linkup/screens/home/home.dart';
 import 'package:linkup/screens/welcome/welcome_screen.dart';
 
@@ -9,15 +10,13 @@ class LinkUpApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MediaQuery(
-      data: MediaQueryData(),
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: WelcomeScreen(
-          duration: 4,
-          navigationPage: HomeScreen(),
-        ),
+    return const MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: WelcomeScreen(
+        duration: 3,
+        navigationPage: HomeScreen(),
       ),
+      onGenerateRoute: PageRoutes.generateRoute,
     );
   }
 }
