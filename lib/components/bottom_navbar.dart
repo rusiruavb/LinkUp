@@ -19,43 +19,55 @@ class _BottomNavbarState extends State<BottomNavbar> {
 
   @override
   Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      type: BottomNavigationBarType.fixed,
-      currentIndex: _selectedIndex,
-      onTap: _onItemTapped,
-      selectedItemColor: colorPrimary,
-      items: <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: _selectedIndex == 0
-              ? const Icon(Icons.badge)
-              : const Icon(Icons.badge_outlined),
-          label: 'Jobs',
+    return Container(
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(
+            color: Colors.grey[800],
+            width: 1.0,
+          ),
         ),
-        BottomNavigationBarItem(
-          icon: _selectedIndex == 1
-              ? const Icon(Icons.book)
-              : const Icon(Icons.book_outlined),
-          label: 'Applications',
-        ),
-        BottomNavigationBarItem(
-          icon: _selectedIndex == 2
-              ? const Icon(Icons.add)
-              : const Icon(Icons.add_outlined),
-          label: 'Post',
-        ),
-        BottomNavigationBarItem(
-          icon: _selectedIndex == 3
-              ? const Icon(Icons.bookmark)
-              : const Icon(Icons.bookmark_outline),
-          label: 'Bookmarks',
-        ),
-        BottomNavigationBarItem(
-          icon: _selectedIndex == 4
-              ? const Icon(Icons.person)
-              : const Icon(Icons.person_outline),
-          label: 'Profile',
-        ),
-      ],
+      ),
+      child: BottomNavigationBar(
+        backgroundColor: colorDarkMidGround,
+        type: BottomNavigationBarType.fixed,
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.grey,
+        items: <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: _selectedIndex == 0
+                ? const Icon(Icons.badge, color: Colors.white)
+                : const Icon(Icons.badge_outlined),
+            label: 'Jobs',
+          ),
+          BottomNavigationBarItem(
+            icon: _selectedIndex == 1
+                ? const Icon(Icons.book, color: Colors.white)
+                : const Icon(Icons.book_outlined, color: Colors.white),
+            label: 'Applications',
+          ),
+          BottomNavigationBarItem(
+            icon: _selectedIndex == 2
+                ? const Icon(Icons.add, color: Colors.white)
+                : const Icon(Icons.add_outlined, color: Colors.white),
+            label: 'Post',
+          ),
+          BottomNavigationBarItem(
+            icon: _selectedIndex == 3
+                ? const Icon(Icons.bookmark, color: Colors.white)
+                : const Icon(Icons.bookmark_outline, color: Colors.white),
+            label: 'Bookmarks',
+          ),
+          BottomNavigationBarItem(
+            icon: _selectedIndex == 4
+                ? const Icon(Icons.person, color: Colors.white)
+                : const Icon(Icons.person_outline, color: Colors.white),
+            label: 'Profile',
+          ),
+        ],
+      ),
     );
   }
 }

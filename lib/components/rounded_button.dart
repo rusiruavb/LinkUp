@@ -42,7 +42,10 @@ class RoundedButton extends StatelessWidget {
             children: <Widget>[
               Text(
                 text,
-                style: const TextStyle(color: colorTextPrimary, fontSize: 18),
+                style: TextStyle(
+                  color: colorTextPrimary,
+                  fontSize: fontSize,
+                ),
               ),
             ],
           ),

@@ -11,7 +11,9 @@ const String fontFamilyRobotBold = "Roboto-Bold";
 
 // Background Color
 const Color colorBackground = Color(0xffffffff);
-const Color colorDivider = Color.fromRGBO(255, 255, 255, 0.12);
+const Color colorDarkBackground = Color(0xff000000);
+const Color colorDarkMidGround = Color(0xff212121);
+const Color colorDarkForground = Color(0xff484848);
 // Color Primary
 const Color colorPrimary = Color(0xff1976d2);
 const Color colorPrimaryLight = Color(0xff42a5f5);
