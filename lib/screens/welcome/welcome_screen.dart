@@ -23,6 +23,7 @@ class WelcomeScreen extends StatelessWidget {
     });
 
     return Scaffold(
+      backgroundColor: colorDarkBackground,
       body: Container(
         alignment: Alignment.center,
         child: Center(
@@ -45,6 +46,7 @@ class WelcomeScreen extends StatelessWidget {
                 style: TextStyle(
                   fontFamily: fontFamilyRobotoRegular,
                   fontSize: 18,
+                  color: Colors.white,
                   fontStyle: FontStyle.italic,
                 ),
               ),
@@ -53,7 +55,7 @@ class WelcomeScreen extends StatelessWidget {
               ),
               const CircularProgressIndicator(
                 strokeWidth: 3,
-                valueColor: AlwaysStoppedAnimation<Color>(colorPrimaryDark),
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
               ),
             ],
           ),

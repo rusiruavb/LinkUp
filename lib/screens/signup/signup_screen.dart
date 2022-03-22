@@ -26,17 +26,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        iconTheme: const IconThemeData(color: Colors.black),
+        backgroundColor: colorDarkBackground,
+        iconTheme: const IconThemeData(color: Colors.white),
         elevation: 0.0,
         title: const Text(
           "Sign Up",
           style: TextStyle(
             fontFamily: "SF-Pro",
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
       ),
+      backgroundColor: colorDarkBackground,
       drawer: const SideNavbar(),
       body: SingleChildScrollView(
         child: Container(
@@ -59,7 +60,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           style: TextStyle(
                             fontFamily: fontFamilySFPro,
                             fontSize: 24,
-                            color: colorPrimaryDark,
+                            color: Colors.white,
                           ),
                         ),
                       ),
@@ -154,7 +155,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       right: 15,
                     ),
                     child: RoundedButton(
-                      color: colorPrimaryDark,
+                      color: colorDarkForground,
                       fontSize: 14,
                       height: 50,
                       width: size.width * 0.4,

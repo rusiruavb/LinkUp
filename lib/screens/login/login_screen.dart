@@ -21,17 +21,18 @@ class _LoginScreenState extends State<LoginScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        iconTheme: const IconThemeData(color: Colors.black),
+        backgroundColor: colorDarkBackground,
+        iconTheme: const IconThemeData(color: Colors.white),
         elevation: 0.0,
         title: const Text(
           "Login",
           style: TextStyle(
             fontFamily: "SF-Pro",
-            color: Colors.black,
+            color: Colors.white,
           ),
         ),
       ),
+      backgroundColor: colorDarkBackground,
       drawer: const SideNavbar(),
       body: SingleChildScrollView(
         child: SizedBox(
@@ -55,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           style: TextStyle(
                             fontFamily: fontFamilySFPro,
                             fontSize: 22,
-                            color: colorPrimaryDark,
+                            color: Colors.white,
                           ),
                         ),
                       ),
@@ -73,7 +74,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             fontFamily: fontFamilySFPro,
                             fontWeight: FontWeight.bold,
                             fontSize: 26,
-                            color: colorPrimaryDark,
+                            color: Colors.white,
                           ),
                         ),
                       ),
@@ -114,8 +115,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       right: 15,
                     ),
                     child: RoundedButton(
-                      color: colorPrimaryDark,
-                      fontSize: 14,
+                      color: colorDarkForground,
+                      fontSize: 18,
                       height: 50,
                       width: size.width * 0.4,
                       text: "Login",

@@ -22,14 +22,18 @@ class RoundedNumberField extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          text,
-          style: const TextStyle(
-            fontFamily: fontFamilyRobotoRegular,
-            fontSize: 16,
-            fontWeight: FontWeight.normal,
+        Padding(
+          padding: const EdgeInsets.only(left: 18),
+          child: Text(
+            text,
+            style: const TextStyle(
+              fontFamily: fontFamilyRobotoRegular,
+              fontSize: 16,
+              color: Colors.white,
+              fontWeight: FontWeight.normal,
+            ),
+            textAlign: TextAlign.left,
           ),
-          textAlign: TextAlign.left,
         ),
         SizedBox(
           height: size.height * 0.005,
@@ -42,6 +46,7 @@ class RoundedNumberField extends StatelessWidget {
             style: const TextStyle(
               fontFamily: fontFamilyRobotoRegular,
               fontSize: 18,
+              color: Colors.white,
             ),
             onChanged: onChange,
             decoration: const InputDecoration(
@@ -72,7 +77,7 @@ class NumberFieldContainer extends StatelessWidget {
       width: size.width * 0.9,
       height: 50,
       decoration: BoxDecoration(
-        color: Colors.grey[300],
+        color: colorDarkMidGround,
         borderRadius: BorderRadius.circular(26),
       ),
       child: child,
