@@ -5,6 +5,8 @@ import 'package:linkup/components/rounded_text_field.dart';
 import 'package:linkup/components/side_navbar.dart';
 import 'package:linkup/constants.dart';
 
+import '../../components/user-profile-image/user_image_upload.dart';
+
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key key}) : super(key: key);
 
@@ -43,8 +45,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: Container(
           width: size.width,
           height: MediaQuery.of(context).orientation == Orientation.landscape
-              ? size.height * 1.6
-              : size.height * 0.95,
+              ? size.height * 2.15
+              : size.height * 1.2,
           padding: const EdgeInsets.all(0.0),
           child: Padding(
             padding: const EdgeInsets.all(5.0),
@@ -56,7 +58,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       Padding(
                         padding: EdgeInsets.only(left: 10, top: 10),
                         child: Text(
-                          "We warmly welcome you to LinkUp",
+                          "We warmly welcomey you to LinkUp",
                           style: TextStyle(
                             fontFamily: fontFamilySFPro,
                             fontSize: 24,
@@ -68,6 +70,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   SizedBox(
                     height: size.height * 0.03,
+                  ),
+                  UserImageUpload(
+                    onFileChanged: (imageUrl) {
+                      print(imageUrl);
+                    },
                   ),
                   RoundedTextField(
                     text: "First Name",
