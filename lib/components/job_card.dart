@@ -156,9 +156,7 @@ class JobCard extends StatelessWidget {
                     color: colorDarkForground,
                     height: 32,
                     width: 95,
-                    onPressed: () {
-                      print("Apply");
-                    },
+                    onPressed: onClick,
                   ),
                 )
               ],
