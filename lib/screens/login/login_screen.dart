@@ -154,31 +154,34 @@ class _LoginScreenState extends State<LoginScreen> {
                             Color(0xFF2A3548),
                           ],
                         )),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: const [
-                        Text(
-                          "Join the privillaged club",
-                          style: TextStyle(
-                            color: colorTextPrimary,
-                            fontSize: 18,
-                            fontFamily: fontFamilySFPro,
+                    child: InkWell(
+                      onTap: () => {print("Button clicked ")},
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: const [
+                          Text(
+                            "Join the privillaged club",
+                            style: TextStyle(
+                              color: colorTextPrimary,
+                              fontSize: 18,
+                              fontFamily: fontFamilySFPro,
+                            ),
                           ),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          "CREATE ACCOUNT",
-                          style: TextStyle(
-                            color: colorTextPrimary,
-                            fontSize: 30,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: fontFamilySFPro,
+                          SizedBox(
+                            height: 5,
                           ),
-                        ),
-                      ],
+                          Text(
+                            "CREATE ACCOUNT",
+                            style: TextStyle(
+                              color: colorTextPrimary,
+                              fontSize: 30,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: fontFamilySFPro,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   )
                 ],

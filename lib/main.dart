@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:linkup/routes/page_routes.dart';
 import 'package:linkup/screens/home/home.dart';
+import 'package:linkup/screens/mycompanies/mycompanies_screen.dart';
 import 'package:linkup/screens/welcome/welcome_screen.dart';
 
 void main() => runApp(const LinkUpApp());
@@ -14,7 +15,7 @@ class LinkUpApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: WelcomeScreen(
         duration: 3,
-        navigationPage: HomeScreen(),
+        navigationPage: MyconpaniesScreen(),
       ),
       onGenerateRoute: PageRoutes.generateRoute,
     );
