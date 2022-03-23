@@ -52,7 +52,7 @@ class _BottomNavbarState extends State<BottomNavbar> {
             icon: _selectedIndex == 2
                 ? const Icon(Icons.add, color: Colors.white)
                 : const Icon(Icons.add_outlined, color: Colors.white),
-            label: 'Post',
+            label: 'Feed',
           ),
           BottomNavigationBarItem(
             icon: _selectedIndex == 3
