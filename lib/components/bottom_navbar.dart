@@ -10,11 +10,16 @@ class BottomNavbar extends StatefulWidget {
 
 class _BottomNavbarState extends State<BottomNavbar> {
   int _selectedIndex = 0;
+  String _route = "";
 
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
+
+    if (index == 4) {
+      Navigator.pushNamed(context, "/profile");
+    }
   }
 
   @override
