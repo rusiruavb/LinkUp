@@ -41,10 +41,12 @@ class PostCard extends StatelessWidget {
                   child: Row(
                     // Header section
                     children: [
-                      Image.network(
-                        profileImageURL,
-                        scale: 23,
-                      ),
+                      ClipRRect(
+                          borderRadius: BorderRadius.circular(100),
+                          child: Image.network(
+                            profileImageURL,
+                            scale: 20,
+                          )),
                       Padding(
                         padding: const EdgeInsets.only(left: 8),
                         child: Column(

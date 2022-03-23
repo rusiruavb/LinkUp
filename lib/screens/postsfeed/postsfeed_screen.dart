@@ -38,8 +38,8 @@ class _PostFeedScreenState extends State<PostFeedScreen> {
             children: const [
               PostCard(
                 profileImageURL:
-                    "https://www.freepnglogos.com/uploads/google-logo-png/google-logo-icon-png-transparent-background-osteopathy-16.png",
-                fullName: "Google In.",
+                    "https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_3.jpg",
+                fullName: "Yohani Ariyarathne",
                 description:
                     "A job description not only describes the position’s responsibilities, it sets the foundation for recruiting, developing and retaining talent and also sets the stage for optimum work performance by clarifying responsibilities, expected results, and evaluation of performance. It is also an important component to maintaining an equitable compensation system and ensuring legal compliance. The document should be revisited and updated in line with the annual performance evaluation cycle.",
                 position: "Associate Software Engineer",
@@ -48,8 +48,18 @@ class _PostFeedScreenState extends State<PostFeedScreen> {
               ),
               PostCard(
                 profileImageURL:
-                    "https://www.freepnglogos.com/uploads/google-logo-png/google-logo-icon-png-transparent-background-osteopathy-16.png",
-                fullName: "Google In.",
+                    "https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_3.jpg",
+                fullName: "Yohani Ariyarathne",
+                description:
+                    "A job description not only describes the position’s responsibilities, it sets the foundation for recruiting, developing and retaining talent and also sets the stage for optimum work performance by clarifying responsibilities, expected results, and evaluation of performance. It is also an important component to maintaining an equitable compensation system and ensuring legal compliance. The document should be revisited and updated in line with the annual performance evaluation cycle.",
+                position: "Associate Software Engineer",
+                postImage:
+                    "https://templates.mediamodifier.com/5e9709395e1d70189ea21cd1/job-posting-linkedin-post-template.jpg",
+              ),
+              PostCard(
+                profileImageURL:
+                    "https://d2qp0siotla746.cloudfront.net/img/use-cases/profile-picture/template_3.jpg",
+                fullName: "Yohani Ariyarathne",
                 description:
                     "A job description not only describes the position’s responsibilities, it sets the foundation for recruiting, developing and retaining talent and also sets the stage for optimum work performance by clarifying responsibilities, expected results, and evaluation of performance. It is also an important component to maintaining an equitable compensation system and ensuring legal compliance. The document should be revisited and updated in line with the annual performance evaluation cycle.",
                 position: "Associate Software Engineer",
