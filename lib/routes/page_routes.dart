@@ -29,8 +29,18 @@ class PageRoutes {
           ),
         );
 
-              // Sign up screen route
-      case "/application":
+      // Sign up screen route
+      case "/applicationform":
+        return PageRouteBuilder(
+          pageBuilder: (_, __, ___) => const ApplicationFormScreen(),
+          settings: settings,
+          transitionsBuilder: (_, opacity, __, child) => FadeTransition(
+            opacity: opacity,
+            child: child,
+          ),
+        );
+
+      case "/opentoworkform":
         return PageRouteBuilder(
           pageBuilder: (_, __, ___) => const ApplicationFormScreen(),
           settings: settings,
