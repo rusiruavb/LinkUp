@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import "package:flutter/material.dart";
 import 'package:linkup/components/rounded_text_field.dart';
 import 'package:linkup/components/side_navbar.dart';
@@ -39,7 +41,7 @@ class _LoginScreenState extends State<LoginScreen> {
           width: size.width,
           height: orientation == Orientation.landscape
               ? size.height * 0.95
-              : size.height * 0.6,
+              : size.height * 0.9,
           child: Padding(
             padding: const EdgeInsets.all(5.0),
             child: Form(
@@ -136,8 +138,49 @@ class _LoginScreenState extends State<LoginScreen> {
                     endIndent: 25, //spacing at the end of divider
                   ),
                   SizedBox(
-                    height: size.height * 0.03,
+                    height: size.height * 0.04,
                   ),
+                  Container(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+                    width: size.width * 0.85,
+                    height: size.height * 0.16,
+                    decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(10)),
+                        gradient: LinearGradient(
+                          begin: Alignment.topRight,
+                          end: Alignment.bottomLeft,
+                          colors: [
+                            Color(0xFF6F95DF),
+                            Color(0xFF2A3548),
+                          ],
+                        )),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          "Join the privillaged club",
+                          style: TextStyle(
+                            color: colorTextPrimary,
+                            fontSize: 18,
+                            fontFamily: fontFamilySFPro,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          "CREATE ACCOUNT",
+                          style: TextStyle(
+                            color: colorTextPrimary,
+                            fontSize: 30,
+                            fontWeight: FontWeight.bold,
+                            fontFamily: fontFamilySFPro,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
                 ],
               ),
             ),
