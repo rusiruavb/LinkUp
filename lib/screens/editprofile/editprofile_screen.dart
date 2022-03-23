@@ -5,7 +5,7 @@ import 'package:linkup/components/rounded_text_field.dart';
 import 'package:linkup/components/side_navbar.dart';
 import 'package:linkup/constants.dart';
 
-import '../../components/user-profile-image/user_image_upload.dart';
+import '../../components/user_image_upload.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({Key key}) : super(key: key);

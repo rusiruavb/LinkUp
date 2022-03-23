@@ -1,10 +1,10 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:firebase_core/firebase_core.dart';
 import "package:flutter/material.dart";
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:linkup/components/user-profile-image/rounded_image.dart';
 import 'package:linkup/constants.dart';
 import "package:path/path.dart" as p;
 import 'package:firebase_storage/firebase_storage.dart' as storage;
@@ -149,5 +149,54 @@ class _UserImageUploadState extends State<UserImageUpload> {
     });
 
     widget.onFileChanged(fileUrl);
+  }
+}
+
+class AppRoundedImage extends StatelessWidget {
+  final ImageProvider provider;
+  final double height;
+  final double width;
+
+  const AppRoundedImage(
+    this.provider, {
+    Key key,
+    this.height,
+    this.width,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(height / 2),
+      child: Image(
+        image: provider,
+        height: height,
+        width: width,
+      ),
+    );
+  }
+
+  factory AppRoundedImage.url(
+    String url, {
+    double height,
+    double width,
+  }) {
+    return AppRoundedImage(
+      NetworkImage(url),
+      height: height,
+      width: width,
+    );
+  }
+
+  factory AppRoundedImage.memory(
+    Uint8List data, {
+    double height,
+    double width,
+  }) {
+    return AppRoundedImage(
+      MemoryImage(data),
+      height: height,
+      width: width,
+    );
   }
 }

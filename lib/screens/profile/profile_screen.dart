@@ -2,7 +2,7 @@ import "package:flutter/material.dart";
 import 'package:linkup/components/bottom_navbar.dart';
 import 'package:linkup/components/experience_card.dart';
 import 'package:linkup/components/side_navbar.dart';
-import 'package:linkup/components/user-profile-image/user_image_upload.dart';
+import 'package:linkup/components/user_image_upload.dart';
 import 'package:linkup/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
