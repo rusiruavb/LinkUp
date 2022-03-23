@@ -125,6 +125,19 @@ class _LoginScreenState extends State<LoginScreen> {
                       },
                     ),
                   ),
+                  SizedBox(
+                    height: size.height * 0.03,
+                  ),
+                  const Divider(
+                    color: colorDivider, //color of divider
+                    height: 5, //height spacing of divider
+                    thickness: 2, //thickness of divier line
+                    indent: 25, //spacing at the start of divider
+                    endIndent: 25, //spacing at the end of divider
+                  ),
+                  SizedBox(
+                    height: size.height * 0.03,
+                  ),
                 ],
               ),
             ),
