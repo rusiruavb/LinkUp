@@ -37,3 +37,5 @@ const Color colorSuccessDark = Color(0xff1b5e20);
 // Text Colors
 const Color colorTextPrimary = Color(0xffffffff);
 const Color colorTextDisabled = Color.fromRGBO(255, 255, 255, 0.5);
+// Color divider
+const Color colorDivider = Color.fromARGB(255, 170, 170, 170);
