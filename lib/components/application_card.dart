@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:linkup/components/rounded_button.dart';
 import 'package:linkup/constants.dart';
 
 class ApplicationCard extends StatelessWidget {
