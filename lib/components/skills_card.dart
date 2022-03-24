@@ -2,18 +2,12 @@ import "package:flutter/material.dart";
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:linkup/constants.dart';
 
-class EducationCard extends StatelessWidget {
-  final String educationLogo;
-  final String period;
-  final String schoolName;
-  final String course;
+class SkillCard extends StatelessWidget {
+  final String skill;
 
-  const EducationCard({
+  const SkillCard({
     Key key,
-    this.educationLogo,
-    this.schoolName,
-    this.period,
-    this.course,
+    this.skill,
   }) : super(key: key);
 
   @override
@@ -29,36 +23,20 @@ class EducationCard extends StatelessWidget {
           Row(
             children: [
               const Icon(
-                FontAwesomeIcons.userGraduate,
+                FontAwesomeIcons.tasks,
                 color: colorTextPrimary,
-                size: 30,
+                size: 18,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 18),
+                padding: const EdgeInsets.only(left: 10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      course,
-                      style: const TextStyle(
-                        fontFamily: fontFamilySFPro,
-                        fontSize: 19,
-                        color: colorTextPrimary,
-                      ),
-                    ),
-                    Text(
-                      schoolName,
+                      skill,
                       style: const TextStyle(
                         fontFamily: fontFamilySFPro,
                         fontSize: 16,
-                        color: colorTextPrimary,
-                      ),
-                    ),
-                    Text(
-                      period,
-                      style: const TextStyle(
-                        fontFamily: fontFamilySFPro,
-                        fontSize: 13,
                         color: colorTextPrimary,
                       ),
                     ),

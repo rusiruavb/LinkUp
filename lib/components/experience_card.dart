@@ -41,7 +41,7 @@ class ExperienceCard extends StatelessWidget {
                       style: const TextStyle(
                         fontFamily: fontFamilySFPro,
                         fontSize: 19,
-                        fontWeight: FontWeight.bold,
+                        fontWeight: FontWeight.normal,
                         color: colorTextPrimary,
                       ),
                     ),

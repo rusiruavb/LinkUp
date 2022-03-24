@@ -1,7 +1,9 @@
 import "package:flutter/material.dart";
 import 'package:linkup/components/bottom_navbar.dart';
+import 'package:linkup/components/education_card.dart';
 import 'package:linkup/components/experience_card.dart';
 import 'package:linkup/components/side_navbar.dart';
+import 'package:linkup/components/skills_card.dart';
 import 'package:linkup/components/user_image_upload.dart';
 import 'package:linkup/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -57,7 +59,7 @@ class _ProfileHeaderCard extends StatelessWidget {
     return Container(
       width:
           orientation == Orientation.landscape ? size.width * 0.75 : size.width,
-      padding: const EdgeInsets.only(top: 5, bottom: 5),
+      padding: const EdgeInsets.only(top: 5),
       child: Card(
         color: colorDarkMidGround,
         child: Column(
@@ -166,36 +168,40 @@ class _ExperienceSection extends StatelessWidget {
     return Container(
       width:
           orientation == Orientation.landscape ? size.width * 0.75 : size.width,
-      padding: const EdgeInsets.only(top: 5, bottom: 5),
+      padding: const EdgeInsets.only(top: 0),
       child: Card(
         color: colorDarkMidGround,
         child: Padding(
           padding: const EdgeInsets.only(top: 8, right: 8, left: 8, bottom: 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
-            children: const [
-              Text(
-                "Experience",
-                style: TextStyle(
-                  fontFamily: fontFamilySFPro,
-                  fontSize: 16,
-                  color: colorTextPrimary,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text(
+                    "Experience",
+                    style: TextStyle(
+                      fontFamily: fontFamilySFPro,
+                      fontSize: 18,
+                      color: colorTextPrimary,
+                    ),
+                  ),
+                  Icon(
+                    Icons.add,
+                    color: colorTextPrimary,
+                  ),
+                ],
+              ),
+              for (var i = 0; i < 2; i++)
+                const ExperienceCard(
+                  companyLogo:
+                      "https://www.freepnglogos.com/uploads/google-logo-png/google-logo-icon-png-transparent-background-osteopathy-16.png",
+                  companyName: "Google",
+                  position: "Software Engineer",
+                  description:
+                      "As an associate software engineer, your job duties include coding software, coordinating with hardware engineers to ensure that different types of technology can run the software, and helping the QA team to test software before release.",
                 ),
-              ),
-              ExperienceCard(
-                companyLogo:
-                    "https://www.freepnglogos.com/uploads/google-logo-png/google-logo-icon-png-transparent-background-osteopathy-16.png",
-                companyName: "Google",
-                position: "Software Engineer",
-                description:
-                    "As an associate software engineer, your job duties include coding software, coordinating with hardware engineers to ensure that different types of technology can run the software, and helping the QA team to test software before release.",
-              ),
-              ExperienceCard(
-                companyLogo:
-                    "https://www.freepnglogos.com/uploads/google-logo-png/google-logo-icon-png-transparent-background-osteopathy-16.png",
-                companyName: "Google",
-                position: "Associate Software Engineer",
-              ),
             ],
           ),
         ),
@@ -207,13 +213,93 @@ class _ExperienceSection extends StatelessWidget {
 class _EducationSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    final size = MediaQuery.of(context).size;
+    final orientation = MediaQuery.of(context).orientation;
+
+    return Container(
+      width:
+          orientation == Orientation.landscape ? size.width * 0.75 : size.width,
+      padding: const EdgeInsets.only(top: 0),
+      child: Card(
+        color: colorDarkMidGround,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 8, right: 8, left: 8, bottom: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text(
+                    "Education",
+                    style: TextStyle(
+                      fontFamily: fontFamilySFPro,
+                      fontSize: 18,
+                      color: colorTextPrimary,
+                    ),
+                  ),
+                  Icon(
+                    Icons.add,
+                    color: colorTextPrimary,
+                  ),
+                ],
+              ),
+              for (var i = 0; i < 2; i++)
+                const EducationCard(
+                  schoolName: "SLIIT",
+                  course: "B.Sc (Hons) Software Engineering",
+                  period: "2019 - 2023",
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
 
 class _SkillsSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    final size = MediaQuery.of(context).size;
+    final orientation = MediaQuery.of(context).orientation;
+
+    return Container(
+      width:
+          orientation == Orientation.landscape ? size.width * 0.75 : size.width,
+      padding: const EdgeInsets.only(top: 0, bottom: 5),
+      child: Card(
+        color: colorDarkMidGround,
+        child: Padding(
+          padding: const EdgeInsets.only(top: 8, right: 8, left: 8, bottom: 15),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: const [
+                  Text(
+                    "Skills",
+                    style: TextStyle(
+                      fontFamily: fontFamilySFPro,
+                      fontSize: 18,
+                      color: colorTextPrimary,
+                    ),
+                  ),
+                  Icon(
+                    Icons.add,
+                    color: colorTextPrimary,
+                  ),
+                ],
+              ),
+              for (var i = 0; i < 2; i++)
+                const SkillCard(
+                  skill: "Public Speaking",
+                ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
