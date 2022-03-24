@@ -1,18 +1,16 @@
 import "package:flutter/material.dart";
 import 'package:linkup/constants.dart';
 
-class OpenToWork extends StatelessWidget {
+class ApplicationCard extends StatelessWidget {
   final String applicantName;
+  final String position;
   final String profileImageURL;
-  final String applyingPosition;
-  final String description;
 
-  const OpenToWork({
+  const ApplicationCard({
     Key key,
     this.applicantName,
+    this.position,
     this.profileImageURL,
-    this.applyingPosition,
-    this.description,
   }) : super(key: key);
 
   @override
@@ -27,7 +25,6 @@ class OpenToWork extends StatelessWidget {
           width: orientation == Orientation.landscape
               ? size.width * 0.75
               : size.width,
-          padding: const EdgeInsets.only(top: 5, bottom: 5),
           child: Card(
             color: colorDarkMidGround,
             child: Column(
@@ -42,7 +39,7 @@ class OpenToWork extends StatelessWidget {
                           borderRadius: BorderRadius.circular(100),
                           child: Image.network(
                             profileImageURL,
-                            scale: 10,
+                            scale: 18,
                           )),
                       Padding(
                         padding: const EdgeInsets.only(left: 8),
@@ -50,7 +47,7 @@ class OpenToWork extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              applicantName,
+                              position,
                               style: const TextStyle(
                                 fontFamily: fontFamilySFPro,
                                 fontSize: 16,
@@ -58,7 +55,7 @@ class OpenToWork extends StatelessWidget {
                               ),
                             ),
                             Text(
-                              applyingPosition,
+                              applicantName,
                               style: const TextStyle(
                                 fontFamily: fontFamilySFPro,
                                 fontWeight: FontWeight.bold,
@@ -68,23 +65,25 @@ class OpenToWork extends StatelessWidget {
                             )
                           ],
                         ),
-                      )
+                      ),
+                      Expanded(child: Container()),
+                      Padding(
+                        padding: const EdgeInsets.only(
+                          left: 15,
+                          right: 15,
+                        ),
+                        child: RoundedButton(
+                          color: colorDarkForground,
+                          fontSize: 13,
+                          height: 40,
+                          width: size.width * 0.2,
+                          text: "View",
+                          onPressed: () {
+                            print("Button clicked");
+                          },
+                        ),
+                      ),
                     ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(
-                    left: 10,
-                    top: 5,
-                    right: 10,
-                  ),
-                  child: Text(
-                    description,
-                    style: const TextStyle(
-                      fontFamily: fontFamilySFPro,
-                      fontSize: 13,
-                      color: Colors.white,
-                    ),
                   ),
                 ),
               ],
