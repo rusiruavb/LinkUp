@@ -220,8 +220,8 @@ class _EducationSection extends StatelessWidget {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     "Education",
                     style: TextStyle(
                       fontFamily: fontFamilySFPro,
@@ -229,10 +229,15 @@ class _EducationSection extends StatelessWidget {
                       color: colorTextPrimary,
                     ),
                   ),
-                  Icon(
-                    Icons.add,
-                    color: colorTextPrimary,
-                  ),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/add-education");
+                    },
+                    icon: const Icon(
+                      Icons.add,
+                      color: colorTextPrimary,
+                    ),
+                  )
                 ],
               ),
               for (var i = 0; i < 2; i++)
