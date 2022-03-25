@@ -5,6 +5,8 @@ import 'package:linkup/screens/login/login_screen.dart';
 import 'package:linkup/screens/signup/signup_screen.dart';
 import 'package:linkup/screens/news_feed/news_feed_screen.dart';
 
+import '../screens/profile/profile_screen.dart';
+
 class PageRoutes {
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -55,6 +57,17 @@ class PageRoutes {
       case "/login":
         return PageRouteBuilder(
           pageBuilder: (_, __, ___) => LoginScreen(),
+          settings: settings,
+          transitionsBuilder: (_, opacity, __, child) => FadeTransition(
+            opacity: opacity,
+            child: child,
+          ),
+        );
+
+      // Profile screen route
+      case "/profile":
+        return PageRouteBuilder(
+          pageBuilder: (_, __, ___) => const ProfileScreen(),
           settings: settings,
           transitionsBuilder: (_, opacity, __, child) => FadeTransition(
             opacity: opacity,

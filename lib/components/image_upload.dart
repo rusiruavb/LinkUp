@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import "package:flutter/material.dart";
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:linkup/components/user-profile-image/rounded_image.dart';
+import 'package:linkup/components/user_image_upload.dart';
 import 'package:linkup/constants.dart';
 import "package:path/path.dart" as p;
 import 'package:firebase_storage/firebase_storage.dart' as storage;

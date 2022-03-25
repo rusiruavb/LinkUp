@@ -1,19 +1,21 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:firebase_core/firebase_core.dart';
 import "package:flutter/material.dart";
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:linkup/components/user-profile-image/rounded_image.dart';
 import 'package:linkup/constants.dart';
 import "package:path/path.dart" as p;
 import 'package:firebase_storage/firebase_storage.dart' as storage;
 
 class UserImageUpload extends StatefulWidget {
   final Function(String imageURL) onFileChanged;
+  String imageURL;
 
-  const UserImageUpload({
+  UserImageUpload({
     Key key,
+    this.imageURL,
     this.onFileChanged,
   }) : super(key: key);
 
@@ -23,13 +25,12 @@ class UserImageUpload extends StatefulWidget {
 
 class _UserImageUploadState extends State<UserImageUpload> {
   final ImagePicker _picker = ImagePicker();
-  String imagePath;
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        if (imagePath == null)
+        if (widget.imageURL == null)
           Container(
             decoration: BoxDecoration(
               border: Border.all(width: 2, color: colorDarkForground),
@@ -41,13 +42,13 @@ class _UserImageUploadState extends State<UserImageUpload> {
               color: colorDarkForground,
             ),
           ),
-        if (imagePath != null)
+        if (widget.imageURL != null)
           InkWell(
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,
             onTap: () => _selectPhoto(),
             child: AppRoundedImage.url(
-              imagePath,
+              widget.imageURL,
               height: 150,
               width: 150,
             ),
@@ -57,7 +58,7 @@ class _UserImageUploadState extends State<UserImageUpload> {
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Text(
-              imagePath != null ? "Change photo" : "Select photo",
+              widget.imageURL != null ? "Change photo" : "Select photo",
               style: const TextStyle(
                 fontFamily: fontFamilySFPro,
                 color: Colors.white,
@@ -144,9 +145,58 @@ class _UserImageUploadState extends State<UserImageUpload> {
     print("Test URL: " + fileUrl);
 
     setState(() {
-      imagePath = fileUrl;
+      widget.imageURL = fileUrl;
     });
 
     widget.onFileChanged(fileUrl);
+  }
+}
+
+class AppRoundedImage extends StatelessWidget {
+  final ImageProvider provider;
+  final double height;
+  final double width;
+
+  const AppRoundedImage(
+    this.provider, {
+    Key key,
+    this.height,
+    this.width,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(height / 2),
+      child: Image(
+        image: provider,
+        height: height,
+        width: width,
+      ),
+    );
+  }
+
+  factory AppRoundedImage.url(
+    String url, {
+    double height,
+    double width,
+  }) {
+    return AppRoundedImage(
+      NetworkImage(url),
+      height: height,
+      width: width,
+    );
+  }
+
+  factory AppRoundedImage.memory(
+    Uint8List data, {
+    double height,
+    double width,
+  }) {
+    return AppRoundedImage(
+      MemoryImage(data),
+      height: height,
+      width: width,
+    );
   }
 }
