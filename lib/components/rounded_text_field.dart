@@ -29,7 +29,7 @@ class RoundedTextField extends StatelessWidget {
             child: Text(
               text,
               style: const TextStyle(
-                fontFamily: fontFamilyRobotoRegular,
+                fontFamily: fontFamilySFPro,
                 fontSize: 16,
                 color: Colors.white,
                 fontWeight: FontWeight.normal,
@@ -47,7 +47,7 @@ class RoundedTextField extends StatelessWidget {
                   ? TextInputType.emailAddress
                   : TextInputType.text,
               style: const TextStyle(
-                fontFamily: fontFamilyRobotoRegular,
+                fontFamily: fontFamilySFPro,
                 fontSize: 18,
                 color: Colors.white,
               ),

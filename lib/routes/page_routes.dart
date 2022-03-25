@@ -26,9 +26,13 @@ class PageRoutes {
         return PageRouteBuilder(
           pageBuilder: (_, __, ___) => const ApplicationFormScreen(),
           settings: settings,
-          transitionsBuilder: (_, opacity, __, child) => FadeTransition(
-            opacity: opacity,
+          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+              SlideTransition(
             child: child,
+            position: Tween<Offset>(
+              begin: const Offset(1.0, 0.0),
+              end: Offset.zero,
+            ).animate(animation),
           ),
         );
 

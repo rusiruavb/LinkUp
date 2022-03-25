@@ -16,7 +16,7 @@ class _JobsScreenState extends State<JobsScreen> {
       alignment: Alignment.center,
       child: SingleChildScrollView(
         child: Column(
-          children: const [
+          children: [
             JobCard(
               companyLogo:
                   "https://www.freepnglogos.com/uploads/google-logo-png/google-logo-icon-png-transparent-background-osteopathy-16.png",
@@ -29,8 +29,11 @@ class _JobsScreenState extends State<JobsScreen> {
               qualifications: "Test",
               salary: "45000",
               type: "Full Time",
+              onClick: () {
+                Navigator.pushNamed(context, "/applicationform");
+              },
             ),
-            JobCard(
+            const JobCard(
               companyLogo:
                   "https://www.freepnglogos.com/uploads/google-logo-png/google-logo-icon-png-transparent-background-osteopathy-16.png",
               companyName: "Google In.",
