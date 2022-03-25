@@ -1,8 +1,6 @@
 import "package:flutter/material.dart";
-import 'package:linkup/components/bottom_navbar.dart';
 import 'package:linkup/components/education_card.dart';
 import 'package:linkup/components/experience_card.dart';
-import 'package:linkup/components/side_navbar.dart';
 import 'package:linkup/components/skills_card.dart';
 import 'package:linkup/components/user_image_upload.dart';
 import 'package:linkup/constants.dart';
@@ -166,8 +164,8 @@ class _ExperienceSection extends StatelessWidget {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     "Experience",
                     style: TextStyle(
                       fontFamily: fontFamilySFPro,
@@ -175,10 +173,15 @@ class _ExperienceSection extends StatelessWidget {
                       color: colorTextPrimary,
                     ),
                   ),
-                  Icon(
-                    Icons.add,
-                    color: colorTextPrimary,
-                  ),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/add-experience");
+                    },
+                    icon: const Icon(
+                      Icons.add,
+                      color: colorTextPrimary,
+                    ),
+                  )
                 ],
               ),
               for (var i = 0; i < 2; i++)

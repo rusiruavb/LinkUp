@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:linkup/screens/applicationform/applicationform_screen.dart';
 import 'package:linkup/screens/home/home.dart';
 import 'package:linkup/screens/login/login_screen.dart';
+import 'package:linkup/screens/profile/add_experience.dart';
 import 'package:linkup/screens/signup/signup_screen.dart';
 import 'package:linkup/screens/news_feed/news_feed_screen.dart';
 
@@ -25,6 +26,21 @@ class PageRoutes {
       case "/applicationform":
         return PageRouteBuilder(
           pageBuilder: (_, __, ___) => const ApplicationFormScreen(),
+          settings: settings,
+          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+              SlideTransition(
+            child: child,
+            position: Tween<Offset>(
+              begin: const Offset(1.0, 0.0),
+              end: Offset.zero,
+            ).animate(animation),
+          ),
+        );
+
+      // Add experience screen route
+      case "/add-experience":
+        return PageRouteBuilder(
+          pageBuilder: (_, __, ___) => const AddExperienceScreen(),
           settings: settings,
           transitionsBuilder: (context, animation, secondaryAnimation, child) =>
               SlideTransition(
