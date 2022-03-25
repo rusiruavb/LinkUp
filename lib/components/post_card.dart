@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import 'package:linkup/components/rounded_button.dart';
 import 'package:linkup/constants.dart';
 
 class PostCard extends StatelessWidget {
@@ -30,7 +29,7 @@ class PostCard extends StatelessWidget {
           width: orientation == Orientation.landscape
               ? size.width * 0.75
               : size.width,
-          padding: const EdgeInsets.only(top: 5, bottom: 5),
+          padding: const EdgeInsets.only(top: 0),
           child: Card(
             color: colorDarkMidGround,
             child: Column(
@@ -45,7 +44,7 @@ class PostCard extends StatelessWidget {
                           borderRadius: BorderRadius.circular(100),
                           child: Image.network(
                             profileImageURL,
-                            scale: 20,
+                            scale: 18,
                           )),
                       Padding(
                         padding: const EdgeInsets.only(left: 8),
@@ -56,6 +55,7 @@ class PostCard extends StatelessWidget {
                               fullName,
                               style: const TextStyle(
                                 fontFamily: fontFamilySFPro,
+                                fontWeight: FontWeight.bold,
                                 fontSize: 16,
                                 color: Colors.white,
                               ),
@@ -64,8 +64,7 @@ class PostCard extends StatelessWidget {
                               position,
                               style: const TextStyle(
                                 fontFamily: fontFamilySFPro,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
+                                fontSize: 14,
                                 color: Colors.white,
                               ),
                             )
@@ -77,11 +76,7 @@ class PostCard extends StatelessWidget {
                 ),
                 if (postImage != null) Image.network(postImage),
                 Padding(
-                  padding: const EdgeInsets.only(
-                    left: 10,
-                    top: 5,
-                    right: 10,
-                  ),
+                  padding: const EdgeInsets.all(10.0),
                   child: Text(
                     description,
                     style: const TextStyle(

@@ -19,19 +19,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "Profile",
-          style: TextStyle(
-            fontFamily: "SF-Pro",
-          ),
-        ),
-        backgroundColor: colorDarkMidGround,
-        elevation: 0.0,
-      ),
       backgroundColor: colorDarkBackground,
-      drawer: const SideNavbar(),
-      bottomNavigationBar: const BottomNavbar(),
       body: Align(
         alignment: Alignment.topCenter,
         child: SingleChildScrollView(
