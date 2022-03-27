@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import 'package:linkup/screens/applicationform/applicationform_screen.dart';
+import 'package:linkup/screens/application_form/application_form_screen.dart';
 import 'package:linkup/screens/home/home.dart';
 import 'package:linkup/screens/login/login_screen.dart';
 import 'package:linkup/screens/profile/add_education.dart';
