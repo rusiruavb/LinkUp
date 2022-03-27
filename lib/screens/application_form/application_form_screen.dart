@@ -1,12 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:linkup/components/rounded_button.dart';
-import 'package:linkup/components/rounded_number_field.dart';
 import 'package:linkup/components/rounded_text_field.dart';
-import 'package:linkup/components/side_navbar.dart';
 import 'package:linkup/constants.dart';
-
-import '../../components/user_image_upload.dart';
-
 class ApplicationFormScreen extends StatefulWidget {
   const ApplicationFormScreen({Key key}) : super(key: key);
 

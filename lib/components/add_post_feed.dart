@@ -1,9 +1,6 @@
-import 'dart:html';
-
 import "package:flutter/material.dart";
 import 'package:linkup/components/image_upload.dart';
 import 'package:linkup/constants.dart';
-import 'package:linkup/components/rounded_text_field.dart';
 import 'package:linkup/components/rounded_button.dart';
 
 class AddPostFeed extends StatefulWidget {

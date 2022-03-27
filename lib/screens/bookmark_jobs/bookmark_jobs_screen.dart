@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:linkup/components/application_card.dart';
-import 'package:linkup/components/bookmarkedjobheader_card.dart';
-import 'package:linkup/components/bookmarkedjobbody_card.dart';
-import 'package:linkup/components/job_card.dart';
 
 import '../../components/bottom_navbar.dart';
 import '../../components/side_navbar.dart';
 import '../../constants.dart';
+import 'bookmark_job_body_card.dart';
+import 'bookmark_job_header_card.dart';
 
 // stores ExpansionPanel state information
 class Item {

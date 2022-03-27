@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
-import 'package:linkup/components/addpost_feed.dart';
+import 'package:linkup/components/add_post_feed.dart';
 import 'package:linkup/components/bottom_navbar.dart';
-import 'package:linkup/components/job_card.dart';
 import 'package:linkup/components/post_card.dart';
 import 'package:linkup/components/side_navbar.dart';
 import 'package:linkup/constants.dart';
