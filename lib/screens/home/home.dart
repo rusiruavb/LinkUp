@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:linkup/components/side_navbar.dart';
 import 'package:linkup/constants.dart';
+import 'package:linkup/screens/bookmark_jobs/bookmark_jobs_screen.dart';
 import 'package:linkup/screens/jobs/jobs_screen.dart';
 import 'package:linkup/screens/news_feed/news_feed_screen.dart';
 import 'package:linkup/screens/profile/profile_screen.dart';
@@ -19,6 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
     JobsScreen(),
     ProfileScreen(),
     NewsFeedScreen(),
+    BookMarkedJobsScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -40,6 +42,11 @@ class _HomeScreenState extends State<HomeScreen> {
       case 2:
         setState(() {
           _tabName = "News Feed";
+        });
+        break;
+      case 3:
+        setState(() {
+          _tabName = "Bookmarks";
         });
         break;
       default:

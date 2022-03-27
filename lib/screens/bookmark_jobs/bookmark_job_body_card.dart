@@ -34,12 +34,12 @@ class BookmarkedJobBodyCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
+        SizedBox(
           width: orientation == Orientation.landscape
               ? size.width * 0.75
               : size.width,
-          padding: const EdgeInsets.only(top: 5, bottom: 5),
           child: Card(
+            elevation: 0.0,
             color: colorDarkMidGround,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

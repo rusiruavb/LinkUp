@@ -21,16 +21,15 @@ class BookmarkedCard extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Container(
+        SizedBox(
           width: orientation == Orientation.landscape
               ? size.width * 0.75
               : size.width,
-          padding: const EdgeInsets.only(top: 5, bottom: 5),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(left: 8),
                 child: Row(
                   // Header section
                   children: [
