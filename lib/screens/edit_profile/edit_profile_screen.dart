@@ -5,8 +5,6 @@ import 'package:linkup/components/rounded_text_field.dart';
 import 'package:linkup/components/side_navbar.dart';
 import 'package:linkup/constants.dart';
 
-import '../../components/user_image_upload.dart';
-
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({Key key}) : super(key: key);
 
@@ -27,20 +25,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: colorDarkBackground,
-        iconTheme: const IconThemeData(color: Colors.white),
-        elevation: 0.0,
-        title: const Text(
-          "Edit Profile",
-          style: TextStyle(
-            fontFamily: "SF-Pro",
-            color: Colors.white,
-          ),
-        ),
-      ),
       backgroundColor: colorDarkBackground,
-      drawer: const SideNavbar(),
       body: SingleChildScrollView(
         child: Container(
           width: size.width,

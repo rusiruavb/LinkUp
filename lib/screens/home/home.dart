@@ -1,6 +1,8 @@
 import "package:flutter/material.dart";
 import 'package:linkup/components/side_navbar.dart';
 import 'package:linkup/constants.dart';
+import 'package:linkup/screens/applications/application_screen.dart';
+import 'package:linkup/screens/bookmark_jobs/bookmark_jobs_screen.dart';
 import 'package:linkup/screens/jobs/jobs_screen.dart';
 import 'package:linkup/screens/news_feed/news_feed_screen.dart';
 import 'package:linkup/screens/profile/profile_screen.dart';
@@ -17,8 +19,10 @@ class _HomeScreenState extends State<HomeScreen> {
   String _tabName = "Jobs";
   static const List<Widget> _widgetList = <Widget>[
     JobsScreen(),
-    ProfileScreen(),
+    ApplicationScreen(),
     NewsFeedScreen(),
+    BookMarkedJobsScreen(),
+    ProfileScreen(),
   ];
 
   void _onItemTapped(int index) {
@@ -34,12 +38,22 @@ class _HomeScreenState extends State<HomeScreen> {
         break;
       case 1:
         setState(() {
-          _tabName = "Profile";
+          _tabName = "Applications";
         });
         break;
       case 2:
         setState(() {
           _tabName = "News Feed";
+        });
+        break;
+      case 3:
+        setState(() {
+          _tabName = "Bookmarks";
+        });
+        break;
+      case 4:
+        setState(() {
+          _tabName = "Profile";
         });
         break;
       default:
@@ -61,8 +75,23 @@ class _HomeScreenState extends State<HomeScreen> {
             fontFamily: "SF-Pro",
           ),
         ),
+        titleSpacing: 0,
         backgroundColor: colorDarkMidGround,
         elevation: 0.0,
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: ClipRRect(
+              borderRadius: BorderRadius.circular(100),
+              child: Image.network(
+                "https://monteluke.com.au/wp-content/gallery/linkedin-profile-pictures/34217-MLS-Fabian-Ekker-003flin.jpg",
+                scale: 18,
+              ),
+            ),
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+          ),
+        ),
       ),
       backgroundColor: colorDarkBackground,
       drawer: const SideNavbar(),
