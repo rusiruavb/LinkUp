@@ -3,6 +3,8 @@ import 'package:linkup/constants.dart';
 
 class RoundedTextArea extends StatelessWidget {
   final ValueChanged<String> onChange;
+  final Color backgroundColor;
+  final Color textAreaColor;
   final String text;
   final String value;
   final String type;
@@ -11,6 +13,8 @@ class RoundedTextArea extends StatelessWidget {
     Key key,
     this.text,
     this.value,
+    this.backgroundColor,
+    this.textAreaColor,
     this.type,
     this.onChange,
   }) : super(key: key);
@@ -20,7 +24,7 @@ class RoundedTextArea extends StatelessWidget {
     final size = MediaQuery.of(context).size;
 
     return Material(
-      color: colorDarkBackground,
+      color: backgroundColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -41,6 +45,7 @@ class RoundedTextArea extends StatelessWidget {
             height: size.height * 0.005,
           ),
           TextFieldContainer(
+            textAreaColor: textAreaColor,
             child: TextFormField(
               initialValue: value,
               keyboardType: TextInputType.multiline,
@@ -66,8 +71,13 @@ class RoundedTextArea extends StatelessWidget {
 
 class TextFieldContainer extends StatelessWidget {
   final Widget child;
+  final Color textAreaColor;
 
-  const TextFieldContainer({Key key, this.child}) : super(key: key);
+  const TextFieldContainer({
+    Key key,
+    this.child,
+    this.textAreaColor,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +91,7 @@ class TextFieldContainer extends StatelessWidget {
       width: size.width * 0.9,
       height: 120,
       decoration: BoxDecoration(
-        color: colorDarkMidGround,
+        color: textAreaColor,
         borderRadius: BorderRadius.circular(20),
       ),
       child: child,

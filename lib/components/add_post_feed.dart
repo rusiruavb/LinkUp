@@ -1,5 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:linkup/components/image_upload.dart';
+import 'package:linkup/components/post_image_upload.dart';
+import 'package:linkup/components/rounded_textarea_field.dart';
 import 'package:linkup/constants.dart';
 import 'package:linkup/components/rounded_button.dart';
 
@@ -20,17 +22,44 @@ class _AddPostFeedState extends State<AddPostFeed> {
     final size = MediaQuery.of(context).size;
     return Column(
       children: [
-        Container(
-            margin: const EdgeInsets.all(5.0),
-            padding: const EdgeInsets.all(3.0),
-            decoration:
-                BoxDecoration(border: Border.all(color: Colors.grey)),
+        Card(
+          color: colorDarkMidGround,
+          child: Container(
+            padding: const EdgeInsets.only(
+              top: 10,
+              left: 25,
+              right: 25,
+              bottom: 5,
+            ),
             child: Column(
               children: [
+                const Align(
+                  alignment: Alignment.topLeft,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 5, bottom: 10),
+                    child: Text(
+                      "Create your post",
+                      style: TextStyle(
+                        fontFamily: fontFamilySFPro,
+                        fontSize: 20,
+                        color: colorTextPrimary,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                RoundedTextArea(
+                  backgroundColor: colorDarkMidGround,
+                  textAreaColor: colorDarkBackground,
+                  text: "Description",
+                  onChange: (value) {
+                    print(value);
+                  },
+                ),
                 SizedBox(
                   height: size.height * 0.03,
                 ),
-                ImageUpload(
+                PostImageUpload(
                   onFileChanged: (imageUrl) {
                     print(imageUrl);
                   },
@@ -38,29 +67,11 @@ class _AddPostFeedState extends State<AddPostFeed> {
                 SizedBox(
                   height: size.height * 0.03,
                 ),
-                const Padding(
-                  padding: EdgeInsets.only(left: 10, right: 10, top: 10),
-                  child: TextField(
-                    maxLines: 4,
-                    decoration: InputDecoration(
-                        filled: true,
-                        hintStyle: TextStyle(color: Colors.white),
-                        fillColor: Color.fromARGB(255, 59, 59, 59),
-                        border: OutlineInputBorder(),
-                        hintText: 'Enter Your Description'),
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: size.height * 0.03,
-                ),
                 RoundedButton(
                   color: colorDarkForground,
                   fontSize: 14,
-                  height: 50,
-                  width: size.width * 0.4,
+                  height: 35,
+                  width: size.width * 0.85,
                   text: "Post",
                   onPressed: () {
                     print("Button clicked");
@@ -70,7 +81,9 @@ class _AddPostFeedState extends State<AddPostFeed> {
                   height: size.height * 0.03,
                 ),
               ],
-            )),
+            ),
+          ),
+        ),
       ],
     );
   }
