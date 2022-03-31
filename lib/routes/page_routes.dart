@@ -7,6 +7,7 @@ import 'package:linkup/screens/profile/add_experience.dart';
 import 'package:linkup/screens/signup/signup_screen.dart';
 import 'package:linkup/screens/news_feed/news_feed_screen.dart';
 
+import '../screens/profile/add_skills.dart';
 import '../screens/profile/profile_screen.dart';
 
 class PageRoutes {
@@ -113,6 +114,15 @@ class PageRoutes {
       case "/feed":
         return PageRouteBuilder(
           pageBuilder: (_, __, ___) => const NewsFeedScreen(),
+          settings: settings,
+          transitionsBuilder: (_, opacity, __, child) => FadeTransition(
+            opacity: opacity,
+            child: child,
+          ),
+        );
+      case "/add-skill":
+        return PageRouteBuilder(
+          pageBuilder: (_, __, ___) => const AddSkills(),
           settings: settings,
           transitionsBuilder: (_, opacity, __, child) => FadeTransition(
             opacity: opacity,

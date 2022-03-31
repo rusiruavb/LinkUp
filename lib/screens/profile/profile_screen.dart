@@ -263,7 +263,7 @@ class _SkillsSection extends StatelessWidget {
     return Container(
       width:
           orientation == Orientation.landscape ? size.width * 0.75 : size.width,
-      padding: const EdgeInsets.only(top: 0, bottom: 5),
+      padding: const EdgeInsets.only(top: 0),
       child: Card(
         color: colorDarkMidGround,
         child: Padding(
@@ -273,8 +273,8 @@ class _SkillsSection extends StatelessWidget {
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: const [
-                  Text(
+                children: [
+                  const Text(
                     "Skills",
                     style: TextStyle(
                       fontFamily: fontFamilySFPro,
@@ -282,15 +282,20 @@ class _SkillsSection extends StatelessWidget {
                       color: colorTextPrimary,
                     ),
                   ),
-                  Icon(
-                    Icons.add,
-                    color: colorTextPrimary,
-                  ),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, "/add-skill");
+                    },
+                    icon: const Icon(
+                      Icons.add,
+                      color: colorTextPrimary,
+                    ),
+                  )
                 ],
               ),
               for (var i = 0; i < 2; i++)
                 const SkillCard(
-                  skill: "Public Speaking",
+                  skill: "Java",
                 ),
             ],
           ),
