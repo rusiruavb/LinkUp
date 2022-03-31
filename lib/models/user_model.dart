@@ -6,6 +6,7 @@ import 'post_model.dart';
 
 class User {
   String id;
+  String token;
   String firstName;
   String lastName;
   String phoneNumber;
@@ -21,6 +22,7 @@ class User {
 
   User({
     this.id,
+    this.token,
     this.firstName,
     this.lastName,
     this.phoneNumber,
@@ -40,6 +42,7 @@ class User {
   ) =>
       User(
         id: json['id'],
+        token: json['token'],
         firstName: json['firstName'],
         lastName: json['lastName'],
         phoneNumber: json['phoneNumber'],

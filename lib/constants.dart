@@ -1,5 +1,8 @@
 import 'package:flutter/widgets.dart';
 
+// API
+const String baseApi = "https://linkup-api-server.herokuapp.com";
+
 // Fonts
 const String fontFamilyLarsseit = "Larsseit";
 const String fontFamilyOpenSans = "Opensans";
