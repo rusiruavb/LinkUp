@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:linkup/constants.dart';
 
 class SideNavbar extends StatelessWidget {
@@ -6,9 +7,12 @@ class SideNavbar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+
     return Drawer(
-      backgroundColor: Colors.white,
+      backgroundColor: colorDarkMidGround,
       child: ListView(
+        padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
             currentAccountPicture: CircleAvatar(
@@ -24,7 +28,7 @@ class SideNavbar extends StatelessWidget {
             accountName: const Text(
               "Oliva Anna",
               style: TextStyle(
-                color: Colors.black,
+                color: colorTextPrimary,
                 fontFamily: fontFamilySFPro,
                 fontSize: 22,
               ),
@@ -32,13 +36,13 @@ class SideNavbar extends StatelessWidget {
             accountEmail: const Text(
               "oliva@gmail.com",
               style: TextStyle(
-                color: Colors.black,
+                color: colorTextPrimary,
                 fontFamily: fontFamilySFPro,
                 fontSize: 16,
               ),
             ),
             decoration: const BoxDecoration(
-              color: Colors.white,
+              color: colorDarkBackground,
             ),
           ),
           _NavbarItem(
@@ -46,14 +50,38 @@ class SideNavbar extends StatelessWidget {
             onClick: () {
               Navigator.pushNamed(context, "/signup");
             },
-            icon: Icons.person,
+            icon: FontAwesomeIcons.user,
           ),
           _NavbarItem(
             text: "Login",
             onClick: () {
               Navigator.pushNamed(context, "/login");
             },
-            icon: Icons.login,
+            icon: FontAwesomeIcons.signIn,
+          ),
+          _NavbarItem(
+            text: "My Companies",
+            onClick: () {
+              Navigator.pushNamed(context, "/login");
+            },
+            icon: FontAwesomeIcons.building,
+          ),
+          _NavbarItem(
+            text: "My Posts",
+            onClick: () {
+              Navigator.pushNamed(context, "/login");
+            },
+            icon: FontAwesomeIcons.fileLines,
+          ),
+          Align(
+            alignment: Alignment.bottomCenter,
+            child: _NavbarItem(
+              text: "Sign out",
+              onClick: () {
+                Navigator.pushNamed(context, "/login");
+              },
+              icon: FontAwesomeIcons.signOut,
+            ),
           ),
         ],
       ),
@@ -76,13 +104,18 @@ class _NavbarItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       iconColor: colorPrimary,
-      leading: Icon(icon, size: 25),
+      leading: Icon(
+        icon,
+        size: 23,
+        color: colorTextDisabled,
+      ),
       horizontalTitleGap: 0,
       title: Text(
         text,
         style: const TextStyle(
           fontFamily: fontFamilySFPro,
           fontSize: 16,
+          color: colorTextPrimary,
         ),
       ),
       onTap: onClick,
