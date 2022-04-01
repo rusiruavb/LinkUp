@@ -142,7 +142,6 @@ class _UserImageUploadState extends State<UserImageUpload> {
 
     final result = await ref.putFile(File(path));
     final fileUrl = await result.ref.getDownloadURL();
-    print("Test URL: " + fileUrl);
 
     setState(() {
       widget.imageURL = fileUrl;

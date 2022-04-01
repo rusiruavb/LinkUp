@@ -1,9 +1,12 @@
 import "package:flutter/material.dart";
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:linkup/components/rounded_button.dart';
 import 'package:linkup/components/rounded_number_field.dart';
 import 'package:linkup/components/rounded_text_field.dart';
 import 'package:linkup/components/side_navbar.dart';
 import 'package:linkup/constants.dart';
+import 'package:linkup/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../components/user_image_upload.dart';
 
@@ -15,12 +18,26 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  String firstName = "";
-  String lastName = "";
-  String email = "";
-  String phoneNumber = "";
-  String password = "";
-  String conformPassword = "";
+  UserProvider userProvider;
+  String conformPassword;
+
+  @override
+  void initState() {
+    super.initState();
+    userProvider = context.read<UserProvider>();
+  }
+
+  void submit() {
+    if (userProvider.newUser.password == conformPassword) {
+      userProvider.create(context);
+    } else {
+      Fluttertoast.showToast(
+        msg: 'Password not matched',
+        backgroundColor: colorWarningLight,
+        textColor: colorDarkBackground,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -73,17 +90,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   UserImageUpload(
                     onFileChanged: (imageUrl) {
-                      print(imageUrl);
+                      print('Test: ' + imageUrl);
+                      userProvider.newUser.profileImageURL = imageUrl;
                     },
+                    imageURL: userProvider.newUser.profileImageURL,
                   ),
                   RoundedTextField(
                     text: "First Name",
                     onChange: (value) {
                       setState(() {
-                        firstName = value;
+                        userProvider.newUser.firstName = value;
                       });
                     },
-                    value: firstName,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -92,10 +110,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     text: "Last Name",
                     onChange: (value) {
                       setState(() {
-                        lastName = value;
+                        userProvider.newUser.lastName = value;
                       });
                     },
-                    value: lastName,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -105,10 +122,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     type: "email",
                     onChange: (value) {
                       setState(() {
-                        email = value;
+                        userProvider.newUser.email = value;
                       });
                     },
-                    value: email,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -118,10 +134,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     type: "phone",
                     onChange: (value) {
                       setState(() {
-                        phoneNumber = value;
+                        userProvider.newUser.phoneNumber = value;
                       });
                     },
-                    value: phoneNumber,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -130,11 +145,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     text: "Password",
                     onChange: (value) {
                       setState(() {
-                        password = value;
+                        userProvider.newUser.password = value;
                       });
                     },
                     type: "password",
-                    value: password,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -147,7 +161,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       });
                     },
                     type: "password",
-                    value: conformPassword,
                   ),
                   MediaQuery.of(context).orientation == Orientation.landscape
                       ? SizedBox(
@@ -169,6 +182,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       text: "Sign Up",
                       onPressed: () {
                         print("Button clicked");
+                        submit();
                       },
                     ),
                   ),

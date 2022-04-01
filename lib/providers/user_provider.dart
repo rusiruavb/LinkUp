@@ -8,6 +8,19 @@ import 'package:linkup/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
 class UserProvider extends ChangeNotifier {
+  User newUser = User.createConstructor(
+    firstName: '',
+    lastName: '',
+    phoneNumber: '',
+    email: '',
+    password: '',
+    profileImageURL:
+        'https://firebasestorage.googleapis.com/v0/b/linkup-31422.appspot.com/o/images%2Fuser_profile_default.png?alt=media&token=c2575581-3695-44fa-a30e-02f795f6f669',
+  );
+  User logUser = User.loginConstructor(
+    email: '',
+    password: '',
+  );
   User user;
   final storage = const FlutterSecureStorage();
 
@@ -20,31 +33,35 @@ class UserProvider extends ChangeNotifier {
       },
       body: jsonEncode(
         <String, String>{
-          'firstName': user.firstName,
-          'lastName': user.lastName,
-          'phoneNumber': user.phoneNumber,
-          'password': user.password,
-          'email': user.email,
-          'profileImageURL': user.profileImageURL,
+          'firstName': newUser.firstName,
+          'lastName': newUser.lastName,
+          'phoneNumber': newUser.phoneNumber,
+          'password': newUser.password,
+          'email': newUser.email,
+          'profileImageURL': newUser.profileImageURL,
         },
       ),
     );
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
-      var authData = User.fromJson(data);
+      var authData = User.fromCreateJson(data);
       final token = await storage.read(key: 'authToken');
 
       if (token != null) {
         await storage.deleteAll();
       }
-      await storage.write(key: 'userId', value: authData.token);
+      await storage.write(key: 'authToken', value: authData.token);
 
       // Get user profile
       getProfile();
 
       notifyListeners();
-      Fluttertoast.showToast(msg: 'Success');
+      Fluttertoast.showToast(
+        msg: 'Success',
+        backgroundColor: colorSuccessLight,
+        textColor: colorTextPrimary,
+      );
       Navigator.pushNamed(context, '/home');
     }
   }
@@ -58,8 +75,8 @@ class UserProvider extends ChangeNotifier {
       },
       body: jsonEncode(
         <String, String>{
-          'email': user.email,
-          'password': user.password,
+          'email': logUser.email,
+          'password': logUser.password,
         },
       ),
     );

@@ -20,6 +20,20 @@ class User {
   List<Application> applications;
   List<Job> jobs;
 
+  User.createConstructor({
+    this.firstName,
+    this.lastName,
+    this.phoneNumber,
+    this.email,
+    this.password,
+    this.profileImageURL,
+  });
+
+  User.loginConstructor({
+    this.email,
+    this.password,
+  });
+
   User({
     this.id,
     this.token,
@@ -55,6 +69,20 @@ class User {
         posts: json['posts'],
         applications: json['applicationList'],
         jobs: json['jobList'],
+      );
+
+  factory User.fromCreateJson(
+    Map<String, dynamic> json,
+  ) =>
+      User(
+        id: json['_id'],
+        token: json['token'],
+        firstName: json['firstName'],
+        lastName: json['lastName'],
+        phoneNumber: json['phoneNumber'],
+        password: json['password'],
+        email: json['email'],
+        profileImageURL: json['profileImageURL'],
       );
 
   Map<String, dynamic> toJson() => {
