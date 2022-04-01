@@ -33,7 +33,7 @@ class UserProvider extends ChangeNotifier {
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       var authData = User.fromJson(data);
-      final token = await storage.read(key: 'userId');
+      final token = await storage.read(key: 'authToken');
 
       if (token != null) {
         await storage.deleteAll();
@@ -41,6 +41,7 @@ class UserProvider extends ChangeNotifier {
       await storage.write(key: 'userId', value: authData.token);
 
       // Get user profile
+      getProfile();
 
       notifyListeners();
       Fluttertoast.showToast(msg: 'Success');
@@ -66,7 +67,7 @@ class UserProvider extends ChangeNotifier {
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       var authData = User.fromJson(data);
-      final token = await storage.read(key: 'userId');
+      final token = await storage.read(key: 'authToken');
 
       if (token != null) {
         await storage.deleteAll();
@@ -74,10 +75,105 @@ class UserProvider extends ChangeNotifier {
       await storage.write(key: 'userId', value: authData.token);
 
       // Get user profile
+      getProfile();
 
       notifyListeners();
       Fluttertoast.showToast(msg: 'Login Success');
       Navigator.pushNamed(context, '/home');
+    }
+  }
+
+  // Get user profile
+  Future<User> getProfile() async {
+    final authToken = await storage.read(key: 'authToken');
+    final response = await http.get(
+      Uri.parse('$baseApi/user/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': authToken,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      user = User.fromJson(data);
+      notifyListeners();
+      return user;
+    } else if (response.statusCode == 400) {
+      Fluttertoast.showToast(msg: 'Authentication Failed');
+      notifyListeners();
+      return null;
+    } else {
+      Fluttertoast.showToast(msg: 'Server Error');
+      notifyListeners();
+      return null;
+    }
+  }
+
+  // Update user profile
+  Future<User> updateUser() async {
+    final authToken = await storage.read(key: 'authToken');
+    final response = await http.put(
+      Uri.parse('$baseApi/user/register'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': authToken,
+      },
+      body: jsonEncode(
+        <String, String>{
+          'firstName': user.firstName,
+          'lastName': user.lastName,
+          'phoneNumber': user.phoneNumber,
+          'password': user.password,
+          'email': user.email,
+          'profileImageURL': user.profileImageURL,
+        },
+      ),
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+      user = User.fromJson(data);
+
+      // Get updated user profile
+      getProfile();
+
+      notifyListeners();
+      Fluttertoast.showToast(msg: 'Update Success');
+      return user;
+    } else if (response.statusCode == 400) {
+      Fluttertoast.showToast(msg: 'Authentication Failed');
+      notifyListeners();
+      return null;
+    } else {
+      Fluttertoast.showToast(msg: 'Server Error');
+      notifyListeners();
+      return null;
+    }
+  }
+
+  void deleteUser(BuildContext context) async {
+    var userId = user.id;
+    final authToken = await storage.read(key: 'authToken');
+    final response = await http.delete(
+      Uri.parse('$baseApi/user/remove/$userId'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': authToken,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      await storage.deleteAll();
+      Navigator.pushNamed(context, '/signup');
+    } else if (response.statusCode == 400) {
+      Fluttertoast.showToast(msg: 'Authentication Failed');
+      notifyListeners();
+      return null;
+    } else {
+      Fluttertoast.showToast(msg: 'Server Error');
+      notifyListeners();
+      return null;
     }
   }
 }
