@@ -24,7 +24,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void initState() {
     super.initState();
     userProvider = context.read<UserProvider>();
-    userProvider.getProfile();
+    userProvider.getProfile(context);
   }
 
   @override

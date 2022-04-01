@@ -70,7 +70,7 @@ class UserProvider extends ChangeNotifier {
       await storage.write(key: 'userId', value: authData.id);
 
       // Get user profile
-      getProfile();
+      getProfile(context);
 
       notifyListeners();
       Fluttertoast.showToast(
@@ -105,20 +105,31 @@ class UserProvider extends ChangeNotifier {
       if (token != null) {
         await storage.deleteAll();
       }
-      await storage.write(key: 'userId', value: authData.token);
+      await storage.write(key: 'authToken', value: authData.token);
       await storage.write(key: 'userId', value: authData.id);
 
       // Get user profile
-      getProfile();
+      getProfile(context);
 
       notifyListeners();
-      Fluttertoast.showToast(msg: 'Login Success');
+      Fluttertoast.showToast(
+        msg: 'Login Success',
+        backgroundColor: colorSuccessLight,
+        textColor: colorTextPrimary,
+      );
       Navigator.pushNamed(context, '/home');
+    } else {
+      notifyListeners();
+      Fluttertoast.showToast(
+        msg: 'Login Failed',
+        backgroundColor: colorErrorLight,
+        textColor: colorTextPrimary,
+      );
     }
   }
 
   // Get user profile
-  Future<User> getProfile() async {
+  Future<User> getProfile(BuildContext context) async {
     final authToken = await storage.read(key: 'authToken');
     final response = await http.get(
       Uri.parse('$baseApi/user/'),
@@ -135,6 +146,7 @@ class UserProvider extends ChangeNotifier {
       return user;
     } else if (response.statusCode == 400) {
       Fluttertoast.showToast(msg: 'Authentication Failed');
+      Navigator.pushNamed(context, '/login');
       notifyListeners();
       return null;
     } else {
@@ -145,7 +157,7 @@ class UserProvider extends ChangeNotifier {
   }
 
   // Update user profile
-  Future<User> updateUser() async {
+  Future<User> updateUser(BuildContext context) async {
     final authToken = await storage.read(key: 'authToken');
     final response = await http.put(
       Uri.parse('$baseApi/user/register'),
@@ -170,7 +182,7 @@ class UserProvider extends ChangeNotifier {
       user = User.fromJson(data);
 
       // Get updated user profile
-      getProfile();
+      getProfile(context);
 
       notifyListeners();
       Fluttertoast.showToast(msg: 'Update Success');

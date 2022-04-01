@@ -1,18 +1,41 @@
 import "package:flutter/material.dart";
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:linkup/components/rounded_text_field.dart';
 import 'package:linkup/components/side_navbar.dart';
+import 'package:linkup/providers/user_provider.dart';
 
 import '../../components/rounded_button.dart';
 import '../../constants.dart';
+import 'package:provider/provider.dart';
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key key}) : super(key: key);
+
   @override
   _LoginScreenState createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  String email = "";
-  String password = "";
+  UserProvider userProvider;
+
+  @override
+  void initState() {
+    super.initState();
+    userProvider = context.read<UserProvider>();
+  }
+
+  void login() {
+    if (userProvider.logUser.email != '' &&
+        userProvider.logUser.password != '') {
+      userProvider.login(context);
+    } else {
+      Fluttertoast.showToast(
+        msg: 'Inputs are required',
+        backgroundColor: colorWarningLight,
+        textColor: colorDarkBackground,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ? const EdgeInsets.only(left: 32, top: 10)
                             : const EdgeInsets.only(left: 10, top: 10),
                         child: const Text(
-                          "Privillage Club Account",
+                          "Privileged Club Account",
                           style: TextStyle(
                             fontFamily: fontFamilySFPro,
                             fontWeight: FontWeight.bold,
@@ -88,10 +111,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     type: "email",
                     onChange: (value) {
                       setState(() {
-                        email = value;
+                        userProvider.logUser.email = value;
                       });
                     },
-                    value: email,
+                    value: userProvider.logUser.email,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -101,10 +124,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     type: "password",
                     onChange: (value) {
                       setState(() {
-                        password = value;
+                        userProvider.logUser.password = value;
                       });
                     },
-                    value: password,
+                    value: userProvider.logUser.password,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -121,7 +144,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       width: size.width * 0.4,
                       text: "Login",
                       onPressed: () {
-                        print("Button clicked");
+                        login();
                       },
                     ),
                   ),
