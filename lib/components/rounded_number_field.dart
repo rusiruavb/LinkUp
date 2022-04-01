@@ -1,19 +1,28 @@
 import "package:flutter/material.dart";
 import 'package:linkup/constants.dart';
 
-class RoundedNumberField extends StatelessWidget {
+class RoundedNumberField extends StatefulWidget {
   final ValueChanged<String> onChange;
   final String text;
   final String type;
   final String value;
+  final bool isRequired;
 
   const RoundedNumberField({
     Key key,
     this.text,
-    this.value,
     this.type,
+    this.value,
+    this.isRequired,
     this.onChange,
   }) : super(key: key);
+
+  @override
+  _RoundedNumberFieldState createState() => _RoundedNumberFieldState();
+}
+
+class _RoundedNumberFieldState extends State<RoundedNumberField> {
+  bool _isFormValid;
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +34,7 @@ class RoundedNumberField extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.only(left: 18),
           child: Text(
-            text,
+            widget.text,
             style: const TextStyle(
               fontFamily: fontFamilyRobotoRegular,
               fontSize: 16,
@@ -40,21 +49,47 @@ class RoundedNumberField extends StatelessWidget {
         ),
         NumberFieldContainer(
           child: TextFormField(
-            initialValue: value,
-            keyboardType:
-                type == "phone" ? TextInputType.phone : TextInputType.number,
+            validator: (value) {
+              if (value.isEmpty) {
+                setState(() {
+                  _isFormValid = false;
+                });
+                return null;
+              } else {
+                setState(() {
+                  _isFormValid = true;
+                });
+                return null;
+              }
+            },
+            initialValue: widget.value,
+            keyboardType: widget.type == "phone"
+                ? TextInputType.phone
+                : TextInputType.number,
             style: const TextStyle(
               fontFamily: fontFamilyRobotoRegular,
               fontSize: 18,
               color: Colors.white,
             ),
-            onChanged: onChange,
+            onChanged: widget.onChange,
             decoration: const InputDecoration(
               focusedBorder: InputBorder.none,
               enabledBorder: InputBorder.none,
             ),
           ),
-        )
+        ),
+        if (widget.isRequired && _isFormValid != null && !_isFormValid)
+          Padding(
+            padding: const EdgeInsets.only(left: 12, top: 5),
+            child: Text(
+              widget.text + ' is required!',
+              style: const TextStyle(
+                fontFamily: fontFamilySFPro,
+                fontSize: 13,
+                color: colorError,
+              ),
+            ),
+          ),
       ],
     );
   }

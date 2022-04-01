@@ -1,20 +1,24 @@
 import "package:flutter/material.dart";
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:linkup/constants.dart';
+import 'package:linkup/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
-class SideNavbar extends StatelessWidget {
-  final String userProfileImage;
-  final String firstName;
-  final String lastName;
-  final String email;
+class SideNavbar extends StatefulWidget {
+  const SideNavbar({Key key}) : super(key: key);
 
-  const SideNavbar({
-    Key key,
-    this.firstName,
-    this.lastName,
-    this.email,
-    this.userProfileImage,
-  }) : super(key: key);
+  @override
+  _SideNavbarState createState() => _SideNavbarState();
+}
+
+class _SideNavbarState extends State<SideNavbar> {
+  UserProvider userProvider;
+
+  @override
+  void initState() {
+    super.initState();
+    userProvider = context.read<UserProvider>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,40 +29,45 @@ class SideNavbar extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          UserAccountsDrawerHeader(
-            currentAccountPicture: CircleAvatar(
-              child: ClipOval(
-                child: Image.network(
-                  userProfileImage,
-                  width: 80,
-                  height: 80,
-                  fit: BoxFit.cover,
+          if (userProvider.user.firstName != '' &&
+              userProvider.user.lastName != '' &&
+              userProvider.user.profileImageURL != '' &&
+              userProvider.user.email != '')
+            UserAccountsDrawerHeader(
+              currentAccountPicture: CircleAvatar(
+                child: ClipOval(
+                  child: Image.network(
+                    userProvider.user.profileImageURL,
+                    width: 80,
+                    height: 80,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
-            accountName: Text(
-              firstName + " " + lastName,
-              style: const TextStyle(
-                color: colorTextPrimary,
-                fontFamily: fontFamilySFPro,
-                fontSize: 22,
+              accountName: Text(
+                userProvider.user.firstName + " " + userProvider.user.lastName,
+                style: const TextStyle(
+                  color: colorTextPrimary,
+                  fontFamily: fontFamilySFPro,
+                  fontSize: 22,
+                ),
+              ),
+              accountEmail: Text(
+                userProvider.user.email,
+                style: const TextStyle(
+                  color: colorTextPrimary,
+                  fontFamily: fontFamilySFPro,
+                  fontSize: 16,
+                ),
+              ),
+              decoration: const BoxDecoration(
+                color: colorDarkBackground,
               ),
             ),
-            accountEmail: Text(
-              email,
-              style: const TextStyle(
-                color: colorTextPrimary,
-                fontFamily: fontFamilySFPro,
-                fontSize: 16,
-              ),
-            ),
-            decoration: const BoxDecoration(
-              color: colorDarkBackground,
-            ),
-          ),
           _NavbarItem(
             text: "Sign Up",
             onClick: () {
+              Navigator.pop(context);
               Navigator.pushNamed(context, "/signup");
             },
             icon: FontAwesomeIcons.user,
@@ -66,6 +75,7 @@ class SideNavbar extends StatelessWidget {
           _NavbarItem(
             text: "Login",
             onClick: () {
+              Navigator.pop(context);
               Navigator.pushNamed(context, "/login");
             },
             icon: FontAwesomeIcons.signIn,
@@ -74,6 +84,7 @@ class SideNavbar extends StatelessWidget {
             text: "My Companies",
             onClick: () {
               Navigator.pushNamed(context, "/login");
+              Navigator.pop(context);
             },
             icon: FontAwesomeIcons.building,
           ),

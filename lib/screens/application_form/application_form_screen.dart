@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:linkup/components/rounded_button.dart';
 import 'package:linkup/components/rounded_text_field.dart';
 import 'package:linkup/constants.dart';
+
 class ApplicationFormScreen extends StatefulWidget {
   const ApplicationFormScreen({Key key}) : super(key: key);
 
@@ -61,6 +62,7 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                         });
                       },
                       value: applicantName,
+                      isRequired: true,
                     ),
                     SizedBox(
                       height: size.height * 0.03,
@@ -73,6 +75,7 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                         });
                       },
                       value: nic,
+                      isRequired: true,
                     ),
                     SizedBox(
                       height: size.height * 0.03,
@@ -86,6 +89,7 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                         });
                       },
                       value: contactNumber,
+                      isRequired: true,
                     ),
                     SizedBox(
                       height: size.height * 0.03,
@@ -98,6 +102,7 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                         });
                       },
                       value: university,
+                      isRequired: true,
                     ),
                     SizedBox(
                       height: size.height * 0.03,
@@ -110,6 +115,7 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                         });
                       },
                       value: skills,
+                      isRequired: true,
                     ),
                     SizedBox(
                       height: size.height * 0.03,
@@ -122,6 +128,7 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                         });
                       },
                       value: languages,
+                      isRequired: true,
                     ),
                     SizedBox(
                       height: size.height * 0.03,
@@ -134,6 +141,7 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                         });
                       },
                       value: linkedIn,
+                      isRequired: true,
                     ),
                     SizedBox(
                       height: size.height * 0.03,
@@ -146,6 +154,7 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                         });
                       },
                       value: github,
+                      isRequired: true,
                     ),
                     SizedBox(
                       height: size.height * 0.03,

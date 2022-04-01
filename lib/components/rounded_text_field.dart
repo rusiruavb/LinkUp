@@ -1,20 +1,28 @@
 import "package:flutter/material.dart";
 import 'package:linkup/constants.dart';
 
-class RoundedTextField extends StatelessWidget {
+class RoundedTextField extends StatefulWidget {
   final ValueChanged<String> onChange;
   final String text;
   final String value;
   final String type;
-  bool _isFormValid;
+  final bool isRequired;
 
-  RoundedTextField({
+  const RoundedTextField({
     Key key,
-    this.text,
-    this.value,
-    this.type,
     this.onChange,
+    this.text,
+    this.isRequired,
+    this.type,
+    this.value,
   }) : super(key: key);
+
+  @override
+  _RoundedTextFieldState createState() => _RoundedTextFieldState();
+}
+
+class _RoundedTextFieldState extends State<RoundedTextField> {
+  bool _isFormValid;
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +36,7 @@ class RoundedTextField extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.only(left: 18),
             child: Text(
-              text,
+              widget.text,
               style: const TextStyle(
                 fontFamily: fontFamilySFPro,
                 fontSize: 16,
@@ -43,8 +51,21 @@ class RoundedTextField extends StatelessWidget {
           ),
           TextFieldContainer(
             child: TextFormField(
-              initialValue: value,
-              keyboardType: type == "email"
+              validator: (value) {
+                if (value.isEmpty) {
+                  setState(() {
+                    _isFormValid = false;
+                  });
+                  return null;
+                } else {
+                  setState(() {
+                    _isFormValid = true;
+                  });
+                  return null;
+                }
+              },
+              initialValue: widget.value,
+              keyboardType: widget.type == "email"
                   ? TextInputType.emailAddress
                   : TextInputType.text,
               style: const TextStyle(
@@ -52,14 +73,26 @@ class RoundedTextField extends StatelessWidget {
                 fontSize: 18,
                 color: Colors.white,
               ),
-              onChanged: onChange,
+              onChanged: widget.onChange,
               decoration: const InputDecoration(
                 focusedBorder: InputBorder.none,
                 enabledBorder: InputBorder.none,
               ),
-              obscureText: type == "password" ? true : false,
+              obscureText: widget.type == "password" ? true : false,
             ),
-          )
+          ),
+          if (widget.isRequired && _isFormValid != null && !_isFormValid)
+            Padding(
+              padding: const EdgeInsets.only(left: 12, top: 5),
+              child: Text(
+                widget.text + ' is required!',
+                style: const TextStyle(
+                  fontFamily: fontFamilySFPro,
+                  fontSize: 13,
+                  color: colorError,
+                ),
+              ),
+            ),
         ],
       ),
     );

@@ -54,6 +54,7 @@ class _AddEducationState extends State<AddEducation> {
                       onChange: (value) {
                         print(value);
                       },
+                      isRequired: true,
                     ),
                     const SizedBox(
                       height: 20,
@@ -63,6 +64,7 @@ class _AddEducationState extends State<AddEducation> {
                       onChange: (value) {
                         print(value);
                       },
+                      isRequired: true,
                     ),
                     const SizedBox(
                       height: 20,

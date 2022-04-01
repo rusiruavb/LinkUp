@@ -52,6 +52,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                       onChange: (value) {
                         print(value);
                       },
+                      isRequired: true,
                     ),
                     const SizedBox(
                       height: 20,
@@ -61,6 +62,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                       onChange: (value) {
                         print(value);
                       },
+                      isRequired: true,
                     ),
                     const SizedBox(
                       height: 20,

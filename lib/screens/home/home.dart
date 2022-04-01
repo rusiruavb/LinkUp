@@ -105,12 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       backgroundColor: colorDarkBackground,
-      drawer: SideNavbar(
-        userProfileImage: userProvider.user.profileImageURL,
-        firstName: userProvider.user.firstName,
-        lastName: userProvider.user.lastName,
-        email: userProvider.user.email,
-      ),
+      drawer: const SideNavbar(),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: colorDarkMidGround,
         type: BottomNavigationBarType.fixed,

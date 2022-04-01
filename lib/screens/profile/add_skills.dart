@@ -54,6 +54,7 @@ class _AddSkillsState extends State<AddSkills> {
                       onChange: (value) {
                         print(value);
                       },
+                      isRequired: true,
                     ),
                     const SizedBox(
                       height: 20,

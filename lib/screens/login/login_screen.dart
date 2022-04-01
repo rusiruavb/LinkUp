@@ -115,6 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       });
                     },
                     value: userProvider.logUser.email,
+                    isRequired: true,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -128,6 +129,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       });
                     },
                     value: userProvider.logUser.password,
+                    isRequired: true,
                   ),
                   SizedBox(
                     height: size.height * 0.03,

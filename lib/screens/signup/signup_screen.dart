@@ -102,6 +102,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         userProvider.newUser.firstName = value;
                       });
                     },
+                    isRequired: true,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -113,6 +114,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         userProvider.newUser.lastName = value;
                       });
                     },
+                    isRequired: true,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -125,6 +127,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         userProvider.newUser.email = value;
                       });
                     },
+                    isRequired: true,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -137,6 +140,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         userProvider.newUser.phoneNumber = value;
                       });
                     },
+                    isRequired: true,
                   ),
                   SizedBox(
                     height: size.height * 0.03,

@@ -15,6 +15,7 @@ class EditProfileScreen extends StatefulWidget {
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
   UserProvider userProvider;
+  GlobalKey<FormState> editProfileFormKey = GlobalKey();
   String confirmPassword = '';
 
   @override
@@ -25,6 +26,12 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     userProvider.modifyUser.lastName = userProvider.user.lastName;
     userProvider.modifyUser.email = userProvider.user.email;
     userProvider.modifyUser.phoneNumber = userProvider.user.phoneNumber;
+  }
+
+  void submit() {
+    if (editProfileFormKey.currentState.validate()) {
+      print("Submitted");
+    }
   }
 
   @override
@@ -44,13 +51,11 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
       body: SingleChildScrollView(
         child: Container(
           width: size.width,
-          height: MediaQuery.of(context).orientation == Orientation.landscape
-              ? size.height * 2.15
-              : size.height * 1,
           padding: const EdgeInsets.all(0.0),
           child: Padding(
             padding: const EdgeInsets.all(5.0),
             child: Form(
+              key: editProfileFormKey,
               child: Column(
                 children: [
                   SizedBox(
@@ -64,6 +69,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       });
                     },
                     value: userProvider.modifyUser.firstName,
+                    isRequired: true,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -76,6 +82,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       });
                     },
                     value: userProvider.modifyUser.lastName,
+                    isRequired: true,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -89,6 +96,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       });
                     },
                     value: userProvider.modifyUser.email,
+                    isRequired: true,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -102,6 +110,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       });
                     },
                     value: userProvider.modifyUser.phoneNumber,
+                    isRequired: true,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -115,6 +124,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     },
                     type: "password",
                     value: userProvider.modifyUser.password,
+                    isRequired: true,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -128,6 +138,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     },
                     type: "password",
                     value: confirmPassword,
+                    isRequired: true,
                   ),
                   MediaQuery.of(context).orientation == Orientation.landscape
                       ? SizedBox(
@@ -149,7 +160,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       width: size.width * 1,
                       text: "Save",
                       onPressed: () {
-                        print("Button clicked");
+                        submit();
                       },
                     ),
                   ),
@@ -172,6 +183,9 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         print("Button clicked");
                       },
                     ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.03,
                   ),
                 ],
               ),
