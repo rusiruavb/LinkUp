@@ -2,8 +2,9 @@ import "package:flutter/material.dart";
 import 'package:linkup/components/rounded_button.dart';
 import 'package:linkup/components/rounded_number_field.dart';
 import 'package:linkup/components/rounded_text_field.dart';
-import 'package:linkup/components/side_navbar.dart';
 import 'package:linkup/constants.dart';
+import 'package:linkup/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class EditProfileScreen extends StatefulWidget {
   const EditProfileScreen({Key key}) : super(key: key);
@@ -13,25 +14,39 @@ class EditProfileScreen extends StatefulWidget {
 }
 
 class _EditProfileScreenState extends State<EditProfileScreen> {
-  String firstName = "";
-  String lastName = "";
-  String email = "";
-  String phoneNumber = "";
-  String password = "";
-  String conformPassword = "";
+  UserProvider userProvider;
+  String confirmPassword = '';
+
+  @override
+  void initState() {
+    super.initState();
+    userProvider = context.read<UserProvider>();
+    userProvider.modifyUser.firstName = userProvider.user.firstName;
+    userProvider.modifyUser.lastName = userProvider.user.lastName;
+    userProvider.modifyUser.email = userProvider.user.email;
+    userProvider.modifyUser.phoneNumber = userProvider.user.phoneNumber;
+  }
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Edit Profile",
+          style: TextStyle(fontFamily: fontFamilySFPro),
+        ),
+        backgroundColor: colorDarkMidGround,
+        elevation: 0.0,
+      ),
       backgroundColor: colorDarkBackground,
       body: SingleChildScrollView(
         child: Container(
           width: size.width,
           height: MediaQuery.of(context).orientation == Orientation.landscape
               ? size.height * 2.15
-              : size.height * 1.2,
+              : size.height * 1,
           padding: const EdgeInsets.all(0.0),
           child: Padding(
             padding: const EdgeInsets.all(5.0),
@@ -45,10 +60,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     text: "First Name",
                     onChange: (value) {
                       setState(() {
-                        firstName = value;
+                        userProvider.modifyUser.firstName = value;
                       });
                     },
-                    value: firstName,
+                    value: userProvider.modifyUser.firstName,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -57,10 +72,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     text: "Last Name",
                     onChange: (value) {
                       setState(() {
-                        lastName = value;
+                        userProvider.modifyUser.lastName = value;
                       });
                     },
-                    value: lastName,
+                    value: userProvider.modifyUser.lastName,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -70,10 +85,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     type: "email",
                     onChange: (value) {
                       setState(() {
-                        email = value;
+                        userProvider.modifyUser.email = value;
                       });
                     },
-                    value: email,
+                    value: userProvider.modifyUser.email,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -83,10 +98,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     type: "phone",
                     onChange: (value) {
                       setState(() {
-                        phoneNumber = value;
+                        userProvider.modifyUser.phoneNumber = value;
                       });
                     },
-                    value: phoneNumber,
+                    value: userProvider.modifyUser.phoneNumber,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -95,24 +110,24 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     text: "New Password",
                     onChange: (value) {
                       setState(() {
-                        password = value;
+                        userProvider.modifyUser.password = value;
                       });
                     },
                     type: "password",
-                    value: password,
+                    value: userProvider.modifyUser.password,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
                   ),
                   RoundedTextField(
-                    text: "Conform New Password",
+                    text: "Confirm New Password",
                     onChange: (value) {
                       setState(() {
-                        conformPassword = value;
+                        confirmPassword = value;
                       });
                     },
                     type: "password",
-                    value: conformPassword,
+                    value: confirmPassword,
                   ),
                   MediaQuery.of(context).orientation == Orientation.landscape
                       ? SizedBox(
@@ -127,11 +142,32 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       right: 15,
                     ),
                     child: RoundedButton(
-                      color: colorDarkForground,
+                      color: colorTextPrimary,
+                      textColor: colorDarkBackground,
                       fontSize: 14,
                       height: 50,
-                      width: size.width * 0.4,
-                      text: "Edit",
+                      width: size.width * 1,
+                      text: "Save",
+                      onPressed: () {
+                        print("Button clicked");
+                      },
+                    ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.03,
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(
+                      left: 15,
+                      right: 15,
+                    ),
+                    child: RoundedButton(
+                      color: colorErrorDark,
+                      textColor: colorTextPrimary,
+                      fontSize: 14,
+                      height: 50,
+                      width: size.width * 1,
+                      text: "Delete Profile",
                       onPressed: () {
                         print("Button clicked");
                       },

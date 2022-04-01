@@ -6,8 +6,9 @@ class RoundedTextField extends StatelessWidget {
   final String text;
   final String value;
   final String type;
+  bool _isFormValid;
 
-  const RoundedTextField({
+  RoundedTextField({
     Key key,
     this.text,
     this.value,

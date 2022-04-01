@@ -17,6 +17,13 @@ class UserProvider extends ChangeNotifier {
     profileImageURL:
         'https://firebasestorage.googleapis.com/v0/b/linkup-31422.appspot.com/o/images%2Fuser_profile_default.png?alt=media&token=c2575581-3695-44fa-a30e-02f795f6f669',
   );
+  User modifyUser = User.updateConstructor(
+    firstName: '',
+    lastName: '',
+    phoneNumber: '',
+    email: '',
+    password: '',
+  );
   User logUser = User.loginConstructor(
     email: '',
     password: '',

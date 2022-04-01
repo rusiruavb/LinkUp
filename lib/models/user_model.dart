@@ -29,6 +29,14 @@ class User {
     this.profileImageURL,
   });
 
+  User.updateConstructor({
+    this.firstName,
+    this.lastName,
+    this.phoneNumber,
+    this.email,
+    this.password,
+  });
+
   User.loginConstructor({
     this.email,
     this.password,

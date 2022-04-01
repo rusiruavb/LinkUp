@@ -97,17 +97,6 @@ class _ProfileHeaderCard extends StatelessWidget {
             const SizedBox(
               height: 10,
             ),
-            const Text(
-              "Mountain view, Califonia",
-              style: TextStyle(
-                fontFamily: fontFamilySFPro,
-                fontSize: 16,
-                color: colorTextPrimary,
-              ),
-            ),
-            const SizedBox(
-              height: 10,
-            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: const [
@@ -145,16 +134,21 @@ class _ProfileHeaderCard extends StatelessWidget {
             const SizedBox(
               height: 12,
             ),
-            const Align(
+            Align(
               alignment: Alignment.center,
               child: Padding(
-                padding: EdgeInsets.only(right: 10, bottom: 5),
-                child: Text(
-                  "Edit",
-                  style: TextStyle(
-                    fontFamily: fontFamilySFPro,
-                    fontSize: 16,
-                    color: colorPrimaryLight,
+                padding: const EdgeInsets.only(right: 10, bottom: 5),
+                child: TextButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/edit-profile');
+                  },
+                  child: const Text(
+                    "Edit",
+                    style: TextStyle(
+                      fontFamily: fontFamilySFPro,
+                      fontSize: 16,
+                      color: colorPrimaryLight,
+                    ),
                   ),
                 ),
               ),
