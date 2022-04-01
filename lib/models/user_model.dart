@@ -13,12 +13,12 @@ class User {
   String password;
   String email;
   String profileImageURL;
-  List<String> skills;
-  List<Education> educations;
-  List<Experience> experiences;
-  List<Post> posts;
-  List<Application> applications;
-  List<Job> jobs;
+  List<dynamic> skills;
+  List<dynamic> educations;
+  List<dynamic> experiences;
+  List<dynamic> posts;
+  List<dynamic> applications;
+  List<dynamic> jobs;
 
   User.createConstructor({
     this.firstName,

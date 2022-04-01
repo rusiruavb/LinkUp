@@ -21,7 +21,22 @@ class UserProvider extends ChangeNotifier {
     email: '',
     password: '',
   );
-  User user;
+  User user = User(
+    firstName: '',
+    lastName: '',
+    phoneNumber: '',
+    email: '',
+    password: '',
+    profileImageURL: '',
+    token: '',
+    applications: [],
+    educations: [],
+    experiences: [],
+    id: '',
+    jobs: [],
+    posts: [],
+    skills: [],
+  );
   final storage = const FlutterSecureStorage();
 
   // Create new user profile
@@ -52,6 +67,7 @@ class UserProvider extends ChangeNotifier {
         await storage.deleteAll();
       }
       await storage.write(key: 'authToken', value: authData.token);
+      await storage.write(key: 'userId', value: authData.id);
 
       // Get user profile
       getProfile();
@@ -90,6 +106,7 @@ class UserProvider extends ChangeNotifier {
         await storage.deleteAll();
       }
       await storage.write(key: 'userId', value: authData.token);
+      await storage.write(key: 'userId', value: authData.id);
 
       // Get user profile
       getProfile();

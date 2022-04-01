@@ -1,11 +1,13 @@
 import "package:flutter/material.dart";
 import 'package:linkup/components/side_navbar.dart';
 import 'package:linkup/constants.dart';
+import 'package:linkup/providers/user_provider.dart';
 import 'package:linkup/screens/applications/application_screen.dart';
 import 'package:linkup/screens/bookmark_jobs/bookmark_jobs_screen.dart';
 import 'package:linkup/screens/jobs/jobs_screen.dart';
 import 'package:linkup/screens/news_feed/news_feed_screen.dart';
 import 'package:linkup/screens/profile/profile_screen.dart';
+import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key key}) : super(key: key);
@@ -24,6 +26,13 @@ class _HomeScreenState extends State<HomeScreen> {
     BookMarkedJobsScreen(),
     ProfileScreen(),
   ];
+  UserProvider userProvider;
+
+  @override
+  void initState() {
+    super.initState();
+    userProvider = context.read<UserProvider>();
+  }
 
   void _onItemTapped(int index) {
     setState(() {
@@ -83,7 +92,9 @@ class _HomeScreenState extends State<HomeScreen> {
             icon: ClipRRect(
               borderRadius: BorderRadius.circular(100),
               child: Image.network(
-                "https://monteluke.com.au/wp-content/gallery/linkedin-profile-pictures/34217-MLS-Fabian-Ekker-003flin.jpg",
+                userProvider.user.profileImageURL != ''
+                    ? userProvider.user.profileImageURL
+                    : defaultProfileImage,
                 scale: 18,
               ),
             ),
@@ -94,7 +105,12 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
       ),
       backgroundColor: colorDarkBackground,
-      drawer: const SideNavbar(),
+      drawer: SideNavbar(
+        userProfileImage: userProvider.user.profileImageURL,
+        firstName: userProvider.user.firstName,
+        lastName: userProvider.user.lastName,
+        email: userProvider.user.email,
+      ),
       bottomNavigationBar: BottomNavigationBar(
         backgroundColor: colorDarkMidGround,
         type: BottomNavigationBarType.fixed,

@@ -1,7 +1,9 @@
 import "package:flutter/material.dart";
 import 'package:linkup/constants.dart';
+import 'package:linkup/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
-class WelcomeScreen extends StatelessWidget {
+class WelcomeScreen extends StatefulWidget {
   final Widget navigationPage;
   final int duration;
 
@@ -12,12 +14,26 @@ class WelcomeScreen extends StatelessWidget {
   }) : super(key: key);
 
   @override
+  _WelcomeScreenState createState() => _WelcomeScreenState();
+}
+
+class _WelcomeScreenState extends State<WelcomeScreen> {
+  UserProvider userProvider;
+
+  @override
+  void initState() {
+    super.initState();
+    userProvider = context.read<UserProvider>();
+    userProvider.getProfile();
+  }
+
+  @override
   Widget build(BuildContext context) {
     // Page navigation
-    Future.delayed(Duration(seconds: duration), () {
+    Future.delayed(Duration(seconds: widget.duration), () {
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => navigationPage),
+        MaterialPageRoute(builder: (context) => widget.navigationPage),
         (route) => false,
       );
     });

@@ -2,6 +2,8 @@ import 'package:flutter/widgets.dart';
 
 // API
 const String baseApi = "https://linkup-api-server.herokuapp.com";
+const String defaultProfileImage =
+    'https://firebasestorage.googleapis.com/v0/b/linkup-31422.appspot.com/o/images%2Fuser_profile_default.png?alt=media&token=c2575581-3695-44fa-a30e-02f795f6f669';
 
 // Fonts
 const String fontFamilyLarsseit = "Larsseit";

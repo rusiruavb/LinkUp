@@ -3,7 +3,18 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:linkup/constants.dart';
 
 class SideNavbar extends StatelessWidget {
-  const SideNavbar({Key key}) : super(key: key);
+  final String userProfileImage;
+  final String firstName;
+  final String lastName;
+  final String email;
+
+  const SideNavbar({
+    Key key,
+    this.firstName,
+    this.lastName,
+    this.email,
+    this.userProfileImage,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,25 +28,25 @@ class SideNavbar extends StatelessWidget {
           UserAccountsDrawerHeader(
             currentAccountPicture: CircleAvatar(
               child: ClipOval(
-                child: Image.asset(
-                  "assets/images/profile_image.jpeg",
+                child: Image.network(
+                  userProfileImage,
                   width: 80,
                   height: 80,
                   fit: BoxFit.cover,
                 ),
               ),
             ),
-            accountName: const Text(
-              "Oliva Anna",
-              style: TextStyle(
+            accountName: Text(
+              firstName + " " + lastName,
+              style: const TextStyle(
                 color: colorTextPrimary,
                 fontFamily: fontFamilySFPro,
                 fontSize: 22,
               ),
             ),
-            accountEmail: const Text(
-              "oliva@gmail.com",
-              style: TextStyle(
+            accountEmail: Text(
+              email,
+              style: const TextStyle(
                 color: colorTextPrimary,
                 fontFamily: fontFamilySFPro,
                 fontSize: 16,

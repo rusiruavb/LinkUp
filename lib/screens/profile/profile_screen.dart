@@ -5,6 +5,8 @@ import 'package:linkup/components/skills_card.dart';
 import 'package:linkup/components/user_image_upload.dart';
 import 'package:linkup/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:linkup/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key key}) : super(key: key);
@@ -14,6 +16,14 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  UserProvider userProvider;
+
+  @override
+  void initState() {
+    super.initState();
+    userProvider = context.read<UserProvider>();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,7 +34,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              _ProfileHeaderCard(),
+              _ProfileHeaderCard(
+                firstName: userProvider.user.firstName,
+                lastName: userProvider.user.lastName,
+                profileImage: userProvider.user.profileImageURL,
+              ),
               _ExperienceSection(),
               _EducationSection(),
               _SkillsSection(),
@@ -37,6 +51,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
 }
 
 class _ProfileHeaderCard extends StatelessWidget {
+  final String profileImage;
+  final String firstName;
+  final String lastName;
+
+  const _ProfileHeaderCard({
+    this.firstName,
+    this.lastName,
+    this.profileImage,
+  });
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -55,15 +79,15 @@ class _ProfileHeaderCard extends StatelessWidget {
               padding: const EdgeInsets.only(top: 20),
               child: UserImageUpload(
                 imageURL:
-                    "https://firebasestorage.googleapis.com/v0/b/linkup-31422.appspot.com/o/images%2F2022-03-22T15%3A35%3A58.162724image_cropper_1647943553952.jpg?alt=media&token=e297b221-aa54-4e86-94c3-f805f221ed0e",
+                    profileImage != '' ? profileImage : defaultProfileImage,
                 onFileChanged: ((imageURL) {
                   print(imageURL);
                 }),
               ),
             ),
-            const Text(
-              "Lasal Sandepa Hettiarachchi",
-              style: TextStyle(
+            Text(
+              firstName + " " + lastName,
+              style: const TextStyle(
                 fontFamily: fontFamilySFPro,
                 fontSize: 24,
                 color: colorTextPrimary,
