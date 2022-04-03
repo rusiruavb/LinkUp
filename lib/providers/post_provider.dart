@@ -73,17 +73,17 @@ class PostProvider extends ChangeNotifier {
     if (response.statusCode == 200) {
       posts.clear();
       final data = jsonDecode(response.body) as List;
+      final List<Post> newPosts = [];
 
       for (Map<String, dynamic> post in data) {
-        posts.add(Post.fromJson(post));
+        newPosts.add(Post.fromJson(post));
       }
 
-      notifyListeners();
-      return posts;
+      return newPosts;
     } else {
       Fluttertoast.showToast(msg: 'Server Error');
-      notifyListeners();
-      return null;
     }
+    notifyListeners();
+    return null;
   }
 }
