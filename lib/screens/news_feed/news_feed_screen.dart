@@ -37,9 +37,12 @@ class NewsFeedScreenState extends State<NewsFeedScreen> {
               child: FutureBuilder<List<Post>>(
                 future: posts,
                 builder: (context, snapshot) {
-                  return RefreshIndicator(
-                    child: _listView(snapshot),
-                    onRefresh: _pullRefresh,
+                  return Align(
+                    alignment: Alignment.topCenter,
+                    child: RefreshIndicator(
+                      child: _listView(snapshot),
+                      onRefresh: _pullRefresh,
+                    ),
                   );
                 },
               ),

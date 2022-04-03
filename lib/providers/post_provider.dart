@@ -86,4 +86,27 @@ class PostProvider extends ChangeNotifier {
     notifyListeners();
     return null;
   }
+
+  void deletePost(BuildContext context, String postId) async {
+    var userId = await storage.read(key: 'userId');
+    var authToken = await storage.read(key: 'authToken');
+    final response = await http.delete(
+      Uri.parse('$baseApi/posts/remove/$userId/$postId'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': authToken,
+      },
+    );
+
+    if (response.statusCode == 200) {
+      notifyListeners();
+    } else if (response.statusCode == 400) {
+      Fluttertoast.showToast(msg: 'Authentication Failed');
+      Navigator.pushNamed(context, '/login');
+      notifyListeners();
+    } else {
+      Fluttertoast.showToast(msg: 'Server Error');
+      notifyListeners();
+    }
+  }
 }
