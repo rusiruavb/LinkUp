@@ -1,9 +1,12 @@
 import "package:flutter/material.dart";
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:linkup/components/rounded_button.dart';
 import 'package:linkup/components/rounded_number_field.dart';
 import 'package:linkup/components/rounded_text_field.dart';
 import 'package:linkup/components/side_navbar.dart';
 import 'package:linkup/constants.dart';
+import 'package:linkup/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../components/user_image_upload.dart';
 
@@ -15,12 +18,29 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  String firstName = "";
-  String lastName = "";
-  String email = "";
-  String phoneNumber = "";
-  String password = "";
-  String conformPassword = "";
+  UserProvider userProvider;
+  GlobalKey<FormState> createProfileFormKey = GlobalKey();
+  String conformPassword;
+
+  @override
+  void initState() {
+    super.initState();
+    userProvider = context.read<UserProvider>();
+  }
+
+  void submit() {
+    if (createProfileFormKey.currentState.validate()) {
+      if (userProvider.newUser.password == conformPassword) {
+        userProvider.create(context);
+      } else {
+        Fluttertoast.showToast(
+          msg: 'Password not matched',
+          backgroundColor: colorWarningLight,
+          textColor: colorDarkBackground,
+        );
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,13 +64,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
       body: SingleChildScrollView(
         child: Container(
           width: size.width,
-          height: MediaQuery.of(context).orientation == Orientation.landscape
-              ? size.height * 2.15
-              : size.height * 1.2,
           padding: const EdgeInsets.all(0.0),
           child: Padding(
             padding: const EdgeInsets.all(5.0),
             child: Form(
+              key: createProfileFormKey,
               child: Column(
                 children: [
                   Row(
@@ -73,17 +91,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   UserImageUpload(
                     onFileChanged: (imageUrl) {
-                      print(imageUrl);
+                      print('Test: ' + imageUrl);
+                      userProvider.newUser.profileImageURL = imageUrl;
                     },
+                    imageURL: userProvider.newUser.profileImageURL,
                   ),
                   RoundedTextField(
                     text: "First Name",
                     onChange: (value) {
                       setState(() {
-                        firstName = value;
+                        userProvider.newUser.firstName = value;
                       });
                     },
-                    value: firstName,
+                    isRequired: true,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -92,10 +112,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     text: "Last Name",
                     onChange: (value) {
                       setState(() {
-                        lastName = value;
+                        userProvider.newUser.lastName = value;
                       });
                     },
-                    value: lastName,
+                    isRequired: true,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -105,10 +125,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     type: "email",
                     onChange: (value) {
                       setState(() {
-                        email = value;
+                        userProvider.newUser.email = value;
                       });
                     },
-                    value: email,
+                    isRequired: true,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -118,10 +138,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     type: "phone",
                     onChange: (value) {
                       setState(() {
-                        phoneNumber = value;
+                        userProvider.newUser.phoneNumber = value;
                       });
                     },
-                    value: phoneNumber,
+                    isRequired: true,
+                  ),
+                  SizedBox(
+                    height: size.height * 0.03,
+                  ),
+                  RoundedNumberField(
+                    text: "Position",
+                    onChange: (value) {
+                      setState(() {
+                        userProvider.newUser.position = value;
+                      });
+                    },
+                    isRequired: true,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -130,11 +162,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     text: "Password",
                     onChange: (value) {
                       setState(() {
-                        password = value;
+                        userProvider.newUser.password = value;
                       });
                     },
                     type: "password",
-                    value: password,
+                    isRequired: true,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -147,7 +179,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       });
                     },
                     type: "password",
-                    value: conformPassword,
+                    isRequired: true,
                   ),
                   MediaQuery.of(context).orientation == Orientation.landscape
                       ? SizedBox(
@@ -169,8 +201,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       text: "Sign Up",
                       onPressed: () {
                         print("Button clicked");
+                        submit();
                       },
                     ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.03,
                   ),
                 ],
               ),

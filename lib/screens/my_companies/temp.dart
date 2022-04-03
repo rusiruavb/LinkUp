@@ -29,8 +29,6 @@ class _MyconpaniesScreenState extends State<MyconpaniesScreen> {
         elevation: 0.0,
       ),
       backgroundColor: colorDarkBackground,
-      drawer: const SideNavbar(),
-      bottomNavigationBar: const BottomNavbar(),
       body: ListView.builder(
         itemCount: items.length,
         itemBuilder: (context, index) {

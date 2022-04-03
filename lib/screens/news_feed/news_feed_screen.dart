@@ -1,9 +1,11 @@
 import "package:flutter/material.dart";
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:linkup/components/add_post_feed.dart';
-import 'package:linkup/components/bottom_navbar.dart';
-import 'package:linkup/components/side_navbar.dart';
+import 'package:linkup/models/post_model.dart';
+import 'package:provider/provider.dart';
 import 'package:linkup/components/post_card.dart';
 import 'package:linkup/constants.dart';
+import 'package:linkup/providers/post_provider.dart';
 
 class NewsFeedScreen extends StatefulWidget {
   const NewsFeedScreen({Key key}) : super(key: key);
@@ -13,6 +15,14 @@ class NewsFeedScreen extends StatefulWidget {
 }
 
 class NewsFeedScreenState extends State<NewsFeedScreen> {
+  Future<List<Post>> posts;
+
+  @override
+  void initState() {
+    super.initState();
+    posts = context.read<PostProvider>().getPosts();
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -21,22 +31,51 @@ class NewsFeedScreenState extends State<NewsFeedScreen> {
       backgroundColor: colorDarkBackground,
       body: Align(
         alignment: Alignment.topCenter,
-        child: SingleChildScrollView(
-          child: Column(
-            children: const [
-              AddPostFeed(),
-              PostCard(
-                postImage:
-                    "https://templates.mediamodifier.com/5e9709395e1d70189ea21cd1/job-posting-linkedin-post-template.jpg",
-                description:
-                    "A job description not only describes the position’s responsibilities, it sets the foundation for recruiting, developing and retaining talent and also sets the stage for optimum work performance by clarifying responsibilities, expected results, and evaluation of performance. It is also an important component to maintaining an equitable compensation system and ensuring legal compliance. The document should be revisited and updated in line with the annual performance evaluation cycle.",
-                position: "Associate Software Engineer",
-                fullName: "Rusiru Bandara",
-                profileImageURL:
-                    "https://monteluke.com.au/wp-content/gallery/linkedin-profile-pictures/34217-MLS-Fabian-Ekker-003flin.jpg",
-              ),
-            ],
-          ),
+        child: Column(
+          children: [
+            const AddPostFeed(),
+            FutureBuilder<List<Post>>(
+              future: posts,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Expanded(
+                    child: ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: ((context, index) {
+                        return PostCard(
+                          fullName: snapshot.data[index].fullName,
+                          description: snapshot.data[index].description,
+                          position: snapshot.data[index].position,
+                          postImage: snapshot.data[index].postImage,
+                          profileImageURL: snapshot.data[index].profileImageURL,
+                        );
+                      }),
+                    ),
+                  );
+                } else if (snapshot.hasError) {
+                  return const Text(
+                    'Error with load posts',
+                    style: TextStyle(
+                      fontFamily: fontFamilySFPro,
+                      fontSize: 16,
+                      color: colorTextPrimary,
+                    ),
+                  );
+                }
+                return const Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: SizedBox(
+                    width: 30,
+                    height: 30,
+                    child: CircularProgressIndicator(
+                      color: colorTextPrimary,
+                      strokeWidth: 2,
+                    ),
+                  ),
+                );
+              },
+            )
+          ],
         ),
       ),
     );

@@ -1,9 +1,24 @@
 import "package:flutter/material.dart";
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:linkup/constants.dart';
+import 'package:linkup/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
-class SideNavbar extends StatelessWidget {
+class SideNavbar extends StatefulWidget {
   const SideNavbar({Key key}) : super(key: key);
+
+  @override
+  _SideNavbarState createState() => _SideNavbarState();
+}
+
+class _SideNavbarState extends State<SideNavbar> {
+  UserProvider userProvider;
+
+  @override
+  void initState() {
+    super.initState();
+    userProvider = context.read<UserProvider>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,40 +29,45 @@ class SideNavbar extends StatelessWidget {
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          UserAccountsDrawerHeader(
-            currentAccountPicture: CircleAvatar(
-              child: ClipOval(
-                child: Image.asset(
-                  "assets/images/profile_image.jpeg",
-                  width: 80,
-                  height: 80,
-                  fit: BoxFit.cover,
+          if (userProvider.user.firstName != '' &&
+              userProvider.user.lastName != '' &&
+              userProvider.user.profileImageURL != '' &&
+              userProvider.user.email != '')
+            UserAccountsDrawerHeader(
+              currentAccountPicture: CircleAvatar(
+                child: ClipOval(
+                  child: Image.network(
+                    userProvider.user.profileImageURL,
+                    width: 80,
+                    height: 80,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            ),
-            accountName: const Text(
-              "Oliva Anna",
-              style: TextStyle(
-                color: colorTextPrimary,
-                fontFamily: fontFamilySFPro,
-                fontSize: 22,
+              accountName: Text(
+                userProvider.user.firstName + " " + userProvider.user.lastName,
+                style: const TextStyle(
+                  color: colorTextPrimary,
+                  fontFamily: fontFamilySFPro,
+                  fontSize: 22,
+                ),
+              ),
+              accountEmail: Text(
+                userProvider.user.email,
+                style: const TextStyle(
+                  color: colorTextPrimary,
+                  fontFamily: fontFamilySFPro,
+                  fontSize: 16,
+                ),
+              ),
+              decoration: const BoxDecoration(
+                color: colorDarkBackground,
               ),
             ),
-            accountEmail: const Text(
-              "oliva@gmail.com",
-              style: TextStyle(
-                color: colorTextPrimary,
-                fontFamily: fontFamilySFPro,
-                fontSize: 16,
-              ),
-            ),
-            decoration: const BoxDecoration(
-              color: colorDarkBackground,
-            ),
-          ),
           _NavbarItem(
             text: "Sign Up",
             onClick: () {
+              Navigator.pop(context);
               Navigator.pushNamed(context, "/signup");
             },
             icon: FontAwesomeIcons.user,
@@ -55,6 +75,7 @@ class SideNavbar extends StatelessWidget {
           _NavbarItem(
             text: "Login",
             onClick: () {
+              Navigator.pop(context);
               Navigator.pushNamed(context, "/login");
             },
             icon: FontAwesomeIcons.signIn,
@@ -62,7 +83,8 @@ class SideNavbar extends StatelessWidget {
           _NavbarItem(
             text: "My Companies",
             onClick: () {
-              Navigator.pushNamed(context, "/login");
+              Navigator.pop(context);
+              Navigator.pushNamed(context, "/my-companies");
             },
             icon: FontAwesomeIcons.building,
           ),
