@@ -68,7 +68,8 @@ class _AddPostFeedState extends State<AddPostFeed> {
                   height: size.height * 0.03,
                 ),
                 RoundedButton(
-                  color: colorDarkForground,
+                  color: colorTextPrimary,
+                  textColor: colorDarkBackground,
                   fontSize: 14,
                   height: 35,
                   width: size.width * 0.85,

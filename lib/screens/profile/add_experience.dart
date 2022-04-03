@@ -73,6 +73,8 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                         print(value);
                       },
                       type: "multiline",
+                      backgroundColor: colorDarkBackground,
+                      textAreaColor: colorDarkMidGround,
                     ),
                     const SizedBox(
                       height: 20,
@@ -80,7 +82,8 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: RoundedButton(
-                        color: colorDarkForground,
+                        textColor: colorDarkBackground,
+                        color: colorTextPrimary,
                         text: "Save",
                         width: size.width * 0.9,
                         height: 40,

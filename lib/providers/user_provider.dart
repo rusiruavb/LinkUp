@@ -165,41 +165,53 @@ class UserProvider extends ChangeNotifier {
 
   // Update user profile
   Future<User> updateUser(BuildContext context) async {
+    print('Modified user: ' + modifyUser.id);
     final authToken = await storage.read(key: 'authToken');
     final response = await http.put(
-      Uri.parse('$baseApi/user/register'),
+      Uri.parse('$baseApi/user/edit'),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         'x-auth-token': authToken,
       },
       body: jsonEncode(
         <String, String>{
-          'firstName': user.firstName,
-          'lastName': user.lastName,
-          'phoneNumber': user.phoneNumber,
-          'password': user.password,
-          'email': user.email,
-          'profileImageURL': user.profileImageURL,
+          'Id': modifyUser.id,
+          'firstName': modifyUser.firstName,
+          'lastName': modifyUser.lastName,
+          'phoneNumber': modifyUser.phoneNumber,
+          'password': modifyUser.password,
+          'email': modifyUser.email,
         },
       ),
     );
 
     if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      user = User.fromJson(data);
-
       // Get updated user profile
       getProfile(context);
 
       notifyListeners();
-      Fluttertoast.showToast(msg: 'Update Success');
+      Fluttertoast.showToast(
+        msg: 'Update Success',
+        backgroundColor: colorSuccess,
+        textColor: colorTextPrimary,
+      );
+      Navigator.pushNamed(context, '/home');
       return user;
     } else if (response.statusCode == 400) {
-      Fluttertoast.showToast(msg: 'Authentication Failed');
+      Fluttertoast.showToast(
+        msg: 'Authentication Failed',
+        backgroundColor: colorError,
+        textColor: colorTextPrimary,
+      );
       notifyListeners();
       return null;
     } else {
-      Fluttertoast.showToast(msg: 'Server Error');
+      print(response.statusCode);
+      Fluttertoast.showToast(
+        msg: 'Server Error',
+        backgroundColor: colorError,
+        textColor: colorTextPrimary,
+      );
       notifyListeners();
       return null;
     }
@@ -224,6 +236,7 @@ class UserProvider extends ChangeNotifier {
       notifyListeners();
       return null;
     } else {
+      print(response.statusCode);
       Fluttertoast.showToast(msg: 'Server Error');
       notifyListeners();
       return null;

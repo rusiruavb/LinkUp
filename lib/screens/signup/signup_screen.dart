@@ -153,6 +153,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       });
                     },
                     type: "password",
+                    isRequired: true,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -165,6 +166,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       });
                     },
                     type: "password",
+                    isRequired: true,
                   ),
                   MediaQuery.of(context).orientation == Orientation.landscape
                       ? SizedBox(

@@ -27,6 +27,7 @@ class User {
     this.email,
     this.password,
     this.profileImageURL,
+    this.token,
   });
 
   User.updateConstructor({
@@ -63,7 +64,7 @@ class User {
     Map<String, dynamic> json,
   ) =>
       User(
-        id: json['id'],
+        id: json['_id'],
         token: json['token'],
         firstName: json['firstName'],
         lastName: json['lastName'],
@@ -82,8 +83,7 @@ class User {
   factory User.fromCreateJson(
     Map<String, dynamic> json,
   ) =>
-      User(
-        id: json['_id'],
+      User.createConstructor(
         token: json['token'],
         firstName: json['firstName'],
         lastName: json['lastName'],
@@ -91,6 +91,17 @@ class User {
         password: json['password'],
         email: json['email'],
         profileImageURL: json['profileImageURL'],
+      );
+
+  factory User.fromModifyJson(
+    Map<String, String> json,
+  ) =>
+      User.updateConstructor(
+        firstName: json['firstName'],
+        lastName: json['lastName'],
+        phoneNumber: json['phoneNumber'],
+        password: json['password'],
+        email: json['email'],
       );
 
   Map<String, dynamic> toJson() => {

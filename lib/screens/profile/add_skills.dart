@@ -62,7 +62,8 @@ class _AddSkillsState extends State<AddSkills> {
                     Align(
                       alignment: Alignment.bottomCenter,
                       child: RoundedButton(
-                        color: colorDarkForground,
+                        textColor: colorDarkBackground,
+                        color: colorTextPrimary,
                         text: "Save",
                         width: size.width * 0.9,
                         height: 40,

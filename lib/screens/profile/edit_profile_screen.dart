@@ -22,15 +22,17 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   void initState() {
     super.initState();
     userProvider = context.read<UserProvider>();
+    userProvider.modifyUser.id = userProvider.user.id;
     userProvider.modifyUser.firstName = userProvider.user.firstName;
     userProvider.modifyUser.lastName = userProvider.user.lastName;
     userProvider.modifyUser.email = userProvider.user.email;
     userProvider.modifyUser.phoneNumber = userProvider.user.phoneNumber;
+    print(userProvider.modifyUser.id);
   }
 
   void submit() {
     if (editProfileFormKey.currentState.validate()) {
-      print("Submitted");
+      userProvider.updateUser(context);
     }
   }
 
@@ -65,6 +67,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     text: "First Name",
                     onChange: (value) {
                       setState(() {
+                        print(value);
                         userProvider.modifyUser.firstName = value;
                       });
                     },
@@ -124,7 +127,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     },
                     type: "password",
                     value: userProvider.modifyUser.password,
-                    isRequired: true,
+                    isRequired: false,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -138,7 +141,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     },
                     type: "password",
                     value: confirmPassword,
-                    isRequired: true,
+                    isRequired:
+                        userProvider.modifyUser.password != '' ? true : false,
                   ),
                   MediaQuery.of(context).orientation == Orientation.landscape
                       ? SizedBox(
@@ -180,7 +184,52 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                       width: size.width * 1,
                       text: "Delete Profile",
                       onPressed: () {
-                        print("Button clicked");
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) => AlertDialog(
+                            backgroundColor: colorDarkMidGround,
+                            title: const Text(
+                              "Delete Profile",
+                              style: TextStyle(
+                                fontFamily: fontFamilySFPro,
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: colorTextPrimary,
+                              ),
+                            ),
+                            content: const Text(
+                              "Are you sure about deleting your profile. After delete, we will completely remove your account from our system.",
+                              style: TextStyle(
+                                fontFamily: fontFamilySFPro,
+                                fontSize: 14,
+                                color: colorTextPrimary,
+                              ),
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () =>
+                                    Navigator.pop(context, 'Cancel'),
+                                child: const Text(
+                                  'Cancel',
+                                  style: TextStyle(
+                                    fontFamily: fontFamilySFPro,
+                                    color: colorPrimaryLight,
+                                  ),
+                                ),
+                              ),
+                              TextButton(
+                                onPressed: () => Navigator.pop(context, 'OK'),
+                                child: const Text(
+                                  'Delete Profile',
+                                  style: TextStyle(
+                                    fontFamily: fontFamilySFPro,
+                                    color: colorError,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        );
                       },
                     ),
                   ),
