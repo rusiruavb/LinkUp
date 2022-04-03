@@ -1,9 +1,3 @@
-import 'application_model.dart';
-import 'education_model.dart';
-import 'experience_model.dart';
-import 'job_model.dart';
-import 'post_model.dart';
-
 class User {
   String id;
   String token;
@@ -12,6 +6,7 @@ class User {
   String phoneNumber;
   String password;
   String email;
+  String position;
   String profileImageURL;
   List<dynamic> skills;
   List<dynamic> educations;
@@ -25,6 +20,7 @@ class User {
     this.lastName,
     this.phoneNumber,
     this.email,
+    this.position,
     this.password,
     this.profileImageURL,
     this.token,
@@ -35,6 +31,7 @@ class User {
     this.lastName,
     this.phoneNumber,
     this.email,
+    this.position,
     this.password,
   });
 
@@ -52,6 +49,7 @@ class User {
     this.password,
     this.email,
     this.profileImageURL,
+    this.position,
     this.skills,
     this.educations,
     this.experiences,
@@ -71,6 +69,7 @@ class User {
         phoneNumber: json['phoneNumber'],
         password: json['password'],
         email: json['email'],
+        position: json['position'],
         profileImageURL: json['profileImageURL'],
         skills: json['skills'],
         educations: json['education'],
@@ -88,6 +87,7 @@ class User {
         firstName: json['firstName'],
         lastName: json['lastName'],
         phoneNumber: json['phoneNumber'],
+        position: json['position'],
         password: json['password'],
         email: json['email'],
         profileImageURL: json['profileImageURL'],
@@ -100,6 +100,7 @@ class User {
         firstName: json['firstName'],
         lastName: json['lastName'],
         phoneNumber: json['phoneNumber'],
+        position: json['position'],
         password: json['password'],
         email: json['email'],
       );
@@ -111,6 +112,7 @@ class User {
         'phoneNumber': phoneNumber,
         'password': password,
         'email': email,
+        'position': position,
         'profileImageURL': profileImageURL,
         'skills': skills,
         'educations': educations,

@@ -95,7 +95,9 @@ class _HomeScreenState extends State<HomeScreen> {
                 userProvider.user.profileImageURL != ''
                     ? userProvider.user.profileImageURL
                     : defaultProfileImage,
-                scale: 18,
+                fit: BoxFit.cover,
+                width: 35,
+                height: 35,
               ),
             ),
             onPressed: () {

@@ -34,11 +34,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              _ProfileHeaderCard(
-                firstName: userProvider.user.firstName,
-                lastName: userProvider.user.lastName,
-                profileImage: userProvider.user.profileImageURL,
-              ),
+              _ProfileHeaderCard(),
               _ExperienceSection(),
               _EducationSection(),
               _SkillsSection(),
@@ -50,16 +46,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 }
 
-class _ProfileHeaderCard extends StatelessWidget {
-  final String profileImage;
-  final String firstName;
-  final String lastName;
+class _ProfileHeaderCard extends StatefulWidget {
+  const _ProfileHeaderCard({Key key}) : super(key: key);
 
-  const _ProfileHeaderCard({
-    this.firstName,
-    this.lastName,
-    this.profileImage,
-  });
+  @override
+  _ProfileHeaderCardState createState() => _ProfileHeaderCardState();
+}
+
+class _ProfileHeaderCardState extends State<_ProfileHeaderCard> {
+  UserProvider userProvider;
+
+  @override
+  void initState() {
+    super.initState();
+    userProvider = context.read<UserProvider>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -78,20 +79,35 @@ class _ProfileHeaderCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 20),
               child: UserImageUpload(
-                imageURL:
-                    profileImage != '' ? profileImage : defaultProfileImage,
+                imageURL: userProvider.user.profileImageURL != ''
+                    ? userProvider.user.profileImageURL
+                    : defaultProfileImage,
                 onFileChanged: ((imageURL) {
-                  print(imageURL);
+                  setState(() {
+                    userProvider.user.profileImageURL = imageURL;
+                    userProvider.updateProfileImage(context);
+                  });
                 }),
               ),
             ),
             Text(
-              firstName + " " + lastName,
+              userProvider.user.firstName + " " + userProvider.user.lastName,
               style: const TextStyle(
                 fontFamily: fontFamilySFPro,
                 fontSize: 24,
                 color: colorTextPrimary,
                 fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(
+              height: 3,
+            ),
+            Text(
+              userProvider.user.position,
+              style: const TextStyle(
+                fontFamily: fontFamilySFPro,
+                fontSize: 16,
+                color: colorTextPrimary,
               ),
             ),
             const SizedBox(

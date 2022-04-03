@@ -13,6 +13,7 @@ class UserProvider extends ChangeNotifier {
     lastName: '',
     phoneNumber: '',
     email: '',
+    position: '',
     password: '',
     profileImageURL:
         'https://firebasestorage.googleapis.com/v0/b/linkup-31422.appspot.com/o/images%2Fuser_profile_default.png?alt=media&token=c2575581-3695-44fa-a30e-02f795f6f669',
@@ -22,6 +23,7 @@ class UserProvider extends ChangeNotifier {
     lastName: '',
     phoneNumber: '',
     email: '',
+    position: '',
     password: '',
   );
   User logUser = User.loginConstructor(
@@ -36,6 +38,7 @@ class UserProvider extends ChangeNotifier {
     password: '',
     profileImageURL: '',
     token: '',
+    position: '',
     applications: [],
     educations: [],
     experiences: [],
@@ -59,6 +62,7 @@ class UserProvider extends ChangeNotifier {
           'lastName': newUser.lastName,
           'phoneNumber': newUser.phoneNumber,
           'password': newUser.password,
+          'position': newUser.position,
           'email': newUser.email,
           'profileImageURL': newUser.profileImageURL,
         },
@@ -163,9 +167,52 @@ class UserProvider extends ChangeNotifier {
     }
   }
 
+  // Update user profile image
+  void updateProfileImage(BuildContext context) async {
+    final authToken = await storage.read(key: 'authToken');
+    final response = await http.put(
+      Uri.parse('$baseApi/user/edit'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': authToken,
+      },
+      body: jsonEncode(
+        <String, String>{
+          'Id': user.id,
+          'profileImageURL': user.profileImageURL,
+        },
+      ),
+    );
+
+    if (response.statusCode == 200) {
+      // Get updated user profile
+      getProfile(context);
+
+      notifyListeners();
+      Fluttertoast.showToast(
+        msg: 'Update Success',
+        backgroundColor: colorSuccess,
+        textColor: colorTextPrimary,
+      );
+    } else if (response.statusCode == 400) {
+      Fluttertoast.showToast(
+        msg: 'Authentication Failed',
+        backgroundColor: colorError,
+        textColor: colorTextPrimary,
+      );
+      notifyListeners();
+    } else {
+      Fluttertoast.showToast(
+        msg: 'Server Error',
+        backgroundColor: colorError,
+        textColor: colorTextPrimary,
+      );
+      notifyListeners();
+    }
+  }
+
   // Update user profile
   Future<User> updateUser(BuildContext context) async {
-    print('Modified user: ' + modifyUser.id);
     final authToken = await storage.read(key: 'authToken');
     final response = await http.put(
       Uri.parse('$baseApi/user/edit'),
@@ -179,6 +226,7 @@ class UserProvider extends ChangeNotifier {
           'firstName': modifyUser.firstName,
           'lastName': modifyUser.lastName,
           'phoneNumber': modifyUser.phoneNumber,
+          'position': modifyUser.position,
           'password': modifyUser.password,
           'email': modifyUser.email,
         },
@@ -206,7 +254,6 @@ class UserProvider extends ChangeNotifier {
       notifyListeners();
       return null;
     } else {
-      print(response.statusCode);
       Fluttertoast.showToast(
         msg: 'Server Error',
         backgroundColor: colorError,

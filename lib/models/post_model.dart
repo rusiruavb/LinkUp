@@ -6,6 +6,15 @@ class Post {
   String postImage;
   String description;
 
+  Post.createPostConstructor({
+    this.id,
+    this.fullName,
+    this.position,
+    this.profileImageURL,
+    this.postImage,
+    this.description,
+  });
+
   Post({
     this.id,
     this.fullName,
@@ -19,7 +28,7 @@ class Post {
     Map<String, dynamic> json,
   ) =>
       Post(
-        id: json['id'],
+        id: json['_id'],
         fullName: json['fullName'],
         position: json['position'],
         profileImageURL: json['profileImageURL'],
@@ -28,7 +37,7 @@ class Post {
       );
 
   Map<String, dynamic> toJson() => {
-        'id': id,
+        '_id': id,
         'fullName': fullName,
         'position': position,
         'profileImageURL': profileImageURL,

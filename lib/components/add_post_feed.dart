@@ -4,6 +4,9 @@ import 'package:linkup/components/post_image_upload.dart';
 import 'package:linkup/components/rounded_textarea_field.dart';
 import 'package:linkup/constants.dart';
 import 'package:linkup/components/rounded_button.dart';
+import 'package:linkup/providers/post_provider.dart';
+import 'package:linkup/providers/user_provider.dart';
+import 'package:provider/provider.dart';
 
 class AddPostFeed extends StatefulWidget {
   const AddPostFeed({
@@ -16,6 +19,15 @@ class AddPostFeed extends StatefulWidget {
 
 class _AddPostFeedState extends State<AddPostFeed> {
   String description = "";
+  PostProvider postProvider;
+  UserProvider userProvider;
+
+  @override
+  void initState() {
+    super.initState();
+    postProvider = context.read<PostProvider>();
+    userProvider = context.read<UserProvider>();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,7 +65,9 @@ class _AddPostFeedState extends State<AddPostFeed> {
                   textAreaColor: colorDarkBackground,
                   text: "Description",
                   onChange: (value) {
-                    print(value);
+                    setState(() {
+                      postProvider.post.description = value;
+                    });
                   },
                 ),
                 SizedBox(
@@ -61,7 +75,9 @@ class _AddPostFeedState extends State<AddPostFeed> {
                 ),
                 PostImageUpload(
                   onFileChanged: (imageUrl) {
-                    print(imageUrl);
+                    setState(() {
+                      postProvider.post.postImage = imageUrl;
+                    });
                   },
                 ),
                 SizedBox(
@@ -75,7 +91,13 @@ class _AddPostFeedState extends State<AddPostFeed> {
                   width: size.width * 0.85,
                   text: "Post",
                   onPressed: () {
-                    print("Button clicked");
+                    postProvider.createPost(
+                      context,
+                      userProvider.user.firstName,
+                      userProvider.user.lastName,
+                      userProvider.user.position,
+                      userProvider.user.profileImageURL,
+                    );
                   },
                 ),
                 SizedBox(

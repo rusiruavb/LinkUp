@@ -27,7 +27,6 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     userProvider.modifyUser.lastName = userProvider.user.lastName;
     userProvider.modifyUser.email = userProvider.user.email;
     userProvider.modifyUser.phoneNumber = userProvider.user.phoneNumber;
-    print(userProvider.modifyUser.id);
   }
 
   void submit() {

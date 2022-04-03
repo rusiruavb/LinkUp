@@ -19,6 +19,7 @@ class SignUpScreen extends StatefulWidget {
 
 class _SignUpScreenState extends State<SignUpScreen> {
   UserProvider userProvider;
+  GlobalKey<FormState> createProfileFormKey = GlobalKey();
   String conformPassword;
 
   @override
@@ -28,14 +29,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void submit() {
-    if (userProvider.newUser.password == conformPassword) {
-      userProvider.create(context);
-    } else {
-      Fluttertoast.showToast(
-        msg: 'Password not matched',
-        backgroundColor: colorWarningLight,
-        textColor: colorDarkBackground,
-      );
+    if (createProfileFormKey.currentState.validate()) {
+      if (userProvider.newUser.password == conformPassword) {
+        userProvider.create(context);
+      } else {
+        Fluttertoast.showToast(
+          msg: 'Password not matched',
+          backgroundColor: colorWarningLight,
+          textColor: colorDarkBackground,
+        );
+      }
     }
   }
 
@@ -61,13 +64,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
       body: SingleChildScrollView(
         child: Container(
           width: size.width,
-          height: MediaQuery.of(context).orientation == Orientation.landscape
-              ? size.height * 2.15
-              : size.height * 1.2,
           padding: const EdgeInsets.all(0.0),
           child: Padding(
             padding: const EdgeInsets.all(5.0),
             child: Form(
+              key: createProfileFormKey,
               child: Column(
                 children: [
                   Row(
@@ -145,6 +146,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   SizedBox(
                     height: size.height * 0.03,
                   ),
+                  RoundedNumberField(
+                    text: "Position",
+                    onChange: (value) {
+                      setState(() {
+                        userProvider.newUser.position = value;
+                      });
+                    },
+                    isRequired: true,
+                  ),
+                  SizedBox(
+                    height: size.height * 0.03,
+                  ),
                   RoundedTextField(
                     text: "Password",
                     onChange: (value) {
@@ -191,6 +204,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         submit();
                       },
                     ),
+                  ),
+                  SizedBox(
+                    height: size.height * 0.03,
                   ),
                 ],
               ),

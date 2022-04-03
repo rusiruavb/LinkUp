@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:linkup/providers/post_provider.dart';
 import 'package:linkup/providers/user_provider.dart';
 import 'package:linkup/routes/page_routes.dart';
 import 'package:linkup/screens/home/home.dart';
@@ -9,6 +10,7 @@ void main() => runApp(
       MultiProvider(
         providers: [
           ChangeNotifierProvider(create: (_) => UserProvider()),
+          ChangeNotifierProvider(create: (_) => PostProvider()),
         ],
         child: const LinkUpApp(),
       ),
