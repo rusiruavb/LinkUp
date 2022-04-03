@@ -52,8 +52,6 @@ class _MyCompanyScreenState extends State<MyCompanyScreen> {
         elevation: 0.0,
       ),
       backgroundColor: colorDarkBackground,
-      drawer: const SideNavbar(),
-      bottomNavigationBar: const BottomNavbar(),
       body: SingleChildScrollView(
         child: ExpansionPanelList(
           expansionCallback: (int index, bool isExpanded) {

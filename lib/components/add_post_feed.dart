@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:linkup/components/image_upload.dart';
 import 'package:linkup/components/post_image_upload.dart';
 import 'package:linkup/components/rounded_textarea_field.dart';
@@ -32,81 +33,87 @@ class _AddPostFeedState extends State<AddPostFeed> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return Column(
-      children: [
-        Card(
-          color: colorDarkMidGround,
-          child: Container(
-            padding: const EdgeInsets.only(
-              top: 10,
-              left: 25,
-              right: 25,
-              bottom: 5,
-            ),
-            child: Column(
-              children: [
-                const Align(
-                  alignment: Alignment.topLeft,
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 5, bottom: 10),
-                    child: Text(
-                      "Create your post",
-                      style: TextStyle(
-                        fontFamily: fontFamilySFPro,
-                        fontSize: 20,
-                        color: colorTextPrimary,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ),
-                RoundedTextArea(
-                  backgroundColor: colorDarkMidGround,
-                  textAreaColor: colorDarkBackground,
-                  text: "Description",
-                  onChange: (value) {
-                    setState(() {
-                      postProvider.post.description = value;
-                    });
-                  },
-                ),
-                SizedBox(
-                  height: size.height * 0.03,
-                ),
-                PostImageUpload(
-                  onFileChanged: (imageUrl) {
-                    setState(() {
-                      postProvider.post.postImage = imageUrl;
-                    });
-                  },
-                ),
-                SizedBox(
-                  height: size.height * 0.03,
-                ),
-                RoundedButton(
-                  color: colorTextPrimary,
-                  textColor: colorDarkBackground,
-                  fontSize: 14,
-                  height: 35,
-                  width: size.width * 0.85,
-                  text: "Post",
-                  onPressed: () {
-                    postProvider.createPost(
-                      context,
-                      userProvider.user.firstName,
-                      userProvider.user.lastName,
-                      userProvider.user.position,
-                      userProvider.user.profileImageURL,
-                    );
-                  },
-                ),
-                SizedBox(
-                  height: size.height * 0.03,
-                ),
-              ],
-            ),
-          ),
+    return ExpansionTile(
+      initiallyExpanded: false,
+      collapsedBackgroundColor: colorDarkMidGround,
+      backgroundColor: colorDarkMidGround,
+      trailing: const Icon(
+        Icons.add,
+        color: colorTextPrimary,
+        size: 20,
+      ),
+      title: const Text(
+        'Create Post',
+        style: TextStyle(
+          fontFamily: fontFamilySFPro,
+          color: colorTextPrimary,
+          fontSize: 18,
         ),
+      ),
+      children: [
+        Column(
+          children: [
+            Card(
+              color: colorDarkMidGround,
+              child: Container(
+                padding: const EdgeInsets.only(
+                  top: 10,
+                  left: 25,
+                  right: 25,
+                  bottom: 5,
+                ),
+                child: Column(
+                  children: [
+                    RoundedTextArea(
+                      backgroundColor: colorDarkMidGround,
+                      textAreaColor: colorDarkBackground,
+                      text: "Description",
+                      onChange: (value) {
+                        setState(() {
+                          postProvider.post.description = value;
+                        });
+                      },
+                      value: postProvider.post.description,
+                    ),
+                    SizedBox(
+                      height: size.height * 0.03,
+                    ),
+                    PostImageUpload(
+                      onFileChanged: (imageUrl) {
+                        setState(() {
+                          postProvider.post.postImage = imageUrl;
+                        });
+                      },
+                    ),
+                    SizedBox(
+                      height: size.height * 0.03,
+                    ),
+                    RoundedButton(
+                      color: colorTextPrimary,
+                      textColor: colorDarkBackground,
+                      fontSize: 14,
+                      height: 35,
+                      width: size.width * 0.85,
+                      text: "Post",
+                      onPressed: () {
+                        postProvider.createPost(
+                          context,
+                          userProvider.user.firstName,
+                          userProvider.user.lastName,
+                          userProvider.user.position,
+                          userProvider.user.profileImageURL,
+                        );
+                      },
+                    ),
+                    SizedBox(
+                      height: size.height * 0.03,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        )
       ],
     );
   }

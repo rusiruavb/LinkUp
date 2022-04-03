@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:linkup/constants.dart';
+import 'package:linkup/providers/post_provider.dart';
 import 'package:linkup/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -18,13 +19,10 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  UserProvider userProvider;
-
   @override
   void initState() {
     super.initState();
-    userProvider = context.read<UserProvider>();
-    userProvider.getProfile(context);
+    context.read<UserProvider>().getProfile(context);
   }
 
   @override

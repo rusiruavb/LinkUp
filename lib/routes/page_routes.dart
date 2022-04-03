@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:linkup/screens/application_form/application_form_screen.dart';
 import 'package:linkup/screens/home/home.dart';
 import 'package:linkup/screens/login/login_screen.dart';
+import 'package:linkup/screens/my_companies/mycompanies_screen.dart';
 import 'package:linkup/screens/profile/add_education.dart';
 import 'package:linkup/screens/profile/add_experience.dart';
 import 'package:linkup/screens/profile/edit_profile_screen.dart';
@@ -115,6 +116,15 @@ class PageRoutes {
       case "/feed":
         return PageRouteBuilder(
           pageBuilder: (_, __, ___) => const NewsFeedScreen(),
+          settings: settings,
+          transitionsBuilder: (_, opacity, __, child) => FadeTransition(
+            opacity: opacity,
+            child: child,
+          ),
+        );
+      case "/my-companies":
+        return PageRouteBuilder(
+          pageBuilder: (_, __, ___) => const MyCompanyScreen(),
           settings: settings,
           transitionsBuilder: (_, opacity, __, child) => FadeTransition(
             opacity: opacity,

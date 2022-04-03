@@ -44,7 +44,9 @@ class PostCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(100),
                         child: Image.network(
                           profileImageURL,
-                          scale: 18,
+                          fit: BoxFit.cover,
+                          height: 30,
+                          width: 30,
                         ),
                       ),
                       Padding(
@@ -75,7 +77,7 @@ class PostCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                if (postImage != null) Image.network(postImage),
+                if (postImage != '') Image.network(postImage),
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Text(

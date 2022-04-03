@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:linkup/constants.dart';
 
 class BottomNavbar extends StatefulWidget {
@@ -61,9 +62,9 @@ class _BottomNavbarState extends State<BottomNavbar> {
           ),
           BottomNavigationBarItem(
             icon: _selectedIndex == 3
-                ? const Icon(Icons.bookmark, color: Colors.white)
+                ? const Icon(FontAwesomeIcons.briefcase, color: Colors.white)
                 : const Icon(Icons.bookmark_outline, color: Colors.white),
-            label: 'Bookmarks',
+            label: 'My Jobs',
           ),
           BottomNavigationBarItem(
             icon: _selectedIndex == 4

@@ -136,9 +136,9 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: _selectedIndex == 3
-                ? const Icon(Icons.bookmark, color: Colors.white)
-                : const Icon(Icons.bookmark_outline, color: Colors.white),
-            label: 'Bookmarks',
+                ? const Icon(Icons.add_business, color: Colors.white)
+                : const Icon(Icons.add_business_outlined, color: Colors.white),
+            label: 'My Jobs',
           ),
           BottomNavigationBarItem(
             icon: _selectedIndex == 4

@@ -18,7 +18,7 @@ class PostProvider extends ChangeNotifier {
   List<Post> posts = [];
   final storage = const FlutterSecureStorage();
 
-  void createPost(
+  Future createPost(
     BuildContext context,
     String firstName,
     String lastName,
@@ -49,6 +49,8 @@ class PostProvider extends ChangeNotifier {
       final data = jsonDecode(response.body);
       post = Post.fromJson(data);
       posts.add(post);
+      post.description = '';
+      post.postImage = '';
       notifyListeners();
     } else if (response.statusCode == 400) {
       Fluttertoast.showToast(msg: 'Authentication Failed');
@@ -61,6 +63,27 @@ class PostProvider extends ChangeNotifier {
   }
 
   Future<List<Post>> getPosts() async {
-    return null;
+    final response = await http.get(
+      Uri.parse('$baseApi/posts/'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      posts.clear();
+      final data = jsonDecode(response.body) as List;
+
+      for (Map<String, dynamic> post in data) {
+        posts.add(Post.fromJson(post));
+      }
+
+      notifyListeners();
+      return posts;
+    } else {
+      Fluttertoast.showToast(msg: 'Server Error');
+      notifyListeners();
+      return null;
+    }
   }
 }

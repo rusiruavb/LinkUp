@@ -83,8 +83,8 @@ class _SideNavbarState extends State<SideNavbar> {
           _NavbarItem(
             text: "My Companies",
             onClick: () {
-              Navigator.pushNamed(context, "/login");
               Navigator.pop(context);
+              Navigator.pushNamed(context, "/my-companies");
             },
             icon: FontAwesomeIcons.building,
           ),
