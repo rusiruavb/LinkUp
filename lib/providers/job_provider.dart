@@ -4,7 +4,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart' as http;
 import 'package:linkup/constants.dart';
 import 'package:linkup/models/job_model.dart';
-import 'package:linkup/models/post_model.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class JobProvider extends ChangeNotifier {

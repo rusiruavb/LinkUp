@@ -1,14 +1,11 @@
 import "package:flutter/material.dart";
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:linkup/components/image_upload.dart';
 import 'package:linkup/components/post_image_upload.dart';
-import 'package:linkup/components/rounded_number_field.dart';
 import 'package:linkup/components/rounded_text_field.dart';
 import 'package:linkup/components/rounded_textarea_field.dart';
+import 'package:linkup/components/user_image_upload.dart';
 import 'package:linkup/constants.dart';
 import 'package:linkup/components/rounded_button.dart';
 import 'package:linkup/providers/job_provider.dart';
-import 'package:linkup/providers/post_provider.dart';
 import 'package:linkup/providers/user_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -39,29 +36,29 @@ class _AddJobFeedState extends State<AddJobFeed> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
-    return ExpansionTile(
-      initiallyExpanded: false,
-      collapsedBackgroundColor: colorDarkMidGround,
-      backgroundColor: colorDarkMidGround,
-      trailing: const Icon(
-        Icons.add,
-        color: colorTextPrimary,
-        size: 20,
-      ),
-      title: const Text(
-        'Create Job',
-        style: TextStyle(
-          fontFamily: fontFamilySFPro,
+    return SingleChildScrollView(
+      child: ExpansionTile(
+        initiallyExpanded: false,
+        collapsedBackgroundColor: colorDarkForground,
+        backgroundColor: colorDarkForground,
+        trailing: const Icon(
+          Icons.add,
           color: colorTextPrimary,
-          fontSize: 18,
+          size: 20,
         ),
-      ),
-      children: [
-        SingleChildScrollView(
-          child: Column(
+        title: const Text(
+          'Create Post',
+          style: TextStyle(
+            fontFamily: fontFamilySFPro,
+            color: colorTextPrimary,
+            fontSize: 18,
+          ),
+        ),
+        children: [
+          Column(
             children: [
               Card(
-                color: colorDarkMidGround,
+                color: colorDarkForground,
                 child: Container(
                   padding: const EdgeInsets.only(
                     top: 10,
@@ -79,16 +76,19 @@ class _AddJobFeedState extends State<AddJobFeed> {
                           });
                         },
                         isRequired: true,
+                        backgroundColor: colorDarkForground,
+                        textAreaColor: colorDarkMidGround,
                       ),
                       SizedBox(
                         height: size.height * 0.03,
                       ),
-                      PostImageUpload(
+                      UserImageUpload(
                         onFileChanged: (imageUrl) {
                           setState(() {
-                            jobProvider.job.jobImage = imageUrl;
+                            jobProvider.job.companyLogo = imageUrl;
                           });
                         },
+                        imageURL: jobProvider.job.companyLogo,
                       ),
                       SizedBox(
                         height: size.height * 0.03,
@@ -101,6 +101,8 @@ class _AddJobFeedState extends State<AddJobFeed> {
                           });
                         },
                         isRequired: true,
+                        backgroundColor: colorDarkForground,
+                        textAreaColor: colorDarkMidGround,
                       ),
                       SizedBox(
                         height: size.height * 0.03,
@@ -113,13 +115,15 @@ class _AddJobFeedState extends State<AddJobFeed> {
                           });
                         },
                         isRequired: true,
+                        backgroundColor: colorDarkForground,
+                        textAreaColor: colorDarkMidGround,
                       ),
                       SizedBox(
                         height: size.height * 0.03,
                       ),
                       RoundedTextArea(
-                        backgroundColor: colorDarkMidGround,
-                        textAreaColor: colorDarkBackground,
+                        backgroundColor: colorDarkForground,
+                        textAreaColor: colorDarkMidGround,
                         text: "Description",
                         onChange: (value) {
                           setState(() {
@@ -134,7 +138,7 @@ class _AddJobFeedState extends State<AddJobFeed> {
                       PostImageUpload(
                         onFileChanged: (imageUrl) {
                           setState(() {
-                            jobProvider.job.companyLogo = imageUrl;
+                            jobProvider.job.jobImage = imageUrl;
                           });
                         },
                       ),
@@ -162,9 +166,9 @@ class _AddJobFeedState extends State<AddJobFeed> {
                 ),
               ),
             ],
-          ),
-        )
-      ],
+          )
+        ],
+      ),
     );
   }
 }
