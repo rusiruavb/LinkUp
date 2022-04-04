@@ -5,24 +5,20 @@ import 'package:linkup/constants.dart';
 class JobCard extends StatelessWidget {
   final String companyName;
   final String companyLogo;
-  final String postImage;
+  final String jobImage;
   final String position;
   final String description;
   final String salary;
-  final String type;
-  final String qualifications;
   final VoidCallback onClick;
 
   const JobCard({
     Key key,
     this.companyName,
     this.companyLogo,
-    this.postImage,
+    this.jobImage,
     this.position,
     this.description,
     this.salary,
-    this.type,
-    this.qualifications,
     this.onClick,
   }) : super(key: key);
 
@@ -81,7 +77,7 @@ class JobCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                if (postImage != null) Image.network(postImage),
+                if (jobImage != null) Image.network(jobImage),
                 Padding(
                   padding: const EdgeInsets.only(left: 10, top: 5),
                   child: Text(
@@ -119,22 +115,6 @@ class JobCard extends StatelessWidget {
                         ),
                         child: Text(
                           "Salary: Rs." + salary + ".00",
-                          style: const TextStyle(
-                            fontFamily: fontFamilySFPro,
-                            fontSize: 16,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    if (type != null)
-                      Padding(
-                        padding: const EdgeInsets.only(
-                          left: 10,
-                          top: 5,
-                          right: 10,
-                        ),
-                        child: Text(
-                          "Job Type: " + type,
                           style: const TextStyle(
                             fontFamily: fontFamilySFPro,
                             fontSize: 16,

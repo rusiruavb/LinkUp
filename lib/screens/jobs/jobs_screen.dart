@@ -1,6 +1,10 @@
 import "package:flutter/material.dart";
-
+import 'package:linkup/components/add_job_feed.dart';
+import 'package:linkup/models/job_model.dart';
+import 'package:linkup/providers/job_provider.dart';
+import 'package:provider/provider.dart';
 import '../../components/job_card.dart';
+import '../../constants.dart';
 
 class JobsScreen extends StatefulWidget {
   const JobsScreen({Key key}) : super(key: key);
@@ -10,42 +14,67 @@ class JobsScreen extends StatefulWidget {
 }
 
 class _JobsScreenState extends State<JobsScreen> {
+  Future<List<Job>> jobs;
+
+  @override
+  void initState() {
+    super.initState();
+    jobs = context.read<JobProvider>().getJobs();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Align(
-      alignment: Alignment.center,
-      child: SingleChildScrollView(
+    final size = MediaQuery.of(context).size;
+
+    return Scaffold(
+      backgroundColor: colorDarkBackground,
+      body: Align(
+        alignment: Alignment.topCenter,
         child: Column(
           children: [
-            JobCard(
-              companyLogo:
-                  "https://www.freepnglogos.com/uploads/google-logo-png/google-logo-icon-png-transparent-background-osteopathy-16.png",
-              companyName: "Google In.",
-              description:
-                  "A job description not only describes the position’s responsibilities, it sets the foundation for recruiting, developing and retaining talent and also sets the stage for optimum work performance by clarifying responsibilities, expected results, and evaluation of performance. It is also an important component to maintaining an equitable compensation system and ensuring legal compliance. The document should be revisited and updated in line with the annual performance evaluation cycle.",
-              position: "Associate Software Engineer",
-              postImage:
-                  "https://templates.mediamodifier.com/5e9709395e1d70189ea21cd1/job-posting-linkedin-post-template.jpg",
-              qualifications: "Test",
-              salary: "45000",
-              type: "Full Time",
-              onClick: () {
-                Navigator.pushNamed(context, "/applicationform");
+            const AddJobFeed(),
+            FutureBuilder<List<Job>>(
+              future: jobs,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return Expanded(
+                    child: ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder: ((context, index) {
+                        return JobCard(
+                          companyLogo: snapshot.data[index].companyLogo,
+                          companyName: snapshot.data[index].companyName,
+                          position: snapshot.data[index].position,
+                          salary: snapshot.data[index].salary,
+                          jobImage: snapshot.data[index].jobImage,
+                          description: snapshot.data[index].description,
+                        );
+                      }),
+                    ),
+                  );
+                } else if (snapshot.hasError) {
+                  return const Text(
+                    'Error with load posts',
+                    style: TextStyle(
+                      fontFamily: fontFamilySFPro,
+                      fontSize: 16,
+                      color: colorTextPrimary,
+                    ),
+                  );
+                }
+                return const Padding(
+                  padding: EdgeInsets.only(top: 20),
+                  child: SizedBox(
+                    width: 30,
+                    height: 30,
+                    child: CircularProgressIndicator(
+                      color: colorTextPrimary,
+                      strokeWidth: 2,
+                    ),
+                  ),
+                );
               },
-            ),
-            const JobCard(
-              companyLogo:
-                  "https://www.freepnglogos.com/uploads/google-logo-png/google-logo-icon-png-transparent-background-osteopathy-16.png",
-              companyName: "Google In.",
-              description:
-                  "A job description not only describes the position’s responsibilities, it sets the foundation for recruiting, developing and retaining talent and also sets the stage for optimum work performance by clarifying responsibilities, expected results, and evaluation of performance. It is also an important component to maintaining an equitable compensation system and ensuring legal compliance. The document should be revisited and updated in line with the annual performance evaluation cycle.",
-              position: "Associate Software Engineer",
-              postImage:
-                  "https://templates.mediamodifier.com/5e9709395e1d70189ea21cd1/job-posting-linkedin-post-template.jpg",
-              qualifications: "Test",
-              salary: "45000",
-              type: "Full Time",
-            ),
+            )
           ],
         ),
       ),
