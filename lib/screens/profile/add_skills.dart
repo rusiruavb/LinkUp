@@ -55,6 +55,8 @@ class _AddSkillsState extends State<AddSkills> {
                         print(value);
                       },
                       isRequired: true,
+                      backgroundColor: colorDarkBackground,
+                    textAreaColor: colorDarkMidGround,
                     ),
                     const SizedBox(
                       height: 20,

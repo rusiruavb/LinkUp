@@ -73,17 +73,40 @@ class PostProvider extends ChangeNotifier {
     if (response.statusCode == 200) {
       posts.clear();
       final data = jsonDecode(response.body) as List;
+      final List<Post> newPosts = [];
 
       for (Map<String, dynamic> post in data) {
-        posts.add(Post.fromJson(post));
+        newPosts.add(Post.fromJson(post));
       }
 
+      return newPosts;
+    } else {
+      Fluttertoast.showToast(msg: 'Server Error');
+    }
+    notifyListeners();
+    return null;
+  }
+
+  void deletePost(BuildContext context, String postId) async {
+    var userId = await storage.read(key: 'userId');
+    var authToken = await storage.read(key: 'authToken');
+    final response = await http.delete(
+      Uri.parse('$baseApi/posts/remove/$userId/$postId'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': authToken,
+      },
+    );
+
+    if (response.statusCode == 200) {
       notifyListeners();
-      return posts;
+    } else if (response.statusCode == 400) {
+      Fluttertoast.showToast(msg: 'Authentication Failed');
+      Navigator.pushNamed(context, '/login');
+      notifyListeners();
     } else {
       Fluttertoast.showToast(msg: 'Server Error');
       notifyListeners();
-      return null;
     }
   }
 }

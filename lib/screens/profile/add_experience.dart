@@ -53,6 +53,8 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                         print(value);
                       },
                       isRequired: true,
+                      backgroundColor: colorDarkBackground,
+                      textAreaColor: colorDarkMidGround,
                     ),
                     const SizedBox(
                       height: 20,
@@ -63,6 +65,8 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                         print(value);
                       },
                       isRequired: true,
+                      backgroundColor: colorDarkBackground,
+                      textAreaColor: colorDarkMidGround,
                     ),
                     const SizedBox(
                       height: 20,

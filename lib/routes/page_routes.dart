@@ -3,6 +3,7 @@ import 'package:linkup/screens/application_form/application_form_screen.dart';
 import 'package:linkup/screens/home/home.dart';
 import 'package:linkup/screens/login/login_screen.dart';
 import 'package:linkup/screens/my_companies/mycompanies_screen.dart';
+import 'package:linkup/screens/my_posts/my_posts_screen.dart';
 import 'package:linkup/screens/profile/add_education.dart';
 import 'package:linkup/screens/profile/add_experience.dart';
 import 'package:linkup/screens/profile/edit_profile_screen.dart';
@@ -143,6 +144,19 @@ class PageRoutes {
       case "/edit-profile":
         return PageRouteBuilder(
           pageBuilder: (_, __, ___) => const EditProfileScreen(),
+          settings: settings,
+          transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+              SlideTransition(
+            child: child,
+            position: Tween<Offset>(
+              begin: const Offset(1.0, 0.0),
+              end: Offset.zero,
+            ).animate(animation),
+          ),
+        );
+        case "/my-posts":
+        return PageRouteBuilder(
+          pageBuilder: (_, __, ___) => const MyPostScreen(),
           settings: settings,
           transitionsBuilder: (context, animation, secondaryAnimation, child) =>
               SlideTransition(
