@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:linkup/constants.dart';
+import 'package:linkup/models/job_model.dart';
 import 'package:linkup/models/post_model.dart';
 import 'package:linkup/models/user_model.dart';
 import 'package:http/http.dart' as http;
@@ -180,6 +181,22 @@ class UserProvider extends ChangeNotifier {
         userPosts.add(Post.fromJson(post));
       }
       return userPosts;
+    }
+    notifyListeners();
+    return null;
+  }
+
+    // Get user posts
+  Future<List<Job>> getUserJobs(BuildContext context) async {
+    User user = await getProfile(context);
+    final List<Job> userJobs = [];
+
+    if (user.posts.isNotEmpty) {
+      final data = user.jobs;
+      for (Map<String, dynamic> job in data) {
+        userJobs.add(Job.fromJson(job));
+      }
+      return userJobs;
     }
     notifyListeners();
     return null;

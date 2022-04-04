@@ -88,6 +88,14 @@ class _SideNavbarState extends State<SideNavbar> {
             },
             icon: FontAwesomeIcons.fileLines,
           ),
+          _NavbarItem(
+            text: "My Jobs",
+            onClick: () {
+              Navigator.pop(context);
+              Navigator.pushNamed(context, "/my-jobs");
+            },
+            icon: FontAwesomeIcons.fileLines,
+          ),
           Align(
             alignment: Alignment.bottomCenter,
             child: _NavbarItem(
