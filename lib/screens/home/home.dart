@@ -4,7 +4,7 @@ import 'package:linkup/constants.dart';
 import 'package:linkup/providers/user_provider.dart';
 import 'package:linkup/screens/applications/application_screen.dart';
 import 'package:linkup/screens/bookmark_jobs/bookmark_jobs_screen.dart';
-import 'package:linkup/screens/jobs/jobs_screen.dart';
+import 'package:linkup/screens/jobs_feed/jobs_screen.dart';
 import 'package:linkup/screens/news_feed/news_feed_screen.dart';
 import 'package:linkup/screens/profile/profile_screen.dart';
 import 'package:provider/provider.dart';
@@ -20,7 +20,7 @@ class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
   String _tabName = "Jobs";
   static const List<Widget> _widgetList = <Widget>[
-    JobsScreen(),
+    JobsFeedScreen(),
     ApplicationScreen(),
     NewsFeedScreen(),
     BookMarkedJobsScreen(),
