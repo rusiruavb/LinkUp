@@ -34,7 +34,7 @@ class JobCard extends StatelessWidget {
           width: orientation == Orientation.landscape
               ? size.width * 0.75
               : size.width,
-          padding: const EdgeInsets.only(top: 5, bottom: 5),
+          padding: const EdgeInsets.only(top: 5, bottom: 0),
           child: Card(
             color: colorDarkMidGround,
             child: Column(
@@ -45,9 +45,14 @@ class JobCard extends StatelessWidget {
                   child: Row(
                     // Header section
                     children: [
-                      Image.network(
-                        companyLogo,
-                        scale: 23,
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(100),
+                        child: Image.network(
+                          companyLogo,
+                          fit: BoxFit.cover,
+                          height: 30,
+                          width: 30,
+                        ),
                       ),
                       Padding(
                         padding: const EdgeInsets.only(left: 8),
@@ -59,16 +64,16 @@ class JobCard extends StatelessWidget {
                               style: const TextStyle(
                                 fontFamily: fontFamilySFPro,
                                 fontSize: 16,
-                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                color: colorTextPrimary,
                               ),
                             ),
                             Text(
                               position,
                               style: const TextStyle(
                                 fontFamily: fontFamilySFPro,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18,
-                                color: Colors.white,
+                                fontSize: 14,
+                                color: colorTextPrimary,
                               ),
                             )
                           ],
@@ -77,9 +82,9 @@ class JobCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                if (jobImage != null) Image.network(jobImage),
+                if (jobImage != '') Image.network(jobImage),
                 Padding(
-                  padding: const EdgeInsets.only(left: 10, top: 5),
+                  padding: const EdgeInsets.only(left: 10, top: 10),
                   child: Text(
                     companyName,
                     style: const TextStyle(
@@ -106,7 +111,7 @@ class JobCard extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    if (salary != null)
+                    if (salary != '')
                       Padding(
                         padding: const EdgeInsets.only(
                           left: 10,
@@ -133,7 +138,8 @@ class JobCard extends StatelessWidget {
                   child: RoundedButton(
                     text: "Apply Now",
                     fontSize: 14,
-                    color: colorDarkForground,
+                    textColor: colorDarkBackground,
+                    color: colorTextPrimary,
                     height: 32,
                     width: 95,
                     onPressed: onClick,
