@@ -7,6 +7,8 @@ class RoundedTextField extends StatefulWidget {
   final String value;
   final String type;
   final bool isRequired;
+  final Color backgroundColor;
+  final Color textAreaColor;
 
   const RoundedTextField({
     Key key,
@@ -14,6 +16,8 @@ class RoundedTextField extends StatefulWidget {
     this.text,
     this.isRequired,
     this.type,
+    this.backgroundColor,
+    this.textAreaColor,
     this.value,
   }) : super(key: key);
 
@@ -29,7 +33,7 @@ class _RoundedTextFieldState extends State<RoundedTextField> {
     final size = MediaQuery.of(context).size;
 
     return Material(
-      color: colorDarkBackground,
+      color: widget.backgroundColor,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -50,6 +54,7 @@ class _RoundedTextFieldState extends State<RoundedTextField> {
             height: size.height * 0.005,
           ),
           TextFieldContainer(
+            textAreaColor: widget.textAreaColor,
             child: TextFormField(
               validator: (value) {
                 if (value.isEmpty) {
@@ -101,8 +106,13 @@ class _RoundedTextFieldState extends State<RoundedTextField> {
 
 class TextFieldContainer extends StatelessWidget {
   final Widget child;
+  final Color textAreaColor;
 
-  const TextFieldContainer({Key key, this.child}) : super(key: key);
+  const TextFieldContainer({
+    Key key,
+    this.child,
+    this.textAreaColor,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -116,7 +126,7 @@ class TextFieldContainer extends StatelessWidget {
       width: size.width * 0.9,
       height: 50,
       decoration: BoxDecoration(
-        color: colorDarkMidGround,
+        color: textAreaColor,
         borderRadius: BorderRadius.circular(26),
       ),
       child: child,

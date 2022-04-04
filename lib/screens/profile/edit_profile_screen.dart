@@ -72,6 +72,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     },
                     value: userProvider.modifyUser.firstName,
                     isRequired: true,
+                    backgroundColor: colorDarkBackground,
+                    textAreaColor: colorDarkMidGround,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -85,6 +87,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     },
                     value: userProvider.modifyUser.lastName,
                     isRequired: true,
+                    backgroundColor: colorDarkBackground,
+                    textAreaColor: colorDarkMidGround,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -99,6 +103,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     },
                     value: userProvider.modifyUser.email,
                     isRequired: true,
+                    backgroundColor: colorDarkBackground,
+                    textAreaColor: colorDarkMidGround,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -127,6 +133,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     type: "password",
                     value: userProvider.modifyUser.password,
                     isRequired: false,
+                    backgroundColor: colorDarkBackground,
+                    textAreaColor: colorDarkMidGround,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -142,6 +150,8 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                     value: confirmPassword,
                     isRequired:
                         userProvider.modifyUser.password != '' ? true : false,
+                    backgroundColor: colorDarkBackground,
+                    textAreaColor: colorDarkMidGround,
                   ),
                   MediaQuery.of(context).orientation == Orientation.landscape
                       ? SizedBox(
