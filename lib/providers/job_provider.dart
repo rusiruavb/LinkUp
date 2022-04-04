@@ -8,7 +8,8 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class JobProvider extends ChangeNotifier {
   Job job = Job.createJobConstructor(
-    companyLogo: '',
+    companyLogo:
+        'https://firebasestorage.googleapis.com/v0/b/linkup-31422.appspot.com/o/images%2FcompanyLogo.jpg?alt=media&token=94afb198-e5c9-417c-bf1b-e729b0a3576e',
     companyName: '',
     position: '',
     id: '',
