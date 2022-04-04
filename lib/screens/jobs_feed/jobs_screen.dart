@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
 import 'package:linkup/components/add_job_feed.dart';
-import 'package:linkup/components/add_post_feed.dart';
 import 'package:linkup/components/job_card.dart';
 import 'package:linkup/models/job_model.dart';
 import 'package:linkup/providers/job_provider.dart';
+import 'package:linkup/screens/application_form/application_form_screen.dart';
 import 'package:provider/provider.dart';
 import 'package:linkup/constants.dart';
 
@@ -67,6 +67,14 @@ class JobsFeedScreenState extends State<JobsFeedScreen> {
             position: snapshot.data[index].position,
             jobImage: snapshot.data[index].jobImage,
             salary: snapshot.data[index].salary,
+            onClick: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ApplicationFormScreen(),
+                ),
+              );
+            },
           );
         }),
       );

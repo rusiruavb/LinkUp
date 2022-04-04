@@ -61,6 +61,8 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                           applicantName = value;
                         });
                       },
+                      backgroundColor: colorDarkBackground,
+                      textAreaColor: colorDarkMidGround,
                       value: applicantName,
                       isRequired: true,
                     ),
@@ -74,6 +76,8 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                           nic = value;
                         });
                       },
+                      backgroundColor: colorDarkBackground,
+                      textAreaColor: colorDarkMidGround,
                       value: nic,
                       isRequired: true,
                     ),
@@ -88,6 +92,8 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                           contactNumber = value;
                         });
                       },
+                      backgroundColor: colorDarkBackground,
+                      textAreaColor: colorDarkMidGround,
                       value: contactNumber,
                       isRequired: true,
                     ),
@@ -101,6 +107,8 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                           university = value;
                         });
                       },
+                      backgroundColor: colorDarkBackground,
+                      textAreaColor: colorDarkMidGround,
                       value: university,
                       isRequired: true,
                     ),
@@ -114,6 +122,8 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                           skills = value;
                         });
                       },
+                      backgroundColor: colorDarkBackground,
+                      textAreaColor: colorDarkMidGround,
                       value: skills,
                       isRequired: true,
                     ),
@@ -127,6 +137,8 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                           languages = value;
                         });
                       },
+                      backgroundColor: colorDarkBackground,
+                      textAreaColor: colorDarkMidGround,
                       value: languages,
                       isRequired: true,
                     ),
@@ -140,6 +152,8 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                           linkedIn = value;
                         });
                       },
+                      backgroundColor: colorDarkBackground,
+                      textAreaColor: colorDarkMidGround,
                       value: linkedIn,
                       isRequired: true,
                     ),
@@ -153,6 +167,8 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                           github = value;
                         });
                       },
+                      backgroundColor: colorDarkBackground,
+                      textAreaColor: colorDarkMidGround,
                       value: github,
                       isRequired: true,
                     ),
@@ -172,11 +188,12 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                         right: 15,
                       ),
                       child: RoundedButton(
-                        color: colorDarkForground,
-                        fontSize: 14,
+                        color: colorTextPrimary,
+                        fontSize: 16,
                         height: 45,
-                        width: 100,
+                        width: size.width * 0.89,
                         text: "Apply",
+                        textColor: colorDarkBackground,
                         onPressed: () {
                           print("Button clicked");
                         },
