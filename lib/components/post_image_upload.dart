@@ -51,7 +51,7 @@ class _PostImageUploadState extends State<PostImageUpload> {
                 borderRadius: BorderRadius.circular(
                   20,
                 ),
-                color: colorDarkBackground,
+                color: colorDarkMidGround,
               ),
               child: InkWell(
                 onTap: () => _selectPhoto(),

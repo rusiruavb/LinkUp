@@ -55,6 +55,8 @@ class _AddEducationState extends State<AddEducation> {
                         print(value);
                       },
                       isRequired: true,
+                      backgroundColor: colorDarkBackground,
+                      textAreaColor: colorDarkMidGround,
                     ),
                     const SizedBox(
                       height: 20,
@@ -65,6 +67,8 @@ class _AddEducationState extends State<AddEducation> {
                         print(value);
                       },
                       isRequired: true,
+                      backgroundColor: colorDarkBackground,
+                      textAreaColor: colorDarkMidGround,
                     ),
                     const SizedBox(
                       height: 20,

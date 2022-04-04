@@ -81,17 +81,10 @@ class _SideNavbarState extends State<SideNavbar> {
             icon: FontAwesomeIcons.signIn,
           ),
           _NavbarItem(
-            text: "My Companies",
-            onClick: () {
-              Navigator.pop(context);
-              Navigator.pushNamed(context, "/my-companies");
-            },
-            icon: FontAwesomeIcons.building,
-          ),
-          _NavbarItem(
             text: "My Posts",
             onClick: () {
-              Navigator.pushNamed(context, "/login");
+              Navigator.pop(context);
+              Navigator.pushNamed(context, "/my-posts");
             },
             icon: FontAwesomeIcons.fileLines,
           ),

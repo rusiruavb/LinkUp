@@ -116,6 +116,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     value: userProvider.logUser.email,
                     isRequired: true,
+                    backgroundColor: colorDarkBackground,
+                    textAreaColor: colorDarkMidGround,
                   ),
                   SizedBox(
                     height: size.height * 0.03,
@@ -130,6 +132,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     },
                     value: userProvider.logUser.password,
                     isRequired: true,
+                    backgroundColor: colorDarkBackground,
+                    textAreaColor: colorDarkMidGround,
                   ),
                   SizedBox(
                     height: size.height * 0.03,

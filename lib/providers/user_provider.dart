@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:linkup/constants.dart';
+import 'package:linkup/models/post_model.dart';
 import 'package:linkup/models/user_model.dart';
 import 'package:http/http.dart' as http;
 
@@ -154,6 +155,7 @@ class UserProvider extends ChangeNotifier {
       final data = jsonDecode(response.body);
       user = User.fromJson(data);
       notifyListeners();
+      print(user.posts.length);
       return user;
     } else if (response.statusCode == 400) {
       Fluttertoast.showToast(msg: 'Authentication Failed');
@@ -165,6 +167,22 @@ class UserProvider extends ChangeNotifier {
       notifyListeners();
       return null;
     }
+  }
+
+  // Get user posts
+  Future<List<Post>> getUserPosts(BuildContext context) async {
+    User user = await getProfile(context);
+    final List<Post> userPosts = [];
+
+    if (user.posts.isNotEmpty) {
+      final data = user.posts;
+      for (Map<String, dynamic> post in data) {
+        userPosts.add(Post.fromJson(post));
+      }
+      return userPosts;
+    }
+    notifyListeners();
+    return null;
   }
 
   // Update user profile image
