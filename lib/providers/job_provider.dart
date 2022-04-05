@@ -90,7 +90,7 @@ class JobProvider extends ChangeNotifier {
     }
   }
 
-    void deleteJob(BuildContext context, String jobId) async {
+  void deleteJob(BuildContext context, String jobId) async {
     var userId = await storage.read(key: 'userId');
     var authToken = await storage.read(key: 'authToken');
     final response = await http.delete(
@@ -113,4 +113,45 @@ class JobProvider extends ChangeNotifier {
     }
   }
 
+  void updateJob(
+    String id,
+    String companyLogo,
+    String jobImage,
+    String description,
+    String position,
+    String salary,
+    String companyName,
+    BuildContext context,
+  ) async {
+    var authToken = await storage.read(key: 'authToken');
+    final response = await http.put(
+      Uri.parse('$baseApi/jobs/edit/$id'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': authToken,
+      },
+      body: jsonEncode(
+        <String, String>{
+          'companyLogo': companyLogo,
+          'jobImage': jobImage,
+          'description': description,
+          'position': position,
+          'salary': salary,
+          'companyName': companyName,
+        },
+      ),
+    );
+
+    if (response.statusCode == 200) {
+      Navigator.pop(context);
+      notifyListeners();
+    } else if (response.statusCode == 400) {
+      Fluttertoast.showToast(msg: 'Authentication Failed');
+      Navigator.pushNamed(context, '/login');
+      notifyListeners();
+    } else {
+      Fluttertoast.showToast(msg: 'Server Error');
+      notifyListeners();
+    }
+  }
 }
