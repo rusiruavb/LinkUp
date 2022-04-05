@@ -9,7 +9,7 @@ class RoundedButton extends StatelessWidget {
   final IconData icon;
   final double height;
   final double width;
-  final double iconColor;
+  final Color iconColor;
   final double fontSize;
 
   const RoundedButton({

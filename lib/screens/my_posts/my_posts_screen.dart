@@ -4,6 +4,7 @@ import 'package:linkup/constants.dart';
 import 'package:linkup/models/post_model.dart';
 import 'package:linkup/providers/post_provider.dart';
 import 'package:linkup/providers/user_provider.dart';
+import 'package:linkup/screens/my_posts/edit_my_post.dart';
 import 'package:linkup/screens/my_posts/my_post_card.dart';
 import 'package:provider/provider.dart';
 
@@ -87,7 +88,7 @@ class _MyPostScreenState extends State<MyPostScreen> {
               children: [
                 SlidableAction(
                   onPressed: (context) {
-                    print("Edit");
+                    print("Delete");
                   },
                   backgroundColor: colorError,
                   foregroundColor: colorTextPrimary,
@@ -103,7 +104,16 @@ class _MyPostScreenState extends State<MyPostScreen> {
               children: [
                 SlidableAction(
                   onPressed: (context) {
-                    print("Edit");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditPost(
+                          id: snapshot.data[index].id,
+                          description: snapshot.data[index].description,
+                          imageURL: snapshot.data[index].postImage,
+                        ),
+                      ),
+                    );
                   },
                   backgroundColor: colorTextPrimary,
                   foregroundColor: colorDarkBackground,

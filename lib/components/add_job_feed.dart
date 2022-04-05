@@ -82,6 +82,16 @@ class _AddJobFeedState extends State<AddJobFeed> {
                       SizedBox(
                         height: size.height * 0.03,
                       ),
+                      const Text(
+                        'Company logo',
+                        style: TextStyle(
+                          color: colorTextPrimary,
+                          fontFamily: fontFamilySFPro,
+                        ),
+                      ),
+                      SizedBox(
+                        height: size.height * 0.01,
+                      ),
                       UserImageUpload(
                         onFileChanged: (imageUrl) {
                           setState(() {
@@ -134,6 +144,20 @@ class _AddJobFeedState extends State<AddJobFeed> {
                       ),
                       SizedBox(
                         height: size.height * 0.03,
+                      ),
+                      const Align(
+                        alignment: Alignment.topLeft,
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 15),
+                          child: Text(
+                            'Job post image',
+                            style: TextStyle(
+                              color: colorTextPrimary,
+                              fontFamily: fontFamilySFPro,
+                              fontSize: 15,
+                            ),
+                          ),
+                        ),
                       ),
                       PostImageUpload(
                         onFileChanged: (imageUrl) {

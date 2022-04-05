@@ -109,4 +109,38 @@ class PostProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  void updatePost(
+    String id,
+    String description,
+    String imageURL,
+    BuildContext context,
+  ) async {
+    var authToken = await storage.read(key: 'authToken');
+    final response = await http.put(
+      Uri.parse('$baseApi/posts/edit/$id'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        'x-auth-token': authToken,
+      },
+      body: jsonEncode(
+        <String, String>{
+          'postImage': imageURL,
+          'description': description,
+        },
+      ),
+    );
+
+    if (response.statusCode == 200) {
+      Navigator.pop(context);
+      notifyListeners();
+    } else if (response.statusCode == 400) {
+      Fluttertoast.showToast(msg: 'Authentication Failed');
+      Navigator.pushNamed(context, '/login');
+      notifyListeners();
+    } else {
+      Fluttertoast.showToast(msg: 'Server Error');
+      notifyListeners();
+    }
+  }
 }

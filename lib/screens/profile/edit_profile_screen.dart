@@ -227,7 +227,10 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                                 ),
                               ),
                               TextButton(
-                                onPressed: () => Navigator.pop(context, 'OK'),
+                                onPressed: () {
+                                  userProvider.deleteUser(context);
+                                  Navigator.pop(context, 'OK');
+                                },
                                 child: const Text(
                                   'Delete Profile',
                                   style: TextStyle(
