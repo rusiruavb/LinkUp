@@ -3,11 +3,9 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:linkup/components/job_card.dart';
 import 'package:linkup/constants.dart';
 import 'package:linkup/models/job_model.dart';
-import 'package:linkup/models/post_model.dart';
 import 'package:linkup/providers/job_provider.dart';
-import 'package:linkup/providers/post_provider.dart';
 import 'package:linkup/providers/user_provider.dart';
-import 'package:linkup/screens/my_posts/my_post_card.dart';
+import 'package:linkup/screens/my_jobs/edit_my_job.dart';
 import 'package:provider/provider.dart';
 
 class MyJobsScreen extends StatefulWidget {
@@ -91,7 +89,7 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
               children: [
                 SlidableAction(
                   onPressed: (context) {
-                    print("Edit");
+                    print("Delete");
                   },
                   backgroundColor: colorError,
                   foregroundColor: colorTextPrimary,
@@ -107,7 +105,20 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
               children: [
                 SlidableAction(
                   onPressed: (context) {
-                    print("Edit");
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => EditJob(
+                          id: snapshot.data[index].id,
+                          companyLogo : snapshot.data[index].companyLogo,
+                          jobImage : snapshot.data[index].jobImage,
+                          description: snapshot.data[index].description,
+                          position : snapshot.data[index].position,
+                          salary : snapshot.data[index].salary,
+                          companyName : snapshot.data[index].companyName,
+                        ),
+                      ),
+                    );
                   },
                   backgroundColor: colorTextPrimary,
                   foregroundColor: colorDarkBackground,
