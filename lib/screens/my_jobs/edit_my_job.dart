@@ -87,9 +87,6 @@ class _EditJobState extends State<EditJob> {
       body: SingleChildScrollView(
         child: SizedBox(
           width: size.width,
-          height: orientation == Orientation.landscape
-              ? size.height * 0.95
-              : size.height * 0.7,
           child: Padding(
             padding: const EdgeInsets.all(5),
             child: Form(
