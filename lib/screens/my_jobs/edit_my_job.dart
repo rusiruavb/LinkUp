@@ -61,8 +61,8 @@ class _EditJobState extends State<EditJob> {
   }
 
   void submit() {
-    _jobProvider.updateJob(_id, _newCompanyLogo, _newJobImage, _newPosition,
-        _newSalary, _newCompanyName, _newDescription, context);
+    _jobProvider.updateJob(_id, _newCompanyLogo, _newJobImage,_newDescription, _newPosition,
+        _newSalary, _newCompanyName, context);
   }
 
   @override
