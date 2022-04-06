@@ -186,7 +186,7 @@ class UserProvider extends ChangeNotifier {
     return null;
   }
 
-    // Get user posts
+  // Get user posts
   Future<List<Job>> getUserJobs(BuildContext context) async {
     User user = await getProfile(context);
     final List<Job> userJobs = [];

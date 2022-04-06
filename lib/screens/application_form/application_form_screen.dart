@@ -1,16 +1,26 @@
 import "package:flutter/material.dart";
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:linkup/components/rounded_button.dart';
 import 'package:linkup/components/rounded_text_field.dart';
 import 'package:linkup/constants.dart';
+import 'package:linkup/providers/application_provider.dart';
+import 'package:provider/provider.dart';
 
 class ApplicationFormScreen extends StatefulWidget {
-  const ApplicationFormScreen({Key key}) : super(key: key);
+  final String jobId;
+
+  const ApplicationFormScreen({
+    Key key,
+    this.jobId,
+  }) : super(key: key);
 
   @override
   _ApplicationFormScreenState createState() => _ApplicationFormScreenState();
 }
 
 class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
+  GlobalKey<FormState> sendApplication = GlobalKey();
+  ApplicationProvider _applicationProvider;
   String applicantName = "";
   String nic = "";
   String contactNumber = "";
@@ -19,6 +29,31 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
   String languages = "";
   String linkedIn = "";
   String github = "";
+
+  @override
+  void initState() {
+    super.initState();
+    _applicationProvider = context.read<ApplicationProvider>();
+  }
+
+  void submit() {
+    if (sendApplication.currentState.validate()) {
+      _applicationProvider.createApplication(
+        context,
+        widget.jobId,
+        applicantName,
+        nic,
+        contactNumber,
+        university,
+        skills,
+        languages,
+        linkedIn,
+        github,
+      );
+    } else {
+      Fluttertoast.showToast(msg: 'Please check the input fields');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,13 +77,11 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
             width: orientation == Orientation.landscape
                 ? size.width * 0.8
                 : size.width,
-            height: orientation == Orientation.landscape
-                ? size.height * 2
-                : size.height * 1.15,
             padding: const EdgeInsets.all(0.0),
             child: Padding(
               padding: const EdgeInsets.all(5.0),
               child: Form(
+                key: sendApplication,
                 child: Column(
                   children: [
                     SizedBox(
@@ -195,9 +228,12 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                         text: "Apply",
                         textColor: colorDarkBackground,
                         onPressed: () {
-                          print("Button clicked");
+                          submit();
                         },
                       ),
+                    ),
+                     SizedBox(
+                      height: size.height * 0.03,
                     ),
                   ],
                 ),
