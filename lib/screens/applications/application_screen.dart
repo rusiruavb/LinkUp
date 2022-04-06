@@ -164,15 +164,23 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
           }),
         );
       } else {
-        return Container(
-          padding: const EdgeInsets.all(8),
-          child: const Text(
-            'You have not submit any application yet',
-            style: TextStyle(
-              fontFamily: fontFamilySFPro,
-              fontSize: 14,
-              color: colorTextPrimary,
-            ),
+        return Padding(
+          padding: const EdgeInsets.only(top: 15),
+          child: Column(
+            children: [
+              Image.asset('assets/images/application.png'),
+              const SizedBox(
+                height: 15,
+              ),
+              const Text(
+                'You have not apply to any job yet',
+                style: TextStyle(
+                  fontFamily: fontFamilySFPro,
+                  fontSize: 18,
+                  color: colorTextPrimary,
+                ),
+              ),
+            ],
           ),
         );
       }

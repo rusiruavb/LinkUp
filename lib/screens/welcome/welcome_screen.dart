@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import 'package:linkup/constants.dart';
 import 'package:linkup/providers/post_provider.dart';
 import 'package:linkup/providers/user_provider.dart';
+import 'package:linkup/screens/login/login_screen.dart';
 import 'package:provider/provider.dart';
 
 class WelcomeScreen extends StatefulWidget {
@@ -19,10 +20,17 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
+  String _authToken;
+
   @override
   void initState() {
     super.initState();
     context.read<UserProvider>().getProfile(context);
+    context.read<UserProvider>().storage.read(key: 'userId').then((value) {
+      setState(() {
+        _authToken = value;
+      });
+    });
   }
 
   @override
@@ -31,7 +39,10 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
     Future.delayed(Duration(seconds: widget.duration), () {
       Navigator.pushAndRemoveUntil(
         context,
-        MaterialPageRoute(builder: (context) => widget.navigationPage),
+        MaterialPageRoute(
+          builder: (context) =>
+              _authToken != null ? widget.navigationPage : const LoginScreen(),
+        ),
         (route) => false,
       );
     });

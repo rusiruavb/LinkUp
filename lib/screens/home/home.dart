@@ -5,6 +5,7 @@ import 'package:linkup/providers/user_provider.dart';
 import 'package:linkup/screens/applications/application_screen.dart';
 import 'package:linkup/screens/bookmark_jobs/bookmark_jobs_screen.dart';
 import 'package:linkup/screens/jobs_feed/jobs_screen.dart';
+import 'package:linkup/screens/my_jobs/my_jobs_screen.dart';
 import 'package:linkup/screens/news_feed/news_feed_screen.dart';
 import 'package:linkup/screens/profile/profile_screen.dart';
 import 'package:provider/provider.dart';
@@ -23,7 +24,7 @@ class _HomeScreenState extends State<HomeScreen> {
     JobsFeedScreen(),
     ApplicationScreen(),
     NewsFeedScreen(),
-    BookMarkedJobsScreen(),
+    MyJobsScreen(),
     ProfileScreen(),
   ];
   UserProvider userProvider;
@@ -57,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen> {
         break;
       case 3:
         setState(() {
-          _tabName = "Bookmarks";
+          _tabName = "My Jobs";
         });
         break;
       case 4:

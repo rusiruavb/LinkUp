@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:linkup/constants.dart';
 import 'package:linkup/providers/user_provider.dart';
@@ -13,11 +14,20 @@ class SideNavbar extends StatefulWidget {
 
 class _SideNavbarState extends State<SideNavbar> {
   UserProvider userProvider;
+  String _authToken;
 
   @override
   void initState() {
     super.initState();
+
     userProvider = context.read<UserProvider>();
+    () {
+      setState(() async {
+        _authToken =
+            await context.read<UserProvider>().storage.read(key: 'authToken');
+        print(_authToken);
+      });
+    };
   }
 
   @override
@@ -64,48 +74,53 @@ class _SideNavbarState extends State<SideNavbar> {
                 color: colorDarkBackground,
               ),
             ),
-          _NavbarItem(
-            text: "Sign Up",
-            onClick: () {
-              Navigator.pop(context);
-              Navigator.pushNamed(context, "/signup");
-            },
-            icon: FontAwesomeIcons.user,
-          ),
-          _NavbarItem(
-            text: "Login",
-            onClick: () {
-              Navigator.pop(context);
-              Navigator.pushNamed(context, "/login");
-            },
-            icon: FontAwesomeIcons.signIn,
-          ),
-          _NavbarItem(
-            text: "My Posts",
-            onClick: () {
-              Navigator.pop(context);
-              Navigator.pushNamed(context, "/my-posts");
-            },
-            icon: FontAwesomeIcons.fileLines,
-          ),
-          _NavbarItem(
-            text: "My Jobs",
-            onClick: () {
-              Navigator.pop(context);
-              Navigator.pushNamed(context, "/my-jobs");
-            },
-            icon: FontAwesomeIcons.fileLines,
-          ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: _NavbarItem(
-              text: "Sign out",
+          if (_authToken == null)
+            const SizedBox(
+              height: 25,
+            ),
+          if (_authToken == null)
+            _NavbarItem(
+              text: "Sign Up",
               onClick: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, "/signup");
+              },
+              icon: FontAwesomeIcons.user,
+            ),
+          if (_authToken == null)
+            _NavbarItem(
+              text: "Login",
+              onClick: () {
+                Navigator.pop(context);
                 Navigator.pushNamed(context, "/login");
               },
-              icon: FontAwesomeIcons.signOut,
+              icon: FontAwesomeIcons.signIn,
             ),
-          ),
+          if (_authToken != null)
+            _NavbarItem(
+              text: "My Posts",
+              onClick: () {
+                Navigator.pop(context);
+                Navigator.pushNamed(context, "/my-posts");
+              },
+              icon: FontAwesomeIcons.fileLines,
+            ),
+          if (_authToken != null)
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: _NavbarItem(
+                text: "Sign out",
+                onClick: () {
+                  context.read<UserProvider>().storage.deleteAll();
+                  Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    "/login",
+                    (Route<dynamic> route) => false,
+                  );
+                },
+                icon: FontAwesomeIcons.signOut,
+              ),
+            ),
         ],
       ),
     );
