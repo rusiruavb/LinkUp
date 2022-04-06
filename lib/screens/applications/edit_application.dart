@@ -1,4 +1,4 @@
-import "package:flutter/material.dart";
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:linkup/components/rounded_button.dart';
 import 'package:linkup/components/rounded_text_field.dart';
@@ -6,49 +6,75 @@ import 'package:linkup/constants.dart';
 import 'package:linkup/providers/application_provider.dart';
 import 'package:provider/provider.dart';
 
-class ApplicationFormScreen extends StatefulWidget {
-  final String jobId;
+class EditApplicationScreen extends StatefulWidget {
+  final String applicationId;
+  final String applicantName;
+  final String university;
+  final String nic;
+  final String contactNumber;
+  final String skills;
+  final String languages;
+  final String linkedIn;
+  final String github;
 
-  const ApplicationFormScreen({
+  const EditApplicationScreen({
     Key key,
-    this.jobId,
+    this.applicationId,
+    this.applicantName,
+    this.university,
+    this.contactNumber,
+    this.github,
+    this.languages,
+    this.linkedIn,
+    this.nic,
+    this.skills,
   }) : super(key: key);
 
   @override
-  _ApplicationFormScreenState createState() => _ApplicationFormScreenState();
+  _EditApplicationState createState() => _EditApplicationState();
 }
 
-class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
-  GlobalKey<FormState> sendApplication = GlobalKey();
+class _EditApplicationState extends State<EditApplicationScreen> {
+  GlobalKey<FormState> editApplication = GlobalKey();
   ApplicationProvider _applicationProvider;
-  String applicantName = "";
-  String nic = "";
-  String contactNumber = "";
-  String university = "";
-  String skills = "";
-  String languages = "";
-  String linkedIn = "";
-  String github = "";
+  String _applicationId = "";
+  String _applicantName = "";
+  String _nic = "";
+  String _contactNumber = "";
+  String _university = "";
+  String _skills = "";
+  String _languages = "";
+  String _linkedIn = "";
+  String _github = "";
 
   @override
   void initState() {
     super.initState();
     _applicationProvider = context.read<ApplicationProvider>();
+    _applicationId = widget.applicationId;
+    _applicantName = widget.applicantName;
+    _contactNumber = widget.contactNumber;
+    _nic = widget.nic;
+    _university = widget.university;
+    _skills = widget.skills;
+    _languages = widget.languages;
+    _linkedIn = widget.linkedIn;
+    _github = widget.github;
   }
 
   void submit() {
-    if (sendApplication.currentState.validate()) {
-      _applicationProvider.createApplication(
+    if (editApplication.currentState.validate()) {
+      _applicationProvider.updateApplication(
         context,
-        widget.jobId,
-        applicantName,
-        nic,
-        contactNumber,
-        university,
-        skills,
-        languages,
-        linkedIn,
-        github,
+        _applicationId,
+        _applicantName,
+        _nic,
+        _contactNumber,
+        _university,
+        _skills,
+        _languages,
+        _linkedIn,
+        _github,
       );
     } else {
       Fluttertoast.showToast(msg: 'Please check the input fields');
@@ -63,7 +89,7 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          "Job Application",
+          "Edit Application",
           style: TextStyle(fontFamily: fontFamilySFPro),
         ),
         backgroundColor: colorDarkMidGround,
@@ -81,7 +107,7 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
             child: Padding(
               padding: const EdgeInsets.all(5.0),
               child: Form(
-                key: sendApplication,
+                key: editApplication,
                 child: Column(
                   children: [
                     SizedBox(
@@ -91,12 +117,12 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                       text: "Applicant Name",
                       onChange: (value) {
                         setState(() {
-                          applicantName = value;
+                          _applicantName = value;
                         });
                       },
                       backgroundColor: colorDarkBackground,
                       textAreaColor: colorDarkMidGround,
-                      value: applicantName,
+                      value: _applicantName,
                       isRequired: true,
                     ),
                     SizedBox(
@@ -106,12 +132,12 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                       text: "NIC",
                       onChange: (value) {
                         setState(() {
-                          nic = value;
+                          _nic = value;
                         });
                       },
                       backgroundColor: colorDarkBackground,
                       textAreaColor: colorDarkMidGround,
-                      value: nic,
+                      value: _nic,
                       isRequired: true,
                     ),
                     SizedBox(
@@ -122,12 +148,12 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                       type: "phone",
                       onChange: (value) {
                         setState(() {
-                          contactNumber = value;
+                          _contactNumber = value;
                         });
                       },
                       backgroundColor: colorDarkBackground,
                       textAreaColor: colorDarkMidGround,
-                      value: contactNumber,
+                      value: _contactNumber,
                       isRequired: true,
                     ),
                     SizedBox(
@@ -137,12 +163,12 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                       text: "University",
                       onChange: (value) {
                         setState(() {
-                          university = value;
+                          _university = value;
                         });
                       },
                       backgroundColor: colorDarkBackground,
                       textAreaColor: colorDarkMidGround,
-                      value: university,
+                      value: _university,
                       isRequired: true,
                     ),
                     SizedBox(
@@ -152,12 +178,12 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                       text: "Skills",
                       onChange: (value) {
                         setState(() {
-                          skills = value;
+                          _skills = value;
                         });
                       },
                       backgroundColor: colorDarkBackground,
                       textAreaColor: colorDarkMidGround,
-                      value: skills,
+                      value: _skills,
                       isRequired: true,
                     ),
                     SizedBox(
@@ -167,12 +193,12 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                       text: "Languages",
                       onChange: (value) {
                         setState(() {
-                          languages = value;
+                          _languages = value;
                         });
                       },
                       backgroundColor: colorDarkBackground,
                       textAreaColor: colorDarkMidGround,
-                      value: languages,
+                      value: _languages,
                       isRequired: true,
                     ),
                     SizedBox(
@@ -182,12 +208,12 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                       text: "LinkedIn",
                       onChange: (value) {
                         setState(() {
-                          linkedIn = value;
+                          _linkedIn = value;
                         });
                       },
                       backgroundColor: colorDarkBackground,
                       textAreaColor: colorDarkMidGround,
-                      value: linkedIn,
+                      value: _linkedIn,
                       isRequired: true,
                     ),
                     SizedBox(
@@ -197,12 +223,12 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                       text: "Github",
                       onChange: (value) {
                         setState(() {
-                          github = value;
+                          _github = value;
                         });
                       },
                       backgroundColor: colorDarkBackground,
                       textAreaColor: colorDarkMidGround,
-                      value: github,
+                      value: _github,
                       isRequired: true,
                     ),
                     SizedBox(
@@ -232,7 +258,7 @@ class _ApplicationFormScreenState extends State<ApplicationFormScreen> {
                         },
                       ),
                     ),
-                     SizedBox(
+                    SizedBox(
                       height: size.height * 0.03,
                     ),
                   ],

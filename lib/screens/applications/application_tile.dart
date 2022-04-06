@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:linkup/constants.dart';
+import 'package:linkup/models/application_model.dart';
 
 class ApplicationTile extends StatelessWidget {
   final int index;
@@ -8,10 +9,13 @@ class ApplicationTile extends StatelessWidget {
   final bool isExpanded;
   final String title;
   final String subTitle;
+  final Application application;
+
   final Function(bool) onExpansionChanged;
 
   const ApplicationTile({
     Key key,
+    this.application,
     this.index,
     this.iterateIndex,
     this.isExpanded,
@@ -22,50 +26,58 @@ class ApplicationTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionTile(
-      initiallyExpanded: false,
-      collapsedBackgroundColor: colorDarkMidGround,
-      backgroundColor: colorDarkMidGround,
-      leading: const Icon(
-        FontAwesomeIcons.fileText,
-        color: colorTextPrimary,
-        size: 32,
-      ),
-      title: const Text(
-        "Associate Software Engineer",
-        style: TextStyle(
-          fontSize: 18,
-          fontFamily: fontFamilySFPro,
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 5),
+      child: ExpansionTile(
+        tilePadding: const EdgeInsets.only(left: 10, right: 10),
+        initiallyExpanded: false,
+        collapsedBackgroundColor: colorDarkMidGround,
+        backgroundColor: colorDarkMidGround,
+        leading: const Icon(
+          FontAwesomeIcons.fileText,
           color: colorTextPrimary,
+          size: 32,
         ),
-      ),
-      subtitle: const Text(
-        "15/03/2022 1.30 PM",
-        style: TextStyle(
-          fontFamily: fontFamilySFPro,
+        title: Text(
+          subTitle,
+          style: const TextStyle(
+            fontSize: 18,
+            fontFamily: fontFamilySFPro,
+            color: colorTextPrimary,
+          ),
+        ),
+        subtitle: Text(
+          application.companyName,
+          style: TextStyle(
+            fontFamily: fontFamilySFPro,
+            color: application.status == "PENDING"
+                ? colorWarningLight
+                : application.status == "REJECTED"
+                    ? colorErrorLight
+                    : application.status == "SELECTED"
+                        ? colorSuccessLight
+                        : colorPrimaryLight,
+          ),
+        ),
+        trailing: const Icon(
+          Icons.arrow_drop_down,
           color: colorTextPrimary,
+          size: 30,
         ),
+        onExpansionChanged: onExpansionChanged,
+        children: <Widget>[
+          ApplicationCard(
+            companyName: application.companyName,
+            applicantName: application.applicantName,
+            contactNumber: application.contactNumber,
+            gitHub: application.github,
+            linkedIn: application.linkedIn,
+            nic: application.nic,
+            university: application.university,
+            status: application.status,
+          )
+        ],
       ),
-      trailing: Icon(
-        index == iterateIndex && isExpanded
-            ? Icons.arrow_circle_up
-            : Icons.arrow_circle_down,
-        color: colorTextPrimary,
-        size: 30,
-      ),
-      onExpansionChanged: onExpansionChanged,
-      children: const <Widget>[
-        ApplicationCard(
-          companyName: "Redot Global",
-          applicantName: "Rusiru Abhisheak",
-          contactNumber: "0776621325",
-          gitHub: "https://github.com/rusiruavb",
-          linkedIn: "https://linkedin.com/rusiru-abhisheak",
-          nic: "982252565V",
-          university: "SLIIT",
-          status: "Pending",
-        )
-      ],
     );
   }
 }
@@ -216,7 +228,7 @@ class ApplicationCard extends StatelessWidget {
                     ),
                     Expanded(
                       child: Text(
-                        university,
+                        nic,
                         style: const TextStyle(
                           fontFamily: fontFamilySFPro,
                           fontSize: 16,
@@ -343,11 +355,11 @@ class ApplicationCard extends StatelessWidget {
                         style: TextStyle(
                           fontFamily: fontFamilySFPro,
                           fontSize: 16,
-                          color: status == "Pending"
+                          color: status == "PENDING"
                               ? colorWarningLight
-                              : status == "Rejected"
+                              : status == "REJECTED"
                                   ? colorErrorLight
-                                  : status == "Selected"
+                                  : status == "SELECTED"
                                       ? colorSuccessLight
                                       : colorPrimaryLight,
                         ),
@@ -356,7 +368,7 @@ class ApplicationCard extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(
-                  height: 15,
+                  height: 10,
                 )
               ],
             ),

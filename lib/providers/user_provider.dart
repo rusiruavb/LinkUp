@@ -151,7 +151,7 @@ class UserProvider extends ChangeNotifier {
         'x-auth-token': authToken,
       },
     );
-
+    print('object' + response.statusCode.toString());
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       user = User.fromJson(data);
@@ -160,8 +160,7 @@ class UserProvider extends ChangeNotifier {
       return user;
     } else if (response.statusCode == 400) {
       Fluttertoast.showToast(msg: 'Authentication Failed');
-      Navigator.pushNamed(context, '/login');
-      notifyListeners();
+      Navigator.pushNamedAndRemoveUntil(context, '/login', (router) => false);
       return null;
     } else {
       Fluttertoast.showToast(msg: 'Server Error');
@@ -186,7 +185,7 @@ class UserProvider extends ChangeNotifier {
     return null;
   }
 
-    // Get user posts
+  // Get user posts
   Future<List<Job>> getUserJobs(BuildContext context) async {
     User user = await getProfile(context);
     final List<Job> userJobs = [];

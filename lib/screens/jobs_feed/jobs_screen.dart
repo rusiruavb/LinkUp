@@ -16,6 +16,7 @@ class JobsFeedScreen extends StatefulWidget {
 
 class JobsFeedScreenState extends State<JobsFeedScreen> {
   Future<List<Job>> jobs;
+  RouteSettings settings;
 
   @override
   void initState() {
@@ -70,8 +71,20 @@ class JobsFeedScreenState extends State<JobsFeedScreen> {
             onClick: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(
-                  builder: (context) => const ApplicationFormScreen(),
+                PageRouteBuilder(
+                  pageBuilder: (_, __, ___) => ApplicationFormScreen(
+                    jobId: snapshot.data[index].id,
+                  ),
+                  settings: settings,
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) =>
+                          SlideTransition(
+                    child: child,
+                    position: Tween<Offset>(
+                      begin: const Offset(1.0, 0.0),
+                      end: Offset.zero,
+                    ).animate(animation),
+                  ),
                 ),
               );
             },

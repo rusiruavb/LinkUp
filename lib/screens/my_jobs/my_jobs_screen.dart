@@ -33,14 +33,6 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          "My Jobs",
-          style: TextStyle(fontFamily: fontFamilySFPro),
-        ),
-        backgroundColor: colorDarkMidGround,
-        elevation: 0.0,
-      ),
       backgroundColor: colorDarkBackground,
       body: Align(
         alignment: Alignment.topCenter,
@@ -65,72 +57,94 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
 
   Widget _listView(AsyncSnapshot snapshot) {
     if (snapshot.hasData) {
-      return ListView.builder(
-        itemCount: snapshot.data.length,
-        itemBuilder: ((context, index) {
-          return Slidable(
-            closeOnScroll: true,
-            key: Key(snapshot.data[index].id),
-            child: JobCard(
-              companyLogo: snapshot.data[index].companyLogo,
-              companyName: snapshot.data[index].companyName,
-              description: snapshot.data[index].description,
-              position: snapshot.data[index].position,
-              jobImage: snapshot.data[index].jobImage,
-              salary: snapshot.data[index].salary,
-            ),
-            endActionPane: ActionPane(
-              dismissible: DismissiblePane(
-                onDismissed: () {
-                  _jobProvider.deleteJob(context, snapshot.data[index].id);
-                  _userProvider.getProfile(context);
-                },
+      if (snapshot.data.length > 0) {
+        return ListView.builder(
+          itemCount: snapshot.data.length,
+          itemBuilder: ((context, index) {
+            return Slidable(
+              closeOnScroll: true,
+              key: Key(snapshot.data[index].id),
+              child: JobCard(
+                companyLogo: snapshot.data[index].companyLogo,
+                companyName: snapshot.data[index].companyName,
+                description: snapshot.data[index].description,
+                position: snapshot.data[index].position,
+                jobImage: snapshot.data[index].jobImage,
+                salary: snapshot.data[index].salary,
               ),
-              children: [
-                SlidableAction(
-                  onPressed: (context) {
-                    print("Delete");
+              endActionPane: ActionPane(
+                dismissible: DismissiblePane(
+                  onDismissed: () {
+                    _jobProvider.deleteJob(context, snapshot.data[index].id);
+                    _userProvider.getProfile(context);
                   },
-                  backgroundColor: colorError,
-                  foregroundColor: colorTextPrimary,
-                  spacing: 5,
-                  icon: Icons.delete,
-                  label: 'Delete',
                 ),
-              ],
-              motion: const DrawerMotion(),
-            ),
-            startActionPane: ActionPane(
-              motion: const DrawerMotion(),
-              children: [
-                SlidableAction(
-                  onPressed: (context) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EditJob(
-                          id: snapshot.data[index].id,
-                          companyLogo : snapshot.data[index].companyLogo,
-                          jobImage : snapshot.data[index].jobImage,
-                          description: snapshot.data[index].description,
-                          position : snapshot.data[index].position,
-                          salary : snapshot.data[index].salary,
-                          companyName : snapshot.data[index].companyName,
+                children: [
+                  SlidableAction(
+                    onPressed: (context) {
+                      print("Delete");
+                    },
+                    backgroundColor: colorError,
+                    foregroundColor: colorTextPrimary,
+                    spacing: 5,
+                    icon: Icons.delete,
+                    label: 'Delete',
+                  ),
+                ],
+                motion: const DrawerMotion(),
+              ),
+              startActionPane: ActionPane(
+                motion: const DrawerMotion(),
+                children: [
+                  SlidableAction(
+                    onPressed: (context) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EditJob(
+                            id: snapshot.data[index].id,
+                            companyLogo: snapshot.data[index].companyLogo,
+                            jobImage: snapshot.data[index].jobImage,
+                            description: snapshot.data[index].description,
+                            position: snapshot.data[index].position,
+                            salary: snapshot.data[index].salary,
+                            companyName: snapshot.data[index].companyName,
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  backgroundColor: colorTextPrimary,
-                  foregroundColor: colorDarkBackground,
-                  spacing: 5,
-                  icon: Icons.edit,
-                  label: 'Edit',
+                      );
+                    },
+                    backgroundColor: colorTextPrimary,
+                    foregroundColor: colorDarkBackground,
+                    spacing: 5,
+                    icon: Icons.edit,
+                    label: 'Edit',
+                  ),
+                ],
+              ),
+            );
+          }),
+        );
+      } else {
+        return Padding(
+          padding: const EdgeInsets.only(top: 15),
+          child: Column(
+            children: [
+              Image.asset('assets/images/job.png'),
+              const SizedBox(
+                height: 15,
+              ),
+              const Text(
+                'You have not publish any jobs to LinkUp',
+                style: TextStyle(
+                  fontFamily: fontFamilySFPro,
+                  fontSize: 18,
+                  color: colorTextPrimary,
                 ),
-              ],
-            ),
-          );
-        }),
-      );
+              ),
+            ],
+          ),
+        );
+      }
     } else if (snapshot.hasError) {
       return const Text(
         'Error with load posts',
