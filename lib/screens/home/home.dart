@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
         break;
       case 1:
         setState(() {
-          _tabName = "Applications";
+          _tabName = "My Applications";
         });
         break;
       case 2:
