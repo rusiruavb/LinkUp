@@ -155,7 +155,7 @@ class _PostImageUploadState extends State<PostImageUpload> {
     await Firebase.initializeApp();
     final ref = storage.FirebaseStorage.instance
         .ref()
-        .child("images")
+        .child("posts")
         .child(DateTime.now().toIso8601String() + p.basename(path));
 
     final result = await ref.putFile(File(path));
