@@ -1,5 +1,7 @@
 class Application {
   String id;
+  String companyName;
+  String position;
   String applicantName;
   String nic;
   String contactNumber;
@@ -7,11 +9,13 @@ class Application {
   String skills;
   String languages;
   String linkedIn;
-  String gitHub;
+  String github;
   String status;
 
   Application({
     this.id,
+    this.companyName,
+    this.position,
     this.applicantName,
     this.nic,
     this.contactNumber,
@@ -19,7 +23,7 @@ class Application {
     this.skills,
     this.languages,
     this.linkedIn,
-    this.gitHub,
+    this.github,
     this.status,
   });
 
@@ -27,7 +31,9 @@ class Application {
     Map<String, dynamic> json,
   ) =>
       Application(
-        id: json['id'],
+        id: json['_id'],
+        companyName: json['job']['companyName'],
+        position: json['job']['position'],
         applicantName: json['applicantName'],
         nic: json['nic'],
         contactNumber: json['contactNumber'],
@@ -35,12 +41,14 @@ class Application {
         skills: json['skills'],
         languages: json['languages'],
         linkedIn: json['linkedIn'],
-        gitHub: json['gitHub'],
+        github: json['github'],
         status: json['status'],
       );
 
   Map<String, dynamic> toJson() => {
         'id': id,
+        'companyName': companyName,
+        'position': position,
         'applicantName': applicantName,
         'nic': nic,
         'contactNumber': contactNumber,
@@ -48,7 +56,7 @@ class Application {
         'skills': skills,
         'languages': languages,
         'linkedIn': linkedIn,
-        'gitHub': gitHub,
+        'gitHub': github,
         'status': status,
       };
 }
