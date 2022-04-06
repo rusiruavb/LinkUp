@@ -47,7 +47,7 @@ class _AddJobFeedState extends State<AddJobFeed> {
           size: 20,
         ),
         title: const Text(
-          'Create Post',
+          'Publish Job',
           style: TextStyle(
             fontFamily: fontFamilySFPro,
             color: colorTextPrimary,
