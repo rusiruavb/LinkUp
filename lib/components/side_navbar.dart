@@ -19,15 +19,17 @@ class _SideNavbarState extends State<SideNavbar> {
   @override
   void initState() {
     super.initState();
-
     userProvider = context.read<UserProvider>();
-    () {
-      setState(() async {
-        _authToken =
-            await context.read<UserProvider>().storage.read(key: 'authToken');
-        print(_authToken);
-      });
-    };
+    context
+        .read<UserProvider>()
+        .storage
+        .read(key: 'authToken')
+        .then((value) => {
+              setState(() {
+                _authToken = value;
+                print("authentication token" + _authToken);
+              })
+            });
   }
 
   @override

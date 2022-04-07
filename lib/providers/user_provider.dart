@@ -189,8 +189,9 @@ class UserProvider extends ChangeNotifier {
   Future<List<Job>> getUserJobs(BuildContext context) async {
     User user = await getProfile(context);
     final List<Job> userJobs = [];
+    print("object");
 
-    if (user.posts.isNotEmpty) {
+    if (user.jobs.isNotEmpty) {
       final data = user.jobs;
       for (Map<String, dynamic> job in data) {
         userJobs.add(Job.fromJson(job));

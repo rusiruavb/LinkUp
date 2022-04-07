@@ -71,6 +71,7 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
                 position: snapshot.data[index].position,
                 jobImage: snapshot.data[index].jobImage,
                 salary: snapshot.data[index].salary,
+                isPublic: false,
               ),
               endActionPane: ActionPane(
                 dismissible: DismissiblePane(

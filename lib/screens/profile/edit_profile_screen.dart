@@ -93,22 +93,22 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                   SizedBox(
                     height: size.height * 0.03,
                   ),
-                  RoundedTextField(
-                    text: "Email Address",
-                    type: "email",
-                    onChange: (value) {
-                      setState(() {
-                        userProvider.modifyUser.email = value;
-                      });
-                    },
-                    value: userProvider.modifyUser.email,
-                    isRequired: true,
-                    backgroundColor: colorDarkBackground,
-                    textAreaColor: colorDarkMidGround,
-                  ),
-                  SizedBox(
-                    height: size.height * 0.03,
-                  ),
+                  // RoundedTextField(
+                  //   text: "Email Address",
+                  //   type: "email",
+                  //   onChange: (value) {
+                  //     setState(() {
+                  //       userProvider.modifyUser.email = value;
+                  //     });
+                  //   },
+                  //   value: userProvider.modifyUser.email,
+                  //   isRequired: true,
+                  //   backgroundColor: colorDarkBackground,
+                  //   textAreaColor: colorDarkMidGround,
+                  // ),
+                  // SizedBox(
+                  //   height: size.height * 0.03,
+                  // ),
                   RoundedNumberField(
                     text: "Phone Number",
                     type: "phone",

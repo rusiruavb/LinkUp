@@ -68,6 +68,7 @@ class JobsFeedScreenState extends State<JobsFeedScreen> {
             position: snapshot.data[index].position,
             jobImage: snapshot.data[index].jobImage,
             salary: snapshot.data[index].salary,
+            isPublic: true,
             onClick: () {
               Navigator.push(
                 context,

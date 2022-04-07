@@ -10,6 +10,7 @@ class JobCard extends StatelessWidget {
   final String description;
   final String salary;
   final VoidCallback onClick;
+  final bool isPublic;
 
   const JobCard({
     Key key,
@@ -20,6 +21,7 @@ class JobCard extends StatelessWidget {
     this.description,
     this.salary,
     this.onClick,
+    this.isPublic,
   }) : super(key: key);
 
   @override
@@ -135,15 +137,17 @@ class JobCard extends StatelessWidget {
                     top: 12,
                     bottom: 12,
                   ),
-                  child: RoundedButton(
-                    text: "Apply Now",
-                    fontSize: 14,
-                    textColor: colorDarkBackground,
-                    color: colorTextPrimary,
-                    height: 32,
-                    width: 95,
-                    onPressed: onClick,
-                  ),
+                  child: isPublic
+                      ? RoundedButton(
+                          text: "Apply Now",
+                          fontSize: 14,
+                          textColor: colorDarkBackground,
+                          color: colorTextPrimary,
+                          height: 32,
+                          width: 95,
+                          onPressed: onClick,
+                        )
+                      : const SizedBox(),
                 )
               ],
             ),
