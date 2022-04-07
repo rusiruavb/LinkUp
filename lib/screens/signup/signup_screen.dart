@@ -60,7 +60,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
       ),
       backgroundColor: colorDarkBackground,
-      drawer: const SideNavbar(),
+      // drawer: const SideNavbar(),
       body: SingleChildScrollView(
         child: Container(
           width: size.width,

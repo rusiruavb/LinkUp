@@ -5,8 +5,12 @@ import 'package:linkup/components/skills_card.dart';
 import 'package:linkup/components/user_image_upload.dart';
 import 'package:linkup/constants.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:linkup/models/experience_model.dart';
+import 'package:linkup/providers/experience_provider.dart';
 import 'package:linkup/providers/user_provider.dart';
 import 'package:provider/provider.dart';
+
+Future<List<Experience>> _experiences;
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key key}) : super(key: key);
@@ -17,10 +21,14 @@ class ProfileScreen extends StatefulWidget {
 
 class _ProfileScreenState extends State<ProfileScreen> {
   UserProvider userProvider;
+  ExperienceProvider _expProvider;
+  
 
   @override
   void initState() {
     super.initState();
+    _expProvider = context.read<ExperienceProvider>();
+    _experiences = _expProvider.getExperience(context);
     userProvider = context.read<UserProvider>();
   }
 
@@ -30,19 +38,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
       backgroundColor: colorDarkBackground,
       body: Align(
         alignment: Alignment.topCenter,
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              _ProfileHeaderCard(),
-              _ExperienceSection(),
-              _EducationSection(),
-              _SkillsSection(),
-            ],
+        child: RefreshIndicator(
+          onRefresh: _pullRefresh,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const _ProfileHeaderCard(),
+                _ExperienceSection(),
+                _EducationSection(),
+                _SkillsSection(),
+              ],
+            ),
           ),
         ),
       ),
     );
+  }
+
+  Future<void> _pullRefresh() async {
+    await Future.delayed(const Duration(seconds: 1));
+    setState(() {
+      _experiences = Provider.of<ExperienceProvider>(context, listen: false)
+          .getExperience(context);
+    });
   }
 }
 
@@ -179,7 +198,12 @@ class _ProfileHeaderCardState extends State<_ProfileHeaderCard> {
   }
 }
 
-class _ExperienceSection extends StatelessWidget {
+class _ExperienceSection extends StatefulWidget {
+  @override
+  _ExperienceSectionState createState() => _ExperienceSectionState();
+}
+
+class _ExperienceSectionState extends State<_ExperienceSection> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -218,17 +242,52 @@ class _ExperienceSection extends StatelessWidget {
                   )
                 ],
               ),
-              for (var i = 0; i < 2; i++)
-                const ExperienceCard(
-                  companyLogo:
-                      "https://www.freepnglogos.com/uploads/google-logo-png/google-logo-icon-png-transparent-background-osteopathy-16.png",
-                  companyName: "Google",
-                  position: "Software Engineer",
-                  description:
-                      "As an associate software engineer, your job duties include coding software, coordinating with hardware engineers to ensure that different types of technology can run the software, and helping the QA team to test software before release.",
-                ),
+              FutureBuilder<List<Experience>>(
+                future: _experiences,
+                builder: (context, snapshot) {
+                  return Align(
+                    alignment: Alignment.topCenter,
+                    child: _listView(snapshot),
+                  );
+                },
+              ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _listView(AsyncSnapshot snapshot) {
+    if (snapshot.hasData) {
+      return Column(
+        children: [
+          for (var i = 0; i < snapshot.data.length; i++)
+            ExperienceCard(
+              companyName: snapshot.data[i].companyName,
+              position: snapshot.data[i].position,
+              description: snapshot.data[i].description,
+            )
+        ],
+      );
+    } else if (snapshot.hasError) {
+      return const Text(
+        'Error with fetch experiences',
+        style: TextStyle(
+          fontFamily: fontFamilySFPro,
+          fontSize: 16,
+          color: colorTextPrimary,
+        ),
+      );
+    }
+    return const Padding(
+      padding: EdgeInsets.only(top: 20),
+      child: SizedBox(
+        width: 30,
+        height: 30,
+        child: CircularProgressIndicator(
+          color: colorTextPrimary,
+          strokeWidth: 2,
         ),
       ),
     );

@@ -66,6 +66,7 @@ class ApplicationProvider extends ChangeNotifier {
   Future<List<Application>> getUserApplications(BuildContext context) async {
     List<Application> userApplications = [];
     var userId = await storage.read(key: 'userId');
+    print(userId);
     var authToken = await storage.read(key: 'authToken');
     var response = await http.get(
       Uri.parse('$baseApi/applications/user/$userId'),

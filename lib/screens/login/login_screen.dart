@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:linkup/components/rounded_text_field.dart';
-import 'package:linkup/components/side_navbar.dart';
 import 'package:linkup/providers/user_provider.dart';
 
 import '../../components/rounded_button.dart';
@@ -43,18 +42,6 @@ class _LoginScreenState extends State<LoginScreen> {
     final orientation = MediaQuery.of(context).orientation;
 
     return Scaffold(
-      // appBar: AppBar(
-      //   backgroundColor: colorDarkBackground,
-      //   iconTheme: const IconThemeData(color: Colors.white),
-      //   elevation: 0.0,
-      //   title: const Text(
-      //     "Login",
-      //     style: TextStyle(
-      //       fontFamily: "SF-Pro",
-      //       color: Colors.white,
-      //     ),
-      //   ),
-      // ),
       backgroundColor: colorDarkBackground,
       body: SingleChildScrollView(
         child: Padding(
@@ -63,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
             width: size.width,
             height: orientation == Orientation.landscape
                 ? size.height * 0.95
-                : size.height * 0.6,
+                : size.height * 0.9,
             child: Padding(
               padding: const EdgeInsets.all(5.0),
               child: Form(
@@ -159,6 +146,61 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       height: size.height * 0.03,
                     ),
+                    SizedBox(
+                      width: size.width * 0.89,
+                      child: const Divider(
+                        height: 2,
+                        color: colorTextDisabled,
+                        thickness: 2,
+                      ),
+                    ),
+                    SizedBox(
+                      height: size.height * 0.03,
+                    ),
+                    Container(
+                      width: size.width * 0.89,
+                      height: size.height * 0.17,
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 25,
+                      ),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(18),
+                          gradient: const LinearGradient(
+                              colors: [Color(0xFF3F1320), Color(0xFFF597B3)])),
+                      child: Align(
+                        alignment: Alignment.topLeft,
+                        child: TextButton(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: const [
+                              Text(
+                                "Join the Privillaged club",
+                                style: TextStyle(
+                                  fontFamily: fontFamilySFPro,
+                                  fontSize: 20,
+                                  color: colorTextPrimary,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 5,
+                              ),
+                              Text(
+                                "CREATE ACCOUNT",
+                                style: TextStyle(
+                                  fontFamily: fontFamilySFPro,
+                                  fontSize: 28,
+                                  color: colorTextPrimary,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                          onPressed: () =>
+                              {Navigator.pushNamed(context, "/signup")},
+                        ),
+                      ),
+                    )
                   ],
                 ),
               ),
