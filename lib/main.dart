@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import 'package:linkup/providers/application_provider.dart';
+import 'package:linkup/providers/experience_provider.dart';
 import 'package:linkup/providers/job_provider.dart';
 import 'package:linkup/providers/post_provider.dart';
 import 'package:linkup/providers/user_provider.dart';
@@ -15,6 +16,7 @@ void main() => runApp(
           ChangeNotifierProvider(create: (_) => PostProvider()),
           ChangeNotifierProvider(create: (_) => JobProvider()),
           ChangeNotifierProvider(create: (_) => ApplicationProvider()),
+          ChangeNotifierProvider(create: (_) => ExperienceProvider()),
         ],
         child: const LinkUpApp(),
       ),

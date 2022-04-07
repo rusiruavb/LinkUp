@@ -1,7 +1,10 @@
 import "package:flutter/material.dart";
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:linkup/components/rounded_button.dart';
 import 'package:linkup/components/rounded_text_field.dart';
 import 'package:linkup/components/rounded_textarea_field.dart';
+import 'package:linkup/providers/experience_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../constants.dart';
 
@@ -13,6 +16,31 @@ class AddExperienceScreen extends StatefulWidget {
 }
 
 class _AddExperienceScreenState extends State<AddExperienceScreen> {
+  GlobalKey<FormState> createExp = GlobalKey();
+  ExperienceProvider _expProvider;
+  String _position;
+  String _description;
+  String _companyName;
+
+  @override
+  void initState() {
+    super.initState();
+    _expProvider = context.read<ExperienceProvider>();
+  }
+
+  void submit() {
+    if (createExp.currentState.validate()) {
+      _expProvider.addExperience(
+        _position,
+        _companyName,
+        _description,
+        context,
+      );
+    } else {
+      Fluttertoast.showToast(msg: 'Please check the input fields');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -42,6 +70,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
             child: Padding(
               padding: const EdgeInsets.all(5.0),
               child: Form(
+                key: createExp,
                 child: Column(
                   children: [
                     SizedBox(
@@ -50,7 +79,9 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                     RoundedTextField(
                       text: "Title*",
                       onChange: (value) {
-                        print(value);
+                        setState(() {
+                          _position = value;
+                        });
                       },
                       isRequired: true,
                       backgroundColor: colorDarkBackground,
@@ -62,7 +93,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                     RoundedTextField(
                       text: "Company name*",
                       onChange: (value) {
-                        print(value);
+                        _companyName = value;
                       },
                       isRequired: true,
                       backgroundColor: colorDarkBackground,
@@ -74,7 +105,7 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                     RoundedTextArea(
                       text: "Description",
                       onChange: (value) {
-                        print(value);
+                        _description = value;
                       },
                       type: "multiline",
                       backgroundColor: colorDarkBackground,
@@ -90,6 +121,9 @@ class _AddExperienceScreenState extends State<AddExperienceScreen> {
                         color: colorTextPrimary,
                         text: "Save",
                         width: size.width * 0.9,
+                        onPressed: () {
+                          submit();
+                        },
                         height: 40,
                       ),
                     )
