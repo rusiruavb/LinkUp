@@ -1,15 +1,14 @@
 import "package:flutter/material.dart";
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:linkup/constants.dart';
 
 class ExperienceCard extends StatelessWidget {
-  final String companyLogo;
   final String position;
   final String companyName;
   final String description;
 
   const ExperienceCard({
     Key key,
-    this.companyLogo,
     this.companyName,
     this.position,
     this.description,
@@ -27,9 +26,10 @@ class ExperienceCard extends StatelessWidget {
         children: [
           Row(
             children: [
-              Image.network(
-                companyLogo,
-                scale: 25,
+              const Icon(
+                FontAwesomeIcons.bank,
+                size: 35,
+                color: colorTextPrimary,
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 8),
@@ -41,7 +41,7 @@ class ExperienceCard extends StatelessWidget {
                       style: const TextStyle(
                         fontFamily: fontFamilySFPro,
                         fontSize: 19,
-                        fontWeight: FontWeight.normal,
+                        fontWeight: FontWeight.bold,
                         color: colorTextPrimary,
                       ),
                     ),
@@ -62,7 +62,7 @@ class ExperienceCard extends StatelessWidget {
             children: [
               if (description != null)
                 Container(
-                  padding: const EdgeInsets.only(left: 48, top: 8),
+                  padding: const EdgeInsets.only(left: 44, top: 8),
                   width: orientation == Orientation.landscape
                       ? size.width * 0.65
                       : size.width * 0.85,

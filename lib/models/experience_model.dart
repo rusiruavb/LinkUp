@@ -1,13 +1,11 @@
 class Experience {
   String id;
-  String companyLogo;
   String position;
   String companyName;
   String description;
 
   Experience({
     this.id,
-    this.companyLogo,
     this.companyName,
     this.position,
     this.description,
@@ -18,7 +16,6 @@ class Experience {
   ) =>
       Experience(
         id: json['_id'],
-        companyLogo: json['companyLogo'],
         position: json['position'],
         companyName: json['companyName'],
         description: json['description'],
@@ -26,7 +23,6 @@ class Experience {
 
   Map<String, dynamic> toJson() => {
         '_id': id,
-        'companyLogo': companyLogo,
         'position': position,
         'companyName': companyName,
         'description': description,
