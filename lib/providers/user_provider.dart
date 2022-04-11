@@ -173,7 +173,7 @@ class UserProvider extends ChangeNotifier {
   Future<List<Post>> getUserPosts(BuildContext context) async {
     User user = await getProfile(context);
     final List<Post> userPosts = [];
-
+    print('object');
     if (user.posts.isNotEmpty) {
       final data = user.posts;
       for (Map<String, dynamic> post in data) {
@@ -182,16 +182,15 @@ class UserProvider extends ChangeNotifier {
       return userPosts;
     }
     notifyListeners();
-    return null;
+    return [];
   }
 
   // Get user posts
   Future<List<Job>> getUserJobs(BuildContext context) async {
     User user = await getProfile(context);
     final List<Job> userJobs = [];
-    print("object");
-
-    if (user.jobs.isNotEmpty) {
+    print(user.jobs.isNotEmpty);
+    if (user != null && user.jobs.isNotEmpty) {
       final data = user.jobs;
       for (Map<String, dynamic> job in data) {
         userJobs.add(Job.fromJson(job));
@@ -199,7 +198,7 @@ class UserProvider extends ChangeNotifier {
       return userJobs;
     }
     notifyListeners();
-    return null;
+    return [];
   }
 
   // Update user profile image

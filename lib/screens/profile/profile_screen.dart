@@ -22,7 +22,6 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   UserProvider userProvider;
   ExperienceProvider _expProvider;
-  
 
   @override
   void initState() {
@@ -30,6 +29,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     _expProvider = context.read<ExperienceProvider>();
     _experiences = _expProvider.getExperience(context);
     userProvider = context.read<UserProvider>();
+    userProvider.getProfile(context);
   }
 
   @override
@@ -61,6 +61,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     setState(() {
       _experiences = Provider.of<ExperienceProvider>(context, listen: false)
           .getExperience(context);
+
+      userProvider.getProfile(context);
     });
   }
 }

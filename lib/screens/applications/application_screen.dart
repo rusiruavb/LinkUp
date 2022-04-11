@@ -185,13 +185,26 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
         );
       }
     } else if (snapshot.hasError) {
-      return const Text(
-        'Error with fetch applications',
-        style: TextStyle(
-          fontFamily: fontFamilySFPro,
-          fontSize: 16,
-          color: colorErrorLight,
-        ),
+      return Column(
+        children: [
+          Image.asset(
+            'assets/images/server.png',
+            fit: BoxFit.cover,
+            width: 110,
+            height: 110,
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          const Text(
+            'We have some problem with fetching data',
+            style: TextStyle(
+              fontFamily: fontFamilySFPro,
+              fontSize: 18,
+              color: colorTextPrimary,
+            ),
+          ),
+        ],
       );
     }
     return const Padding(
