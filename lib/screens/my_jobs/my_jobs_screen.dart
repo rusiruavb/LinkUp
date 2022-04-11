@@ -26,8 +26,7 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
     _userProvider = context.read<UserProvider>();
     _jobProvider = context.read<JobProvider>();
 
-    userJobs =
-        Provider.of<UserProvider>(context, listen: false).getUserJobs(context);
+    userJobs = _userProvider.getUserJobs(context);
   }
 
   @override
@@ -130,7 +129,12 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
           padding: const EdgeInsets.only(top: 15),
           child: Column(
             children: [
-              Image.asset('assets/images/job.png'),
+              Image.asset(
+                'assets/images/job.png',
+                fit: BoxFit.cover,
+                width: 90,
+                height: 90,
+              ),
               const SizedBox(
                 height: 15,
               ),
@@ -147,13 +151,26 @@ class _MyJobsScreenState extends State<MyJobsScreen> {
         );
       }
     } else if (snapshot.hasError) {
-      return const Text(
-        'Error with load posts',
-        style: TextStyle(
-          fontFamily: fontFamilySFPro,
-          fontSize: 16,
-          color: colorTextPrimary,
-        ),
+      return Column(
+        children: [
+          Image.asset(
+            'assets/images/server.png',
+            fit: BoxFit.cover,
+            width: 110,
+            height: 110,
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          const Text(
+            'We have some problem with fetching data',
+            style: TextStyle(
+              fontFamily: fontFamilySFPro,
+              fontSize: 18,
+              color: colorTextPrimary,
+            ),
+          ),
+        ],
       );
     }
     return const Padding(

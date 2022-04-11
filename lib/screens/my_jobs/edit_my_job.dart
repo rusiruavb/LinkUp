@@ -250,7 +250,7 @@ class _PostImageUploadState extends State<_PostEditImageUpload> {
 
     return Column(
       children: [
-        if (_newImage != null)
+        if (_newImage != '')
           InkWell(
             splashColor: Colors.transparent,
             highlightColor: Colors.transparent,

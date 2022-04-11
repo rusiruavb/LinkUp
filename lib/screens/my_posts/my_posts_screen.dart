@@ -65,75 +65,115 @@ class _MyPostScreenState extends State<MyPostScreen> {
 
   Widget _listView(AsyncSnapshot snapshot) {
     if (snapshot.hasData) {
-      return ListView.builder(
-        itemCount: snapshot.data.length,
-        itemBuilder: ((context, index) {
-          return Slidable(
-            closeOnScroll: true,
-            key: Key(snapshot.data[index].id),
-            child: MyPostCard(
-              fullName: snapshot.data[index].fullName,
-              description: snapshot.data[index].description,
-              position: snapshot.data[index].position,
-              postImage: snapshot.data[index].postImage,
-              profileImageURL: snapshot.data[index].profileImageURL,
-            ),
-            endActionPane: ActionPane(
-              dismissible: DismissiblePane(
-                onDismissed: () {
-                  _postProvider.deletePost(context, snapshot.data[index].id);
-                  _userProvider.getProfile(context);
-                },
+      if (snapshot.data.length > 0) {
+        return ListView.builder(
+          itemCount: snapshot.data.length,
+          itemBuilder: ((context, index) {
+            return Slidable(
+              closeOnScroll: true,
+              key: Key(snapshot.data[index].id),
+              child: MyPostCard(
+                fullName: snapshot.data[index].fullName,
+                description: snapshot.data[index].description,
+                position: snapshot.data[index].position,
+                postImage: snapshot.data[index].postImage,
+                profileImageURL: snapshot.data[index].profileImageURL,
               ),
-              children: [
-                SlidableAction(
-                  onPressed: (context) {
-                    print("Delete");
+              endActionPane: ActionPane(
+                dismissible: DismissiblePane(
+                  onDismissed: () {
+                    _postProvider.deletePost(context, snapshot.data[index].id);
+                    _userProvider.getProfile(context);
                   },
-                  backgroundColor: colorError,
-                  foregroundColor: colorTextPrimary,
-                  spacing: 5,
-                  icon: Icons.delete,
-                  label: 'Delete',
                 ),
-              ],
-              motion: const DrawerMotion(),
-            ),
-            startActionPane: ActionPane(
-              motion: const DrawerMotion(),
-              children: [
-                SlidableAction(
-                  onPressed: (context) {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EditPost(
-                          id: snapshot.data[index].id,
-                          description: snapshot.data[index].description,
-                          imageURL: snapshot.data[index].postImage,
+                children: [
+                  SlidableAction(
+                    onPressed: (context) {
+                      print("Delete");
+                    },
+                    backgroundColor: colorError,
+                    foregroundColor: colorTextPrimary,
+                    spacing: 5,
+                    icon: Icons.delete,
+                    label: 'Delete',
+                  ),
+                ],
+                motion: const DrawerMotion(),
+              ),
+              startActionPane: ActionPane(
+                motion: const DrawerMotion(),
+                children: [
+                  SlidableAction(
+                    onPressed: (context) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => EditPost(
+                            id: snapshot.data[index].id,
+                            description: snapshot.data[index].description,
+                            imageURL: snapshot.data[index].postImage,
+                          ),
                         ),
-                      ),
-                    );
-                  },
-                  backgroundColor: colorTextPrimary,
-                  foregroundColor: colorDarkBackground,
-                  spacing: 5,
-                  icon: Icons.edit,
-                  label: 'Edit',
+                      );
+                    },
+                    backgroundColor: colorTextPrimary,
+                    foregroundColor: colorDarkBackground,
+                    spacing: 5,
+                    icon: Icons.edit,
+                    label: 'Edit',
+                  ),
+                ],
+              ),
+            );
+          }),
+        );
+      } else {
+        return Padding(
+          padding: const EdgeInsets.only(top: 15),
+          child: Column(
+            children: [
+              Image.asset(
+                'assets/images/post.png',
+                fit: BoxFit.cover,
+                width: 100,
+                height: 100,
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              const Text(
+                'You have not publish any posts to LinkUp',
+                style: TextStyle(
+                  fontFamily: fontFamilySFPro,
+                  fontSize: 18,
+                  color: colorTextPrimary,
                 ),
-              ],
-            ),
-          );
-        }),
-      );
+              ),
+            ],
+          ),
+        );
+      }
     } else if (snapshot.hasError) {
-      return const Text(
-        'Error with load posts',
-        style: TextStyle(
-          fontFamily: fontFamilySFPro,
-          fontSize: 16,
-          color: colorTextPrimary,
-        ),
+      return Column(
+        children: [
+          Image.asset(
+            'assets/images/server.png',
+            fit: BoxFit.cover,
+            width: 110,
+            height: 110,
+          ),
+          const SizedBox(
+            height: 15,
+          ),
+          const Text(
+            'We have some problem with fetching data',
+            style: TextStyle(
+              fontFamily: fontFamilySFPro,
+              fontSize: 18,
+              color: colorTextPrimary,
+            ),
+          ),
+        ],
       );
     }
     return const Padding(

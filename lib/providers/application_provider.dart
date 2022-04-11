@@ -66,8 +66,8 @@ class ApplicationProvider extends ChangeNotifier {
   Future<List<Application>> getUserApplications(BuildContext context) async {
     List<Application> userApplications = [];
     var userId = await storage.read(key: 'userId');
-    print(userId);
     var authToken = await storage.read(key: 'authToken');
+    print(userId);
     var response = await http.get(
       Uri.parse('$baseApi/applications/user/$userId'),
       headers: <String, String>{
@@ -87,11 +87,11 @@ class ApplicationProvider extends ChangeNotifier {
       Fluttertoast.showToast(msg: 'Authentication Failed');
       Navigator.pushNamed(context, '/login');
       notifyListeners();
-      return null;
+      return [];
     } else {
       Fluttertoast.showToast(msg: 'Server Error');
       notifyListeners();
-      return null;
+      return [];
     }
   }
 
